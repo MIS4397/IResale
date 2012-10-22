@@ -1,52 +1,47 @@
 <?xml version="1.0"?>
 <ireselldata>
-  <ijdoane>
-    <password>houston1</password>
+  <csv>
+    <password>cougars</password>
     <item>
-        <itemName>painting</itemName>
-        <itemDescription>household</itemDescription>
-        <priceBuy>4.38</priceBuy>
-        <monthBuy>May</monthBuy>
-        <monthBuyIndex>4</monthBuyIndex>
-        <dayBuy>5</dayBuy>
-        <dayBuyIndex>4</dayBuyIndex>
+        <itemName>kitchen table</itemName>
+        <itemDescription>furniture for use in the kitchen</itemDescription>
+        <priceBuy>10</priceBuy>
+        <monthBuy>March</monthBuy>
+        <monthBuyIndex>2</monthBuyIndex>
+        <dayBuy>8</dayBuy>
+        <dayBuyIndex>7</dayBuyIndex>
         <yearBuy>2012</yearBuy>
         <yearBuyIndex>4</yearBuyIndex>
-        <priceSold>7.58</priceSold>
-        <monthSold>July</monthSold>
-        <monthSoldIndex>6</monthSoldIndex>
-        <daySold>17</daySold>
-        <daySoldIndex>17</daySoldIndex>
+        <priceSold>19.99</priceSold>
+        <monthSold>June</monthSold>
+        <monthSoldIndex>5</monthSoldIndex>
+        <daySold>23</daySold>
+        <daySoldIndex>23</daySoldIndex>
         <yearSold>2012</yearSold>
         <yearSoldIndex>4</yearSoldIndex>
-        <numberBoughtDays>1586</numberBoughtDays>
-        <numberSoldDays>1660</numberSoldDays>
-        <profits>3.2</profits>
-        <percentReturns>73.05</percentReturns>
-        <daysToSold>74</daysToSold>
+        <numberBoughtDays>1528</numberBoughtDays>
+        <numberSoldDays>1636</numberSoldDays>
+        <profits>9.989999999999998</profits>
+        <percentReturns>99.89</percentReturns>
+        <daysToSold>108</daysToSold>
+        <itemNumbers>200834647362</itemNumbers>
+        <startBids>10</startBids>
+        <highestBids>19.99</highestBids>
+        <reserves>250</reserves>
+        <buyItNows>100</buyItNows>
+        <shippings>10</shippings>
+        <shipLengths>30</shipLengths>
+        <shipLengthUnit>cm</shipLengthUnit>
+        <shipLengthUnitIndex>1</shipLengthUnitIndex>
+        <shipWidths>50</shipWidths>
+        <shipWidthUnit>cm</shipWidthUnit>
+        <shipWidthUnitIndex>1</shipWidthUnitIndex>
+        <shipHeights>10</shipHeights>
+        <shipHeightUnit>cm</shipHeightUnit>
+        <shipHeightUnitIndex>1</shipHeightUnitIndex>
+        <shipWeights>50</shipWeights>
+        <shipWeightUnit>kg</shipWeightUnit>
+        <shipWeightUnitIndex>1</shipWeightUnitIndex>
     </item>
-    <item>
-      <itemName>table</itemName>
-      <itemDescription>kitchen furniture</itemDescription>
-      <priceBuy>36.50</priceBuy>
-      <monthBuy>March</monthBuy>
-      <monthBuyIndex>2</monthBuyIndex>
-      <dayBuy>10</dayBuy>
-      <dayBuyIndex>9</dayBuyIndex>
-      <yearBuy>2012</yearBuy>
-      <yearBuyIndex>4</yearBuyIndex>
-      <priceSold>100</priceSold>
-      <monthSold>November</monthSold>
-      <monthSoldIndex>10</monthSoldIndex>
-      <daySold>13</daySold>
-      <daySoldIndex>13</daySoldIndex>
-      <yearSold>2012</yearSold>
-      <yearSoldIndex>4</yearSoldIndex>
-      <numberBoughtDays>1530</numberBoughtDays>
-      <numberSoldDays>1779</numberSoldDays>
-      <profits>63.5</profits>
-      <percentReturns>173.97</percentReturns>
-      <daysToSold>249</daysToSold>
-    </item>
-  </ijdoane>
+  <item><itemName>powerpuff doll</itemName><itemDescription>soft plushy bubbles doll</itemDescription><priceBuy>5</priceBuy><monthBuy>May</monthBuy><monthBuyIndex>4</monthBuyIndex><dayBuy>7</dayBuy><dayBuyIndex>6</dayBuyIndex><yearBuy>2010</yearBuy><yearBuyIndex>2</yearBuyIndex><priceSold>14.96</priceSold><monthSold>July</monthSold><monthSoldIndex>6</monthSoldIndex><daySold>19</daySold><daySoldIndex>19</daySoldIndex><yearSold>2012</yearSold><yearSoldIndex>4</yearSoldIndex><numberBoughtDays>858</numberBoughtDays><numberSoldDays>1662</numberSoldDays><profits>9.96</profits><percentReturns>199.2</percentReturns><daysToSold>804</daysToSold><itemNumbers>320971072736</itemNumbers><startBids/><highestBids>14.96</highestBids><reserves/><buyItNows/><shippings/><shipLengths/><shipLengthUnit>inches</shipLengthUnit><shipLengthUnitIndex>0</shipLengthUnitIndex><shipWidths/><shipWidthUnit>inches</shipWidthUnit><shipWidthUnitIndex>0</shipWidthUnitIndex><shipHeights>10,10,10,10,</shipHeights><shipHeightUnit>inches</shipHeightUnit><shipHeightUnitIndex>0</shipHeightUnitIndex><shipWeights/><shipWeightUnit>lbs</shipWeightUnit><shipWeightUnitIndex>0</shipWeightUnitIndex></item><item><itemName>chanel 2.66</itemName><itemDescription>authentic chanel handbag</itemDescription><priceBuy>1000</priceBuy><monthBuy>January</monthBuy><monthBuyIndex>0</monthBuyIndex><dayBuy>1</dayBuy><dayBuyIndex>0</dayBuyIndex><yearBuy>2012</yearBuy><yearBuyIndex>4</yearBuyIndex><priceSold></priceSold><monthSold>January</monthSold><monthSoldIndex>0</monthSoldIndex><daySold>1</daySold><daySoldIndex>0</daySoldIndex><yearSold>2012</yearSold><yearSoldIndex>4</yearSoldIndex><numberBoughtDays>1462</numberBoughtDays><numberSoldDays>1462</numberSoldDays><profits>-1000</profits><percentReturns>-100</percentReturns><daysToSold>0</daysToSold><itemNumbers>150926600955</itemNumbers><startBids></startBids><highestBids></highestBids><reserves></reserves><buyItNows></buyItNows><shippings></shippings><shipLengths></shipLengths><shipLengthUnit>inches</shipLengthUnit><shipLengthUnitIndex>0</shipLengthUnitIndex><shipWidths></shipWidths><shipWidthUnit>inches</shipWidthUnit><shipWidthUnitIndex>0</shipWidthUnitIndex><shipHeights>10,10,10,10,10,,</shipHeights><shipHeightUnit>inches</shipHeightUnit><shipHeightUnitIndex>0</shipHeightUnitIndex><shipWeights></shipWeights><shipWeightUnit>lbs</shipWeightUnit><shipWeightUnitIndex>0</shipWeightUnitIndex></item></csv>
 </ireselldata>

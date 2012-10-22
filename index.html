@@ -11,12 +11,11 @@
 <body onload="createItemWizard(-1)">
 
 //home page
-<div data-role="page" id="home">
+<div data-role="page" id="home" data-theme="b">
 
     <div data-role="header">
         <h1>iResell</h1>
     </div>
-
     <div data-role="content">
         <div style="text-align: center">
             <h2>some motto</h2>
@@ -238,7 +237,7 @@
 <div data-role="page" id="editItems">
 
     <div data-role="header">
-        <h1>Item Wizard</h1>
+        <h1>Item View</h1>
     </div>
 
     <div id="itemEditor" align="center"></div>
@@ -425,12 +424,36 @@
     daySellIndex = new Array();
     numberSellDays = new Array();
     daysToSell = new Array();
-    temp = new Array();
-    index = 0;
     profits = new Array();
     percentReturn = new Array();
+    itemNumber = new Array();
+    startBid = new Array();
+    highestBid = new Array();
+    monthEnd = new Array();
+    monthEndIndex = new Array();
+    yearEnd = new Array();
+    yearEndIndex = new Array();
+    dayEnd = new Array();
+    dayEndIndex = new Array();
+    numberEndDays = new Array();
+    reserve = new Array();
+    buyItNow = new Array();
+    shipping = new Array();
+    shipLength = new Array();
+    shipLengthUnits = new Array();
+    shipLengthUnitsIndex = new Array();
+    shipWidth = new Array();
+    shipWidthUnits = new Array();
+    shipWidthUnitsIndex = new Array();
+    shipHeight = new Array();
+    shipHeightUnits = new Array();
+    shipHeightUnitsIndex = new Array();
+    shipWeight = new Array();
+    shipWeightUnits = new Array();
+    shipWeightUnitsIndex = new Array();
     averageProfit = 0;
     averagePercentReturn = 0;
+    index = 0;
 
     username = "";
     password = "";
@@ -439,30 +462,23 @@
 
     function createItemWizard(p) {
         itemEditor.innerHTML = "<form name='itemEdit'>" +
-        "<table>" +
+        "<table border='0'>" +
             "<tr height='20'></tr>" +
             "<tr>" +
-                "<td>Name of Item:</td>" +
+                "<td colspan=3><input type='text' name='name' size='15'></td>" +
+                "<td align='right'>Quantity:</td>" +
+                "<td><input type='text' name='quantity' size='1'></td>" +
             "</tr>" +
-            "<tr>" +
-                "<td><input type='text' name='name' size='15'></td>" +
-            "</tr>" +
-            "<tr>" +
-                "<td>Item Description:</td>" +
-            "</tr>" +
-            "<tr>" +
-                "<td><input type='text' name='description' size='15'></td>" +
+            "<tr height='130'>" +
+                "<td></td>" +
+                "<td colspan='4' height='130'><textarea style='resize:none' rows='5' cols='10' name='description'></textarea></td>" +
             "</tr>" +
             "<tr>" +
                 "<td>Purchase Price:</td>" +
-            "</tr>" +
-            "<tr>" +
                 "<td><input type='text' name='purchasePrice' size='7'></td>" +
             "</tr>" +
             "<tr>" +
                 "<td>Purchase Date:</td>" +
-            "</tr>" +
-            "<tr>" +
                 "<td><select name='monthBuy'><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option>" +
                         "<option>August</option><option>September</option><option>October</option><option>November</option><option>December</option>" +
                     "</select></td>" +
@@ -477,14 +493,10 @@
             "</tr>" +
             "<tr>" +
                 "<td>Sell Price:</td>" +
-            "</tr>" +
-            "<tr>" +
                 "<td><input type='text' name='sellPrice' size='7'></td>" +
             "</tr>" +
             "<tr>" +
                 "<td>Sell Date:</td>" +
-            "</tr>" +
-            "<tr>" +
                 "<td><select name='monthSell'><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option>" +
                         "<option>August</option><option>September</option><option>October</option><option>November</option><option>December</option>" +
                     "</select></td>" +
@@ -496,6 +508,74 @@
                     "</select></td>" +
             "</tr>" +
             "<tr height='30'></tr>" +
+            "<tr height='50'>" +
+                "<td colspan=5 bgcolor=yellow align=center><font size=8 color=black>Ebay</font></td>" +
+            "</tr>" +
+            "<tr height='30'></tr>" +
+            "<tr>" +
+                "<td>Item Number:</td>" +
+                "<td><input type=text size=4 name=itemNumber></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Start Bid:</td>" +
+                "<td><input type=text size=4 name=startBid></td>" +
+            "</tr>" +
+
+            "<tr>" +
+                "<td>Highest Bid:</td>" +
+                "<td><input type=text size=4 name=highestBid></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Auction End Date:</td>" +
+                "<td><select name='monthEnd'><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option>" +
+                    "<option>August</option><option>September</option><option>October</option><option>November</option><option>December</option>" +
+                    "</select></td>" +
+                "<td><select name='dayEnd'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option>" +
+                    "<option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option>" +
+                    "<option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select></td>" +
+                "<td><select name='yearEnd'><option>2008</option><option>2009</option><option>2010</option><option>2011</option><option>2012</option><option>2013</option><option>2014</option><option>2015</option>" +
+                    "<option>2016</option><option>2017</option>" +
+                    "</select></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Reserve:</td>" +
+                "<td><input type=text size=4 name=reserve></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Buy It Now:</td>" +
+                "<td><input type=text size=4 name=buyItNow></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Shipping/Handling:</td>" +
+                "<td><input type=text size=4 name=shipping></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Length:</td>" +
+                "<td><input type=text size=2 name=length></td>" +
+                "<td><select name=lengthUnits><option>inches</option><option>cm</option></select></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Width:</td>" +
+                "<td><input type=text size=2 name=width></td>" +
+                "<td><select name=widthUnits><option>inches</option><option>cm</option></select></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Height:</td>" +
+                "<td><input type=text size=2 name=height></td>" +
+                "<td><select name=heightUnits><option>inches</option><option>cm</option></select></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Weight:</td>" +
+                "<td><input type=text size=2 name=weight></td>" +
+                "<td><select name=weightUnits><option>lbs</option><option>kg</option></select></td>" +
+        "</tr>" +
+            "<tr>" +
+                "<td>" +
+                    "<div id=listEbay>" +
+                        "<button onclick=addToEbay()>List on Ebay</button>" +
+                    "</div>" +
+                "</td>" +
+            "</tr>" +
         "</table>" +
         "</form>" +
         "<table border=0><tr><td><input type=button onclick=editItem(" + p + ") value=Finish></td><td></td><td><input type=button onclick=location.href='#items' value=Cancel></td></tr></table>";
@@ -522,7 +602,24 @@
         document.itemEdit.monthSell.selectedIndex = 0;
         document.itemEdit.daySell.selectedIndex = 0;
         document.itemEdit.yearSell.selectedIndex = 4;
+        document.itemEdit.monthEnd.selectedIndex = 0;
+        document.itemEdit.dayEnd.selectedIndex = 0;
+        document.itemEdit.yearEnd.selectedIndex = 4;
         document.itemEdit.sellPrice.value = "";
+        document.itemEdit.itemNumber.value = "";
+        document.itemEdit.startBid.value = "";
+        document.itemEdit.highestBid.value = "";
+        document.itemEdit.reserve.value = "";
+        document.itemEdit.buyItNow.value = "";
+        document.itemEdit.shipping.value = "";
+        document.itemEdit.length.value = "";
+        document.itemEdit.lengthUnits.selectedIndex = 0;
+        document.itemEdit.width.value = "";
+        document.itemEdit.widthUnits.selectedIndex = 0;
+        document.itemEdit.height.value = "";
+        document.itemEdit.heightUnits.selectedIndex = 0;
+        document.itemEdit.weight.value = "";
+        document.itemEdit.weightUnits.selectedIndex = 0;
     }
 
     function setWizard(j) {
@@ -541,15 +638,29 @@
         document.itemEdit.daySell.selectedIndex = daySellIndex[k];
         document.itemEdit.yearSell.selectedIndex = yearSellIndex[k];
         document.itemEdit.sellPrice.value = priceSold[k];
+        document.itemEdit.itemNumber.value = itemNumber[k];
+        document.itemEdit.startBid.value = startBid[k];
+        document.itemEdit.highestBid.value = highestBid[k];
+        document.itemEdit.reserve.value = reserve[k];
+        document.itemEdit.buyItNow.value = buyItNow[k];
+        document.itemEdit.shipping.value = shipping[k];
+        document.itemEdit.length.value = shipLength[k];
+        document.itemEdit.lengthUnits.selectedIndex = shipLengthUnitsIndex[k];
+        document.itemEdit.width.value = shipWidth[k];
+        document.itemEdit.widthUnits.selectedIndex = shipWidthUnitsIndex[k];
+        document.itemEdit.height.value = shipHeight[k];
+        document.itemEdit.heightUnits.selectedIndex = shipHeightUnitsIndex[k];
+        document.itemEdit.weight.value = shipWeight[k];
+        document.itemEdit.weightUnits.selectedIndex = shipWeightUnitsIndex[k];
     }
 
-    function editItem(itemNumber) {
-        if (itemNumber == -1) {
+    function editItem(itemNumbers) {
+        if (itemNumbers == -1) {
             l = index;
             index++;
         }
         else {
-            l = itemNumber;
+            l = itemNumbers;
         }
 
         color = "#E8E8E8";
@@ -609,6 +720,7 @@
             }
         }
         priceSold[l] = document.itemEdit.sellPrice.value;
+
         e = document.itemEdit.monthSell;
         monthSell[l] = e.options[e.selectedIndex].value;
         monthSellIndex[l] = document.itemEdit.monthSell.selectedIndex;
@@ -645,15 +757,72 @@
         }
 
         profits[l] = Number(priceSold[l]) - Number(priceBuy[l]) + "";
-
         percentReturn[l] = 10000 * profits[l] / priceBuy[l];
         percentReturn[l] += "";
         temp = percentReturn[l].split(".");
         percentReturn[l] = temp[0] / 100;
         daysToSell[l] = numberSellDays[l] - numberBuyDays[l];
+        itemNumber[l] = document.itemEdit.itemNumber.value;
+        startBid[l] = document.itemEdit.startBid.value;
+        highestBid[l] = document.itemEdit.highestBid.value;
+        e = document.itemEdit.monthEnd;
+        monthEnd[l] = e.options[e.selectedIndex].value;
+        monthEndIndex[l] = document.itemEdit.monthEnd.selectedIndex;
+        e = document.itemEdit.yearEnd;
+        yearEnd[l] = e.options[e.selectedIndex].value;
+        yearEndIndex[l] = document.itemEdit.yearEnd.selectedIndex;
+        e = document.itemEdit.dayEnd;
+        dayEnd[l] = e.options[e.selectedIndex].value;
+        dayEndIndex[l] = document.itemEdit.dayEnd.selectedIndex;
+        numberEndDays[l] = dayEndIndex[l] + 1;
+        for (i = 0; i < monthEndIndex[l]; i++) {
+            if ((i <= 6 && i % 2 == 0) || (i >= 7 && i % 2 == 1) || i == 0) {
+                numberEndDays[l] += 31;
+            }
+            if (((i < 6 && i % 2 == 1) || (i > 7 && i % 2 == 0)) && i != 1) {
+                numberEndDays[l] += 30;
+            }
+            if (i == 1) {
+                if (yearEnd[l] % 4 == 0) {
+                    numberEndDays[l] += 29;
+                }
+                else {
+                    numberEndDays[l] += 28;
+                }
+            }
+        }
+        for (i = 0; i < yearEndIndex[l]; i++) {
+            if (i % 4 == 0) {
+                numberEndDays[l] += 366;
+            }
+            else {
+                numberEndDays[l] += 365;
+            }
+        }
+
+        reserve[l] = document.itemEdit.reserve.value;
+        buyItNow[l] = document.itemEdit.buyItNow.value;
+        shipping[l] = document.itemEdit.shipping.value;
+        shipLength[l] = document.itemEdit.length.value;
+        e = document.itemEdit.lengthUnits;
+        shipLengthUnits[l] = e.options[e.selectedIndex].value;
+        shipLengthUnitsIndex[l] = document.itemEdit.lengthUnits.selectedIndex;
+        shipWidth[l] = document.itemEdit.width.value;
+        e = document.itemEdit.widthUnits;
+        shipWidthUnits[l] = e.options[e.selectedIndex].value;
+        shipWidthUnitsIndex[l] = document.itemEdit.widthUnits.selectedIndex;
+        shipHeight[l] = document.itemEdit.height.value;
+        e = document.itemEdit.heightUnits;
+        shipHeightUnits[l] = e.options[e.selectedIndex].value;
+        shipHeightUnitsIndex[l] = document.itemEdit.heightUnits.selectedIndex;
+        shipWeight[l] = document.itemEdit.weight.value;
+        e = document.itemEdit.weightUnits;
+        shipWeightUnits[l] = e.options[e.selectedIndex].value;
+        shipWeightUnitsIndex[l] = document.itemEdit.weightUnits.selectedIndex;
+
         calendarString = "<select name=calendarItem onchange=setCalendar()>";
 
-        if (itemNumber == -1) {
+        if (itemNumbers == -1) {
             newXML(l);
         }
         else {
@@ -698,6 +867,8 @@
         itemView.innerHTML = htmlString;
         document.getCalendarItem.calendarItem.selectedIndex = 0;
         setCalendar();
+        calculateStats();
+        reloadEbay();
         window.location.href = '#items';
     }
 
@@ -730,11 +901,29 @@
         daySell.splice(j, 1);
         daySellIndex.splice(j, 1);
         numberSellDays.splice(j, 1);
-        daysToSell.splice(j, 1);
-        temp.splice(j, 1);
-        index--;
         profits.splice(j, 1);
         percentReturn.splice(j, 1);
+        daysToSell.splice(j, 1);
+        itemNumber.splice(j, 1);
+        startBid.splice(j, 1);
+        highestBid.splice(j, 1);
+        reserve.splice(j, 1);
+        buyItNow.splice(j, 1);
+        shipping.splice(j, 1);
+        shipLength.splice(j, 1);
+        shipLengthUnits.splice(j, 1);
+        shipLengthUnitsIndex.splice(j, 1);
+        shipWidth.splice(j, 1);
+        shipWidthUnits.splice(j, 1);
+        shipWidthUnitsIndex.splice(j, 1);
+        shipHeight.splice(j, 1);
+        shipHeightUnits.splice(j, 1);
+        shipHeightUnitsIndex.splice(j, 1);
+        shipWeight.splice(j, 1);
+        shipWeightUnits.splice(j, 1);
+        shipWeightUnitsIndex.splice(j, 1);
+        index--;
+
         htmlString = "<table width=100% border=1 cellpadding=10>" +
                             "<thead>" +
                             "<tr>" +
@@ -816,6 +1005,7 @@
         calculateStats();
         document.getCalendarItem.calendarItem.selectedIndex = 0;
         setCalendar();
+        reloadEbay();
         window.location.href = '#items';
     }
 
@@ -1415,6 +1605,7 @@
                 window.location.href = "#home";
                 login.innerHTML = "Welcome " + username;
                 readXML(xmlhttp.responseText);
+                calculateStats();
             }
         }
         xmlhttp.open("GET", "index.php?action=login&un=" + username + "&pw=" + password, true);
@@ -1468,9 +1659,44 @@
                 percentReturn[k] = xmlString[i];
             if (j == 20)
                 daysToSell[k] = xmlString[i];
-
+            if (j == 21)
+                itemNumber[k] = xmlString[i];
+            if (j == 22)
+                startBid[k] = xmlString[i];
+            if (j == 23)
+                highestBid[k] = xmlString[i];
+            if (j == 24)
+                reserve[k] = xmlString[i];
+            if (j == 25)
+                buyItNow[k] = xmlString[i];
+            if (j == 26)
+                shipping[k] = xmlString[i];
+            if (j == 27)
+                shipLength[k] = xmlString[i];
+            if (j == 28)
+                shipLengthUnits[k] = xmlString[i];
+            if (j == 29)
+                shipLengthUnitsIndex[k] = xmlString[i];
+            if (j == 30)
+                shipWidth[k] = xmlString[i];
+            if (j == 31)
+                shipWidthUnits[k] = xmlString[i];
+            if (j == 32)
+                shipWidthUnitsIndex[k] = xmlString[i];
+            if (j == 33)
+                shipHeight[k] = xmlString[i];
+            if (j == 34)
+                shipHeightUnits[k] = xmlString[i];
+            if (j == 35)
+                shipHeightUnitsIndex[k] = xmlString[i];
+            if (j == 36)
+                shipWeight[k] = xmlString[i];
+            if (j == 37)
+                shipWeightUnits[k] = xmlString[i];
+            if (j == 38)
+                shipWeightUnitsIndex[k] = xmlString[i];
             j++;
-            if (j > 20) {
+            if (j > 38) {
                 j = 0;
                 k++;
             }
@@ -1535,7 +1761,6 @@
         calendarList.innerHTML = calendarItemString;
         document.getCalendarItem.calendarItem.selectedIndex = 0;
         setCalendar();
-        calculateStats();
     }
 
     function newXML(l) {
@@ -1555,11 +1780,29 @@
         yearSold = yearSell[l];
         yearSoldIndex = yearSellIndex[l];
         daySold = daySell[l];
-        daySoldIndex = daySell[l];
+        daySoldIndex = daySellIndex[l];
         numberSoldDays = numberSellDays[l];
         daysToSold = daysToSell[l];
         profit = profits[l];
         percentReturns = percentReturn[l];
+        itemNumbers = itemNumber[l];
+        startBids = startBid[l];
+        highestBids = highestBid[l];
+        reserves = reserve[l];
+        buyItNows = buyItNow[l];
+        shippings = shipping[l];
+        shipLengths = shipLength[l];
+        shipLengthUnit = shipLengthUnits[l];
+        shipLengthUnitIndex = shipLengthUnitsIndex[l];
+        shipWidths = shipWidth[l];
+        shipWidthUnit = shipWidthUnits[l];
+        shipWidthUnitIndex = shipWidthUnitsIndex[l];
+        shipHeights = shipHeight[l];
+        shipHeightUnit = shipHeightUnits[l];
+        shipHeightUnitIndex = shipHeightUnitsIndex[l];
+        shipWeights = shipWeight[l];
+        shipWeightUnit = shipWeightUnits[l];
+        shipWeightUnitIndex = shipWeightUnitsIndex[l];
 
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
@@ -1569,7 +1812,10 @@
         xmlhttp.open("GET", "index.php?action=load&un=" + username + "&in=" + name + "&id=" + description + "&pb=" + priceBought + "&mb=" + monthBought + "&mbi=" +
                                 monthBoughtIndex + "&db=" + dayBought + "&dbi=" + dayBoughtIndex + "&yb=" + yearBought + "&ybi=" + yearBoughtIndex + "&ps=" + priceSell + "&ms=" + monthSold +
                                 "&msi=" + monthSoldIndex + "&ds=" + daySold + "&dsi=" + daySoldIndex + "&ys=" + yearSold + "&ysi=" + yearSoldIndex + "&nbd=" + numberBoughtDays +
-                                "&nsd=" + numberSoldDays + "&p=" + profit + "&pr=" + percentReturns + "&dts=" + daysToSold, true);
+                                "&nsd=" + numberSoldDays + "&p=" + profit + "&pr=" + percentReturns + "&dts=" + daysToSold + "&inu=" + itemNumbers + "&sb=" + startBids + "&hb=" + highestBids + "&r=" + reserves +
+                                "&bin=" + buyItNows + "&s=" + shippings + "&sl=" + shipLengths + "&slu=" + shipLengthUnit + "&slui=" + shipLengthUnitIndex + "&sw=" + shipWeights + "&swu=" +
+                                shipWidthUnit + "&swui=" + shipWidthUnitIndex + "&sh=" + shipHeight + "&shu=" + shipHeightUnit + "&shui=" + shipHeightUnitIndex + "&swe=" + shipWeights +
+                                "&sweu=" + shipWeightUnit + "&sweui=" + shipWeightUnitIndex, true);
         xmlhttp.send();
     }
 
@@ -1595,15 +1841,50 @@
         daysToSold = daysToSell[c];
         profit = profits[c];
         percentReturns = percentReturn[c];
+        itemNumbers = itemNumber[c];
+        startBids = startBid[c];
+        highestBids = highestBid[c];
+        reserves = reserve[c];
+        buyItNows = buyItNow[c];
+        shippings = shipping[c];
+        shipLengths = shipLength[c];
+        shipLengthUnit = shipLengthUnits[c];
+        shipLengthUnitIndex = shipLengthUnitsIndex[c];
+        shipWidths = shipWidth[c];
+        shipWidthUnit = shipWidthUnits[c];
+        shipWidthUnitIndex = shipWidthUnitsIndex[c];
+        shipHeights = shipHeight[c];
+        shipHeightUnit = shipHeightUnits[c];
+        shipHeightUnitIndex = shipHeightUnitsIndex[c];
+        shipWeights = shipWeight[c];
+        shipWeightUnit = shipWeightUnits[c];
+        shipWeightUnitIndex = shipWeightUnitsIndex[c];
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4) {
+                statsTable.innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET", "index.php?action=edit&un=" + username + "&on=" + originalName + "&in=" + name + "&id=" + description + "&pb=" + priceBought + "&mb=" + monthBought + "&mbi=" +
+        xmlhttp.open("GET", "index.php?action=edit&on=" + originalName + "&un=" + username + "&in=" + name + "&id=" + description + "&pb=" + priceBought + "&mb=" + monthBought + "&mbi=" +
                                 monthBoughtIndex + "&db=" + dayBought + "&dbi=" + dayBoughtIndex + "&yb=" + yearBought + "&ybi=" + yearBoughtIndex + "&ps=" + priceSell + "&ms=" + monthSold +
                                 "&msi=" + monthSoldIndex + "&ds=" + daySold + "&dsi=" + daySoldIndex + "&ys=" + yearSold + "&ysi=" + yearSoldIndex + "&nbd=" + numberBoughtDays +
-                                "&nsd=" + numberSoldDays + "&p=" + profit + "&pr=" + percentReturns + "&dts=" + daysToSold, true);
+                                "&nsd=" + numberSoldDays + "&p=" + profit + "&pr=" + percentReturns + "&dts=" + daysToSold + "&inu=" + itemNumbers + "&sb=" + startBids + "&hb=" + highestBids + "&r=" + reserves +
+                                "&bin=" + buyItNows + "&s=" + shippings + "&sl=" + shipLengths + "&slu=" + shipLengthUnit + "&slui=" + shipLengthUnitIndex + "&sw=" + shipWeights + "&swu=" +
+                                shipWidthUnit + "&swui=" + shipWidthUnitIndex + "&sh=" + shipHeight + "&shu=" + shipHeightUnit + "&shui=" + shipHeightUnitIndex + "&swe=" + shipWeights +
+                                "&sweu=" + shipWeightUnit + "&sweui=" + shipWeightUnitIndex, true);
+        xmlhttp.send();
+        reloadEbay();
+    }
+
+    function reloadEbay() {
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4) {
+                readXML(xmlhttp.responseText);
+                calculateStats();
+            }
+        }
+        xmlhttp.open("GET", "index.php?action=login&un=" + username + "&pw=" + password, true);
         xmlhttp.send();
     }
 </script>
