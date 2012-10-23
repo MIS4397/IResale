@@ -339,10 +339,11 @@
             echo "false";
         }
         else{
+            $doc->load("ireselldata.xml");
             $node=$doc->getElementsByTagName("ireselldata")->item(0);
             $node=$doc->importNode($node, true);
             $username=$doc->createElement($un);
-
+            
             $password=$doc->createElement("password");
             $password->appendChild($doc->createTextNode($pw));
             $username->appendChild($password);
