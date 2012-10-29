@@ -12,21 +12,21 @@
         <dayBuyIndex>7</dayBuyIndex>
         <yearBuy>2012</yearBuy>
         <yearBuyIndex>4</yearBuyIndex>
-        <priceSold>19.99</priceSold>
+        <priceSold>99.0</priceSold>
         <monthSold>June</monthSold>
         <monthSoldIndex>5</monthSoldIndex>
-        <daySold>23</daySold>
-        <daySoldIndex>23</daySoldIndex>
+        <daySold>31</daySold>
+        <daySoldIndex>31</daySoldIndex>
         <yearSold>2012</yearSold>
         <yearSoldIndex>4</yearSoldIndex>
-        <numberBoughtDays>1528</numberBoughtDays>
-        <numberSoldDays>1636</numberSoldDays>
-        <profits>9.989999999999998</profits>
-        <percentReturns>99.89</percentReturns>
-        <daysToSold>108</daysToSold>
-        <itemNumbers>200834647362</itemNumbers>
+        <numberBoughtDays>1529</numberBoughtDays>
+        <numberSoldDays>1644</numberSoldDays>
+        <profits>89</profits>
+        <percentReturns>890</percentReturns>
+        <daysToSold>115</daysToSold>
+        <itemNumbers>160906948574</itemNumbers>
         <startBids>10</startBids>
-        <highestBids>19.99</highestBids>
+        <highestBids>99.0</highestBids>
         <reserves>250</reserves>
         <buyItNows>100</buyItNows>
         <shippings>10</shippings>
@@ -36,7 +36,7 @@
         <shipWidths>50</shipWidths>
         <shipWidthUnit>cm</shipWidthUnit>
         <shipWidthUnitIndex>1</shipWidthUnitIndex>
-        <shipHeights>10</shipHeights>
+        <shipHeights></shipHeights>
         <shipHeightUnit>cm</shipHeightUnit>
         <shipHeightUnitIndex>1</shipHeightUnitIndex>
         <shipWeights>50</shipWeights>
@@ -56,15 +56,15 @@
         <priceSold>14.96</priceSold>
         <monthSold>July</monthSold>
         <monthSoldIndex>6</monthSoldIndex>
-        <daySold>19</daySold>
-        <daySoldIndex>19</daySoldIndex>
+        <daySold>27</daySold>
+        <daySoldIndex>27</daySoldIndex>
         <yearSold>2012</yearSold>
         <yearSoldIndex>4</yearSoldIndex>
-        <numberBoughtDays>858</numberBoughtDays>
-        <numberSoldDays>1662</numberSoldDays>
+        <numberBoughtDays>859</numberBoughtDays>
+        <numberSoldDays>1670</numberSoldDays>
         <profits>9.96</profits>
         <percentReturns>199.2</percentReturns>
-        <daysToSold>804</daysToSold>
+        <daysToSold>811</daysToSold>
         <itemNumbers>320971072736</itemNumbers>
         <startBids/>
         <highestBids>14.96</highestBids>
@@ -77,7 +77,7 @@
         <shipWidths/>
         <shipWidthUnit>inches</shipWidthUnit>
         <shipWidthUnitIndex>0</shipWidthUnitIndex>
-        <shipHeights>10,10,10,10,</shipHeights>
+        <shipHeights></shipHeights>
         <shipHeightUnit>inches</shipHeightUnit>
         <shipHeightUnitIndex>0</shipHeightUnitIndex>
         <shipWeights/>
@@ -94,34 +94,34 @@
         <dayBuyIndex>0</dayBuyIndex>
         <yearBuy>2012</yearBuy>
         <yearBuyIndex>4</yearBuyIndex>
-        <priceSold/>
+        <priceSold>1575.0</priceSold>
         <monthSold>January</monthSold>
         <monthSoldIndex>0</monthSoldIndex>
-        <daySold>1</daySold>
-        <daySoldIndex>0</daySoldIndex>
+        <daySold>8</daySold>
+        <daySoldIndex>8</daySoldIndex>
         <yearSold>2012</yearSold>
         <yearSoldIndex>4</yearSoldIndex>
         <numberBoughtDays>1462</numberBoughtDays>
-        <numberSoldDays>1462</numberSoldDays>
-        <profits>-1000</profits>
-        <percentReturns>-100</percentReturns>
-        <daysToSold>0</daysToSold>
+        <numberSoldDays>1469</numberSoldDays>
+        <profits>575</profits>
+        <percentReturns>57.5</percentReturns>
+        <daysToSold>7</daysToSold>
         <itemNumbers>150926600955</itemNumbers>
-        <startBids/>
-        <highestBids/>
-        <reserves/>
-        <buyItNows/>
-        <shippings/>
-        <shipLengths/>
+        <startBids></startBids>
+        <highestBids>1575.0</highestBids>
+        <reserves></reserves>
+        <buyItNows></buyItNows>
+        <shippings></shippings>
+        <shipLengths></shipLengths>
         <shipLengthUnit>inches</shipLengthUnit>
         <shipLengthUnitIndex>0</shipLengthUnitIndex>
-        <shipWidths/>
+        <shipWidths></shipWidths>
         <shipWidthUnit>inches</shipWidthUnit>
         <shipWidthUnitIndex>0</shipWidthUnitIndex>
-        <shipHeights/>
+        <shipHeights>ss</shipHeights>
         <shipHeightUnit>inches</shipHeightUnit>
         <shipHeightUnitIndex>0</shipHeightUnitIndex>
-        <shipWeights/>
+        <shipWeights></shipWeights>
         <shipWeightUnit>lbs</shipWeightUnit>
         <shipWeightUnitIndex>0</shipWeightUnitIndex>
     </item>
@@ -137,4 +137,38 @@
           <monthBuyIndex>3</monthBuyIndex>
           <dayBuy>5</dayBuy>
           <dayBuyIndex>4</dayBuyIndex>
-          <yearBuy>2012</yearBuy><yearBuyIndex>4</yearBuyIndex><priceSold>500</priceSold><monthSold>August</monthSold><monthSoldIndex>7</monthSoldIndex><daySold>15</daySold><daySoldIndex>14</daySoldIndex><yearSold>2012</yearSold><yearSoldIndex>4</yearSoldIndex><numberBoughtDays>1556</numberBoughtDays><numberSoldDays>1689</numberSoldDays><profits>480</profits><percentReturns>2400</percentReturns><daysToSold>133</daysToSold><itemNumbers></itemNumbers><startBids></startBids><highestBids></highestBids><reserves></reserves><buyItNows></buyItNows><shippings></shippings><shipLengths></shipLengths><shipLengthUnit>inches</shipLengthUnit><shipLengthUnitIndex>0</shipLengthUnitIndex><shipWidths></shipWidths><shipWidthUnit>inches</shipWidthUnit><shipWidthUnitIndex>0</shipWidthUnitIndex><shipHeights></shipHeights><shipHeightUnit>inches</shipHeightUnit><shipHeightUnitIndex>0</shipHeightUnitIndex><shipWeights></shipWeights><shipWeightUnit>lbs</shipWeightUnit><shipWeightUnitIndex>0</shipWeightUnitIndex></item></cliff></ireselldata>
+          <yearBuy>2012</yearBuy>
+          <yearBuyIndex>4</yearBuyIndex>
+          <priceSold>500</priceSold>
+          <monthSold>August</monthSold>
+          <monthSoldIndex>7</monthSoldIndex>
+          <daySold>15</daySold>
+          <daySoldIndex>14</daySoldIndex>
+          <yearSold>2012</yearSold>
+          <yearSoldIndex>4</yearSoldIndex>
+          <numberBoughtDays>1556</numberBoughtDays>
+          <numberSoldDays>1689</numberSoldDays>
+          <profits>480</profits>
+          <percentReturns>2400</percentReturns>
+          <daysToSold>133</daysToSold>
+          <itemNumbers/>
+          <startBids/>
+          <highestBids/>
+          <reserves/>
+          <buyItNows/>
+          <shippings/>
+          <shipLengths/>
+          <shipLengthUnit>inches</shipLengthUnit>
+          <shipLengthUnitIndex>0</shipLengthUnitIndex>
+          <shipWidths/>
+          <shipWidthUnit>inches</shipWidthUnit>
+          <shipWidthUnitIndex>0</shipWidthUnitIndex>
+          <shipHeights/>
+          <shipHeightUnit>inches</shipHeightUnit>
+          <shipHeightUnitIndex>0</shipHeightUnitIndex>
+          <shipWeights/>
+          <shipWeightUnit>lbs</shipWeightUnit>
+          <shipWeightUnitIndex>0</shipWeightUnitIndex>
+      </item>
+    </cliff>
+</ireselldata>

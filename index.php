@@ -47,7 +47,7 @@
     $un=$_GET["un"];
     $pw=$_GET["pw"];
     $rpw=$_GET["rpw"];
-    $at=$_GET["at"];
+    $ue=$_GET["ue"];
 
     //auxillary variable for delete item
     $on=$_GET["on"];
@@ -60,98 +60,109 @@
 
     //Retrieves values from xml on login to populate the javascript arrays
     if($action=="login"){
-
         //retrieves credentials
         $doc->load("ireselldata.xml");
         $node=$doc->getElementsByTagName("ireselldata")->item(0);
-        $node=$node->getElementsByTagName($un)->item(0);
-        $password=$node->getElementsByTagName("password")->item(0)->nodeValue;
-
-        //starting the output string
-        $outputString="";
-
-        //checks password before retrieving item information
-        if($pw==$password){
-           $items=$node->getElementsByTagName("item"); 
-
-           //loop to create string with all the item info with ~ as delimiter to be used by javascript
-           foreach($items as $xmlItem){
-               $outputString=$outputString.$xmlItem->getElementsByTagName("itemName")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("itemDescription")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("priceBuy")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("monthBuy")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("monthBuyIndex")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("dayBuy")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("dayBuyIndex")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("yearBuy")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("yearBuyIndex")->item(0)->nodeValue."~";
-               if($xmlItem->getElementsByTagName("itemNumbers")->item(0)->nodeValue!=""){
-                    $selectedItemID=$xmlItem->getElementsByTagName("itemNumbers")->item(0)->nodeValue;
-                    $apicallb  = "$s_endpoint";
-                    $apicallb .= "callname=GetSingleItem";
-                    $apicallb .= "&version=563";
-                    $apicallb .= "&appid=$appid";
-                    $apicallb .= "&itemid=$selectedItemID";
-                    $apicallb .= "&responseencoding=$responseEncoding";
-                    $ebayDoc=simplexml_load_file($apicallb);
-                    $currentPrice=$ebayDoc->Item->ConvertedCurrentPrice;
-                    $outputString=$outputString.$currentPrice."~";
-               }
-               else{
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("priceSold")->item(0)->nodeValue."~";    
-               }
-               $outputString=$outputString.$xmlItem->getElementsByTagName("monthSold")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("monthSoldIndex")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("daySold")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("daySoldIndex")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("yearSold")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("yearSoldIndex")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("numberBoughtDays")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("numberSoldDays")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("profits")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("percentReturns")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("daysToSold")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("itemNumbers")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("startBids")->item(0)->nodeValue."~";
-               if($xmlItem->getElementsByTagName("itemNumbers")->item(0)->nodeValue!=""){
-                    $selectedItemID=$xmlItem->getElementsByTagName("itemNumbers")->item(0)->nodeValue;
-                    $apicallb  = "$s_endpoint";
-                    $apicallb .= "callname=GetSingleItem";
-                    $apicallb .= "&version=563";
-                    $apicallb .= "&appid=$appid";
-                    $apicallb .= "&itemid=$selectedItemID";
-                    $apicallb .= "&responseencoding=$responseEncoding";
-                    $ebayDoc=simplexml_load_file($apicallb);
-                    $currentPrice=$ebayDoc->Item->ConvertedCurrentPrice;
-                    $outputString=$outputString.$currentPrice."~";
-               }
-               else{
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("highestBids")->item(0)->nodeValue."~";    
-               }
-               $outputString=$outputString.$xmlItem->getElementsByTagName("reserves")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("buyItNows")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("shippings")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("shipLengths")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("shipLengthUnit")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("shipLengthUnitIndex")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("shipWidths")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("shipWidthUnit")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("shipWidthUnitIndex")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("shipHeights")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("shipHeightUnit")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("shipHeightUnitIndex")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("shipWeights")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("shipWeightUnit")->item(0)->nodeValue."~";
-               $outputString=$outputString.$xmlItem->getElementsByTagName("shipWeightUnitIndex")->item(0)->nodeValue."~";
-           }
-
-           //sends string to html/javascript
-           echo $outputString;
+        if($node->getElementsByTagName($un)->item(0)==null){
+                //if so, echo error message
+                echo "***Invalid Username***";
         }
         else{
+            $node=$node->getElementsByTagName($un)->item(0);
+            $password=$node->getElementsByTagName("password")->item(0)->nodeValue;
+            
+            //starting the output string
+            $outputString="";
 
-            //sends message to html/javascript if password is incorrect
-            echo "incorrect password";
+            //checks password before retrieving item information
+            if($pw==$password){
+                $items=$node->getElementsByTagName("item"); 
+
+                //loop to create string with all the item info with ~ as delimiter to be used by javascript
+                foreach($items as $xmlItem){
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("itemName")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("itemDescription")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("priceBuy")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("monthBuy")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("monthBuyIndex")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("dayBuy")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("dayBuyIndex")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("yearBuy")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("yearBuyIndex")->item(0)->nodeValue."~";
+                    if($xmlItem->getElementsByTagName("itemNumbers")->item(0)->nodeValue!=""){
+                        $selectedItemID=$xmlItem->getElementsByTagName("itemNumbers")->item(0)->nodeValue;
+                        $apicallb  = "$s_endpoint";
+                        $apicallb .= "callname=GetSingleItem";
+                        $apicallb .= "&version=563";
+                        $apicallb .= "&appid=$appid";
+                        $apicallb .= "&itemid=$selectedItemID";
+                        $apicallb .= "&responseencoding=$responseEncoding";
+                        $ebayDoc=simplexml_load_file($apicallb);
+                        $currentPrice=$ebayDoc->Item->ConvertedCurrentPrice;
+                        $outputString=$outputString.$currentPrice."~";
+                    }
+                    else{
+                        $outputString=$outputString.$xmlItem->getElementsByTagName("priceSold")->item(0)->nodeValue."~";    
+                    }
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("monthSold")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("monthSoldIndex")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("daySold")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("daySoldIndex")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("yearSold")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("yearSoldIndex")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("numberBoughtDays")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("numberSoldDays")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("profits")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("percentReturns")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("daysToSold")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("itemNumbers")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("startBids")->item(0)->nodeValue."~";
+                    if($xmlItem->getElementsByTagName("itemNumbers")->item(0)->nodeValue!=""){
+                        $selectedItemID=$xmlItem->getElementsByTagName("itemNumbers")->item(0)->nodeValue;
+                        $apicallb  = "$s_endpoint";
+                        $apicallb .= "callname=GetSingleItem";
+                        $apicallb .= "&version=563";
+                        $apicallb .= "&appid=$appid";
+                        $apicallb .= "&itemid=$selectedItemID";
+                        $apicallb .= "&responseencoding=$responseEncoding";
+                        $ebayDoc=simplexml_load_file($apicallb);
+                        $currentPrice=$ebayDoc->Item->ConvertedCurrentPrice;
+                        $imgSrc=$ebayDoc->Item->GalleryURL;
+                        $endTime=$ebayDoc->Item->EndTime;
+                        $outputString=$outputString.$currentPrice."~";
+                        $outputString=$outputString.$imgSrc."~";
+                        $outputString=$outputString.$endTime."~";
+                    }
+                    else{
+                        $outputString=$outputString.$xmlItem->getElementsByTagName("highestBids")->item(0)->nodeValue."~";  
+                        $outputString=$outputString.""."~"; 
+                        $outputString=$outputString.""."~"; 
+                    }
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("reserves")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("buyItNows")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("shippings")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipLengths")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipLengthUnit")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipLengthUnitIndex")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipWidths")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipWidthUnit")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipWidthUnitIndex")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipHeights")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipHeightUnit")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipHeightUnitIndex")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipWeights")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipWeightUnit")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipWeightUnitIndex")->item(0)->nodeValue."~";
+                }
+
+                //sends string to html/javascript
+                echo $outputString;
+            }
+            else{
+
+                //sends message to html/javascript if password is incorrect
+                echo "***Incorrect Password***";
+            }
         }
     }
 
@@ -335,26 +346,41 @@
     }
 
     if($action=="newAccount"){
+        //check if passwords match
         if($pw!=$rpw){
-            echo "false";
+            //if not, echo error message
+            echo "***Passwords do not match***";
         }
         else{
+            //load xml document
             $doc->load("ireselldata.xml");
             $node=$doc->getElementsByTagName("ireselldata")->item(0);
             $node=$doc->importNode($node, true);
-            $username=$doc->createElement($un);
             
-            $password=$doc->createElement("password");
-            $password->appendChild($doc->createTextNode($pw));
-            $username->appendChild($password);
+            //check if username already exists
+            if($node->getElementsByTagName($un)->item(0)!=null){
+                //if so, echo error message
+                echo "***Username ".$un." already exists***";
+            }
+            else{
+                //create username node
+                $username=$doc->createElement($un);
+            
+                //append password and user email to username node
+                $password=$doc->createElement("password");
+                $password->appendChild($doc->createTextNode($pw));
+                $username->appendChild($password);
 
-            $accountType=$doc->createElement("accountType");
-            $accountType->appendChild($doc->createTextNode($at));
-            $username->appendChild($accountType);
+                $userEmail=$doc->createElement("userEmail");
+                $userEmail->appendChild($doc->createTextNode($ue));
+                $username->appendChild($userEmail);
 
-            $node->appendChild($username);
-            $doc->save("ireselldata.xml");
-            echo "true";
+                //append username node to xml doc and save
+                $node->appendChild($username);
+                $doc->save("ireselldata.xml");
+
+                echo "true";
+            }
         }
     }
 
@@ -427,9 +453,5 @@
             }
         }
         $doc->save("ireselldata.xml");
-    }
-
-    if(action=="ebay"){
-        $ebayEndpoint="http://open.api.ebay.com/shopping?callname=GetSingleItem&appid=IanDoane-c375-483f-aef7-011bd5a48fb0&version=563";
     }
 ?>
