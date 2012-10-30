@@ -55,8 +55,137 @@
 
     originalName = "";
 
-    function resetWizard() {
-        window.location.href = "#page8";
+    function createItemWizard(p, q) {
+        itemEditor.innerHTML = "<form name='itemEdit'>" +
+        "<table border='0'>" +
+            "<tr height='20'></tr>" +
+            "<tr>" +
+                "<td colspan=3><input type='text' name='name' size='15'></td>" +
+                "<td align='right'>Quantity:</td>" +
+                "<td><input type='text' name='quantity' size='1'></td>" +
+            "</tr>" +
+            "<tr height='130'>" +
+                "<td><img src=" + images[p] + " width=125></div></td>" +
+                "<td colspan='4' height='130'><textarea style='resize:none' rows='5' cols='10' name='description'></textarea></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Purchase Price:</td>" +
+                "<td><input type='text' name='purchasePrice' size='7'></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Purchase Date:</td>" +
+                "<td><select name='monthBuy'><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option>" +
+                        "<option>August</option><option>September</option><option>October</option><option>November</option><option>December</option>" +
+                    "</select></td>" +
+                "<td><select name='dayBuy'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option>" +
+                        "<option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option>" +
+                        "<option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option>" +
+                        "<option>30</option><option>31</option>" +
+                    "</select></td>" +
+                "<td><select name='yearBuy'><option>2008</option><option>2009</option><option>2010</option><option>2011</option><option>2012</option><option>2013</option><option>2014</option><option>2015</option>" +
+                        "<option>2016</option><option>2017</option>" +
+                    "</select></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Sell Price:</td>" +
+                "<td><input type='text' name='sellPrice' size='7'></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Sell Date:</td>" +
+                "<td><select name='monthSell'><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option>" +
+                        "<option>August</option><option>September</option><option>October</option><option>November</option><option>December</option>" +
+                    "</select></td>" +
+                "<td><select name='daySell'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option>" +
+                        "<option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option>" +
+                        "<option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select></td>" +
+                "<td><select name='yearSell'><option>2008</option><option>2009</option><option>2010</option><option>2011</option><option>2012</option><option>2013</option><option>2014</option><option>2015</option>" +
+                        "<option>2016</option><option>2017</option>" +
+                    "</select></td>" +
+            "</tr>" +
+            "<tr height='30'></tr>" +
+            "<tr height='50'>" +
+                "<td colspan=5 bgcolor=yellow align=center><font size=8 color=black>Ebay</font></td>" +
+            "</tr>" +
+            "<tr height='30'></tr>" +
+            "<tr>" +
+                "<td>Item Number:</td>" +
+                "<td><input type=text size=4 name=itemNumber></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Start Bid:</td>" +
+                "<td><input type=text size=4 name=startBid></td>" +
+            "</tr>" +
+
+            "<tr>" +
+                "<td>Highest Bid:</td>" +
+                "<td><input type=text size=4 name=highestBid></td>" +
+            "</tr>" +
+            "<tr>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Auction End Date:</td>" +
+                "<td>" + monthEnd[p] + " " + dayEnd[p] + ", " + yearEnd[p] + "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Auction End Time:</td>" +
+                "<td>" + hourEnd[p] + ":" + minuteEnd[p] + " " + morningEnd[p] + "</td>" +
+            "</tr>" +
+            "<tr>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Reserve:</td>" +
+                "<td><input type=text size=4 name=reserve></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Buy It Now:</td>" +
+                "<td><input type=text size=4 name=buyItNow></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Shipping/Handling:</td>" +
+                "<td><input type=text size=4 name=shipping></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Length:</td>" +
+                "<td><input type=text size=2 name=length></td>" +
+                "<td><select name=lengthUnits><option>inches</option><option>cm</option></select></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Width:</td>" +
+                "<td><input type=text size=2 name=width></td>" +
+                "<td><select name=widthUnits><option>inches</option><option>cm</option></select></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Height:</td>" +
+                "<td><input type=text size=2 name=height></td>" +
+                "<td><select name=heightUnits><option>inches</option><option>cm</option></select></td>" +
+            "</tr>" +
+            "<tr>" +
+                "<td>Weight:</td>" +
+                "<td><input type=text size=2 name=weight></td>" +
+                "<td><select name=weightUnits><option>lbs</option><option>kg</option></select></td>" +
+        "</tr>" +
+            "<tr>" +
+                "<td>" +
+                    "<div id=listEbay>" +
+                        "<button onclick=addToEbay()>List on Ebay</button>" +
+                    "</div>" +
+                "</td>" +
+            "</tr>" +
+        "</table>" +
+        "</form>" +
+        "<table border=0><tr><td><input type=button onclick=editItem(" + p + ") value=Finish></td><td></td><td><input type=button onclick=location.href='#items' value=Cancel></td></tr></table>";
+
+        if (p == -1) {
+            resetWizardOnLoad();
+        }
+        else {
+            setWizardOnLoad(p);
+        }
+    }
+
+    function resetWizardOnLoad() {
         document.itemEdit.name.value = "";
         document.itemEdit.description.value = "";
         document.itemEdit.purchasePrice.value = "";
@@ -66,6 +195,9 @@
         document.itemEdit.monthSell.selectedIndex = 0;
         document.itemEdit.daySell.selectedIndex = 0;
         document.itemEdit.yearSell.selectedIndex = 4;
+        document.itemEdit.monthEnd.selectedIndex = 0;
+        document.itemEdit.dayEnd.selectedIndex = 0;
+        document.itemEdit.yearEnd.selectedIndex = 4;
         document.itemEdit.sellPrice.value = "";
         document.itemEdit.itemNumber.value = "";
         document.itemEdit.startBid.value = "";
@@ -81,11 +213,14 @@
         document.itemEdit.heightUnits.selectedIndex = 0;
         document.itemEdit.weight.value = "";
         document.itemEdit.weightUnits.selectedIndex = 0;
-        itemImage.innerHTML = "<img src=iresell.JPG width=125>";
     }
 
-    function setWizard(k) {
-        window.location.href = "#page8";
+    function setWizard(j) {
+        window.location.href = "#editItems";
+        createItemWizard(j, 0);
+    }
+
+    function setWizardOnLoad(k) {
         document.itemEdit.name.value = names[k];
         document.itemEdit.description.value = descriptions[k];
         document.itemEdit.purchasePrice.value = priceBuy[k];
@@ -126,7 +261,7 @@
         htmlString = "<table width=100% border=1 cellpadding=10>" +
                             "<thead>" +
                             "<tr>" +
-                                "<th colspan=2></th>" +
+                                "<th></th>" +
                                 "<th>Item Name</th>" +
                                 "<th>Item Description</th>" +
                                 "<th>Purchase Price</th>" +
@@ -228,10 +363,7 @@
         endDateSplit = endTimes[l].split("T");
         endDate = endDateSplit[0].split("-");
         yearEnd[l] = endDate[0];
-        yearSell[l] = yearEnd[l];
-        yearSellIndex[l] = yearEnd[l] - 2008;
         monthEnd[l] = endDate[1];
-        monthSellIndex[l] = monthEnd[l] - 1;
         if (monthEnd[l] == 1)
             monthEnd[l] = "January";
         if (monthEnd[l] == 2)
@@ -257,10 +389,7 @@
         if (monthEnd[l] == 12)
             monthEnd[l] = "December";
 
-        monthSell[l] = monthEnd[l];
         dayEnd[l] = endDate[2];
-        daySell[l] = dayEnd[l];
-        daySellIndex[l] = dayEnd[l] - 1;
 
         endTimesSplit = endDateSplit[1].split(".");
         endTime = endTimesSplit[0].split(":");
@@ -280,7 +409,7 @@
             }
         }
         minuteEnd[l] = endTime[0];
-        
+
         reserve[l] = document.itemEdit.reserve.value;
         buyItNow[l] = document.itemEdit.buyItNow.value;
         shipping[l] = document.itemEdit.shipping.value;
@@ -309,7 +438,8 @@
         else {
             editXML(l);
         }
-        for (i = 0; i < descriptions.length; i++) {
+
+        for (i = 0; i < index; i++) {
             if (colorIndex == 0) {
                 color = "#E8E8E8";
                 colorIndex = 1;
@@ -321,7 +451,6 @@
             calendarString += "<option>" + names[i] + "</option>";
             htmlString += "<tr>";
             htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>X</button></td>";
-            htmlString += "<td bgcolor=" + color + "><img src="+images[i]+" width=70></td>";
             htmlString += "<td bgcolor=" + color + ">" + names[i] + "</td>";
             htmlString += "<td bgcolor=" + color + ">" + descriptions[i] + "</td>";
             htmlString += "<td bgcolor=" + color + ">$" + toMoney(priceBuy[i]) + "</td>";
@@ -343,12 +472,13 @@
         }
 
         calendarString += "</select>";
-        //calendarList.innerHTML = calendarString;
+        calendarList.innerHTML = calendarString;
         htmlString += "</tbody></table>";
-        items.innerHTML = htmlString;
-        //document.getCalendarItem.calendarItem.selectedIndex = 0;
-        //setCalendar();
-        //calculateStats();
+        itemView.innerHTML = htmlString;
+        document.getCalendarItem.calendarItem.selectedIndex = 0;
+        setCalendar();
+        calculateStats();
+        window.location.href = '#items';
     }
 
     function removeItem(j) {
@@ -1079,15 +1209,26 @@
             if (xmlhttp.readyState == 4) {
                 xmlResponse = xmlhttp.responseText.split("~");
                 if (xmlResponse.length > 1) {
+                    
                     readXML(xmlhttp.responseText);
-                    window.location.href = "#page2"
+                    window.location.href = "#home";
+                    loginView.innerHTML = "Welcome " + username;
                 }
                 else {
-                    window.location.href = "#page13";
+                    window.location.href = "#loginPage";
+                    login.innerHTML = "<table border=0>" +
+                                            "<tr><td colspan=3><img src=iresell.JPG width=400></td></tr>" +
+                                            "<tr><td colspan=3>Username</td></tr>" +
+                                            "<tr><td colspan=3><input type=text width=9 name=username></td></tr>" +
+                                            "<tr><td colspan=3>Password</td></tr>" +
+                                            "<tr><td colspan=3><input type=password width=9 name=password></td></tr>" +
+                                            "<tr><td><button onclick=loginWindow()>Log in</button></td><td width=30></td><td><a href=#createAccount>Create account</a></td></tr>" +
+                                        "</table>";
+                    window.location.reload();
                 }
             }
         }
-        window.location.href = "#loading";
+        login.innerHTML = "loading...";
         xmlhttp.open("GET", "index.php?action=login&un=" + username + "&pw=" + password, true);
         xmlhttp.send();
     }
@@ -1185,15 +1326,73 @@
                 k++;
             }
         }
-
+        
         for (x = 0; x < k; x++) {
-            setWizard(x);
+            createItemWizard(x, -1);
             editItem(x);
         }
-        //calendarList.innerHTML = calendarItemString;
-        //document.getCalendarItem.calendarItem.selectedIndex = 0;
-        //setCalendar();
-        //calculateStats();
+        window.location.href = "#home";
+        color = "#E8E8E8";
+        colorIndex = 0;
+        index = descriptions.length;
+        calendarItemString = "<select name=calendarItem onchange=setCalendar()>";
+        htmlString = "<table width=100% border=1 cellpadding=10>" +
+                            "<thead>" +
+                            "<tr>" +
+                                "<th></th>" +
+                                "<th>Item Name</th>" +
+                                "<th>Item Description</th>" +
+                                "<th>Purchase Price</th>" +
+                                "<th>Purchase Date</th>" +
+                                "<th>Sell Price</th>" +
+                                "<th>Sell Date</th>" +
+                                "<th>Profit</th>" +
+                                "<th>Percent Return</th>" +
+                                "<th>Days to Sell</th>" +
+                                "</tr>" +
+                                "</thead>" +
+                                "<tbody>";
+        for (i = 0; i < index; i++) {
+            htmlString += "<tr>";
+            htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>X</button></td>";
+            htmlString += "<td bgcolor=" + color + ">" + names[i] + "</td>";
+            htmlString += "<td bgcolor=" + color + ">" + descriptions[i] + "</td>";
+            htmlString += "<td bgcolor=" + color + ">$" + toMoney(priceBuy[i]) + "</td>";
+            htmlString += "<td bgcolor=" + color + ">" + monthBuy[i] + " " + dayBuy[i] + ", " + yearBuy[i] + "</td>";
+            htmlString += "<td bgcolor=" + color + ">$" + toMoney(priceSold[i]) + "</td>";
+            htmlString += "<td bgcolor=" + color + ">" + monthSell[i] + " " + daySell[i] + ", " + yearSell[i] + "</td>";
+            htmlString += "<td bgcolor=" + color + ">";
+            if (profits[i] >= 0) {
+                htmlString += "$" + toMoney(profits[i]) + "</td>";
+            }
+            else {
+                tempProfit = profits[i] * (-1);
+                htmlString += "-$" + tempProfit + "</td>";
+            }
+            htmlString += "<td bgcolor=" + color + ">" + percentReturn[i] + "%</td>";
+            htmlString += "<td bgcolor=" + color + ">" + daysToSell[i] + "</td>";
+            htmlString += "<td bgcolor=" + color + "><button onclick=setWizard(" + i + ")>Edit</button></td>";
+            htmlString += "</tr>";
+
+            calendarItemString += "<option>" + names[i] + "</option>";
+
+            if (colorIndex == 0) {
+                colorIndex = 1;
+                color = "#66CCFF";
+            }
+            else {
+                colorIndex = 0;
+                color = "#E8E8E8";
+            }
+
+        }
+        htmlString += "</table>";
+        itemView.innerHTML = htmlString;
+        calendarItemString += "</select>";
+        calendarList.innerHTML = calendarItemString;
+        document.getCalendarItem.calendarItem.selectedIndex = 0;
+        setCalendar();
+        calculateStats();
     }
 
     function newXML(l) {
