@@ -49,6 +49,7 @@
     averageProfit = 0;
     averagePercentReturn = 0;
     index = 0;
+    newItem = "true";
 
     username = "";
     password = "";
@@ -82,6 +83,10 @@
         document.itemEdit.weight.value = "";
         document.itemEdit.weightUnits.selectedIndex = 0;
         itemImage.innerHTML = "<img src=iresell.JPG width=125>";
+        auctionDate.innerHTML = "";
+        auctionTime.innerHTML = "";
+        index = descriptions.length;
+        newItem = "true";
     }
 
     function setWizard(k) {
@@ -110,17 +115,21 @@
         document.itemEdit.heightUnits.selectedIndex = shipHeightUnitsIndex[k];
         document.itemEdit.weight.value = shipWeight[k];
         document.itemEdit.weightUnits.selectedIndex = shipWeightUnitsIndex[k];
+        itemImage.innerHTML = "<img src=" + images[k] + " width=125>";
+        auctionDate.innerHTML = monthEnd[k] + " " + dayEnd[k] + ", " + yearEnd[k];
+        auctionTime.innerHTML = hourEnd[k] + ":" + minuteEnd[k] + " " + morningEnd[k];
+        index = k;
+        newItem = "false";
     }
 
-    function editItem(itemNumbers) {
+    function editItem(itemNumbers, q) {
         if (itemNumbers == -1) {
-            l = index;
-            index++;
+            l = descriptions.length;
         }
         else {
             l = itemNumbers;
         }
-
+        l = index;
         color = "#E8E8E8";
         colorIndex = 0;
         htmlString = "<table width=100% border=1 cellpadding=10>" +
@@ -128,14 +137,9 @@
                             "<tr>" +
                                 "<th colspan=2></th>" +
                                 "<th>Item Name</th>" +
-                                "<th>Item Description</th>" +
-                                "<th>Purchase Price</th>" +
-                                "<th>Purchase Date</th>" +
                                 "<th>Sell Price</th>" +
-                                "<th>Sell Date</th>" +
                                 "<th>Profit</th>" +
                                 "<th>Percent Return</th>" +
-                                "<th>Days to Sell</th>" +
                                 "</tr>" +
                                 "</thead>" +
                                 "<tbody>";
@@ -215,140 +219,269 @@
                 numberSellDays[l] += 365;
             }
         }
-        profits[l] = Number(priceSold[l]) - Number(priceBuy[l]) + "";
-        percentReturn[l] = 10000 * profits[l] / priceBuy[l];
-        percentReturn[l] += "";
-        temp = percentReturn[l].split(".");
-        percentReturn[l] = temp[0] / 100;
         daysToSell[l] = numberSellDays[l] - numberBuyDays[l];
         itemNumber[l] = document.itemEdit.itemNumber.value;
         startBid[l] = document.itemEdit.startBid.value;
         highestBid[l] = document.itemEdit.highestBid.value;
-        
-        endDateSplit = endTimes[l].split("T");
-        endDate = endDateSplit[0].split("-");
-        yearEnd[l] = endDate[0];
-        yearSell[l] = yearEnd[l];
-        yearSellIndex[l] = yearEnd[l] - 2008;
-        monthEnd[l] = endDate[1];
-        monthSellIndex[l] = monthEnd[l] - 1;
-        if (monthEnd[l] == 1)
-            monthEnd[l] = "January";
-        if (monthEnd[l] == 2)
-            monthEnd[l] = "February";
-        if (monthEnd[l] == 3)
-            monthEnd[l] = "March";
-        if (monthEnd[l] == 4)
-            monthEnd[l] = "April";
-        if (monthEnd[l] == 5)
-            monthEnd[l] = "May";
-        if (monthEnd[l] == 6)
-            monthEnd[l] = "June";
-        if (monthEnd[l] == 7)
-            monthEnd[l] = "July";
-        if (monthEnd[l] == 8)
-            monthEnd[l] = "August";
-        if (monthEnd[l] == 9)
-            monthEnd[l] = "September";
-        if (monthEnd[l] == 10)
-            monthEnd[l] = "October";
-        if (monthEnd[l] == 11)
-            monthEnd[l] = "November";
-        if (monthEnd[l] == 12)
-            monthEnd[l] = "December";
-
-        monthSell[l] = monthEnd[l];
-        dayEnd[l] = endDate[2];
-        daySell[l] = dayEnd[l];
-        daySellIndex[l] = dayEnd[l] - 1;
-
-        endTimesSplit = endDateSplit[1].split(".");
-        endTime = endTimesSplit[0].split(":");
-        hourEnd[l] = endTime[0];
-        if (hourEnd[l] < 12) {
-            morningEnd[l] = "AM";
+        if (q != -1) {
+            images[l] = "iresell.JPG";
         }
-        else {
-            morningEnd[l] = "PM";
-            if (hourEnd[l] != 0 || hourEnd[l] != 12) {
-                hourEnd[l] = hourEnd[l] - 12;
-            }
-            else {
-                if (hourEnd[l] == 0) {
-                    hourEnd[l] = 12;
+        if (itemNumber[l] != "" && q!=-1) {
+            xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4) {
+                    ebayString = xmlhttp.responseText.split("~");
+                    endTimes[l] = ebayString[2];
+                    highestBid[l] = ebayString[0];
+                    images[l] = ebayString[1];
+                    priceSold[l] = ebayString[0];
+                    endDateSplit = endTimes[l].split("T");
+                    endDate = endDateSplit[0].split("-");
+                    yearEnd[l] = endDate[0];
+                    monthEnd[l] = endDate[1];
+                    if (monthEnd[l] == 1)
+                        monthEnd[l] = "January";
+                    if (monthEnd[l] == 2)
+                        monthEnd[l] = "February";
+                    if (monthEnd[l] == 3)
+                        monthEnd[l] = "March";
+                    if (monthEnd[l] == 4)
+                        monthEnd[l] = "April";
+                    if (monthEnd[l] == 5)
+                        monthEnd[l] = "May";
+                    if (monthEnd[l] == 6)
+                        monthEnd[l] = "June";
+                    if (monthEnd[l] == 7)
+                        monthEnd[l] = "July";
+                    if (monthEnd[l] == 8)
+                        monthEnd[l] = "August";
+                    if (monthEnd[l] == 9)
+                        monthEnd[l] = "September";
+                    if (monthEnd[l] == 10)
+                        monthEnd[l] = "October";
+                    if (monthEnd[l] == 11)
+                        monthEnd[l] = "November";
+                    if (monthEnd[l] == 12)
+                        monthEnd[l] = "December";
+
+                    dayEnd[l] = endDate[2];
+
+                    endTimesSplit = endDateSplit[1].split(".");
+                    endTime = endTimesSplit[0].split(":");
+                    hourEnd[l] = endTime[0];
+                    if (hourEnd[l] < 12) {
+                        morningEnd[l] = "AM";
+                    }
+                    else {
+                        morningEnd[l] = "PM";
+                        if (hourEnd[l] != 0 || hourEnd[l] != 12) {
+                            hourEnd[l] = hourEnd[l] - 12;
+                        }
+                        else {
+                            if (hourEnd[l] == 0) {
+                                hourEnd[l] = 12;
+                            }
+                        }
+                    }
+                    minuteEnd[l] = endTime[0];
+
+                    profits[l] = Number(priceSold[l]) - Number(priceBuy[l]) + "";
+                    percentReturn[l] = 10000 * profits[l] / priceBuy[l];
+                    percentReturn[l] += "";
+                    temp = percentReturn[l].split(".");
+                    percentReturn[l] = temp[0] / 100;
+
+                    reserve[l] = document.itemEdit.reserve.value;
+                    buyItNow[l] = document.itemEdit.buyItNow.value;
+                    shipping[l] = document.itemEdit.shipping.value;
+                    shipLength[l] = document.itemEdit.length.value;
+                    e = document.itemEdit.lengthUnits;
+                    shipLengthUnits[l] = e.options[e.selectedIndex].value;
+                    shipLengthUnitsIndex[l] = document.itemEdit.lengthUnits.selectedIndex;
+                    shipWidth[l] = document.itemEdit.width.value;
+                    e = document.itemEdit.widthUnits;
+                    shipWidthUnits[l] = e.options[e.selectedIndex].value;
+                    shipWidthUnitsIndex[l] = document.itemEdit.widthUnits.selectedIndex;
+                    shipHeight[l] = document.itemEdit.height.value;
+                    e = document.itemEdit.heightUnits;
+                    shipHeightUnits[l] = e.options[e.selectedIndex].value;
+                    shipHeightUnitsIndex[l] = document.itemEdit.heightUnits.selectedIndex;
+                    shipWeight[l] = document.itemEdit.weight.value;
+                    e = document.itemEdit.weightUnits;
+                    shipWeightUnits[l] = e.options[e.selectedIndex].value;
+                    shipWeightUnitsIndex[l] = document.itemEdit.weightUnits.selectedIndex;
+                    calendarString = "<select name=calendarItem onchange=setCalendar()>";
+
+                    if (q != -1) {
+                        if (newItem == "true") {
+                            newXML(l);
+                        }
+                        else {
+                            editXML(l);
+                        }
+                    }
+                    for (i = 0; i < descriptions.length; i++) {
+                        if (colorIndex == 0) {
+                            color = "#E8E8E8";
+                            colorIndex = 1;
+                        }
+                        else {
+                            color = "#66CCFF";
+                            colorIndex = 0;
+                        }
+                        calendarString += "<option>" + names[i] + "</option>";
+                        htmlString += "<tr>";
+                        htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>X</button></td>";
+                        htmlString += "<td bgcolor=" + color + "><img src=" + images[i] + " width=70></td>";
+                        htmlString += "<td bgcolor=" + color + ">" + names[i] + "</td>";
+                        htmlString += "<td bgcolor=" + color + ">$" + toMoney(priceSold[i]) + "</td>";
+                        htmlString += "<td bgcolor=" + color + ">";
+                        if (profits[i] >= 0) {
+                            htmlString += "$" + toMoney(profits[i]) + "</td>";
+                        }
+                        else {
+                            tempProfit = profits[i] * (-1);
+                            htmlString += "-$" + tempProfit + "</td>";
+                        }
+                        htmlString += "<td bgcolor=" + color + ">" + percentReturn[i] + "%</td>";
+                        htmlString += "<td bgcolor=" + color + "><button onclick=setWizard(" + i + ")>Edit</button></td>";
+                        htmlString += "</tr>";
+                    }
+
+                    calendarString += "</select>";
+                    //calendarList.innerHTML = calendarString;
+                    htmlString += "</tbody></table>";
+                    items.innerHTML = htmlString;
+                    if (q != -1) {
+                        window.location.href = "#page2";
+                    }
                 }
             }
-        }
-        minuteEnd[l] = endTime[0];
-        
-        reserve[l] = document.itemEdit.reserve.value;
-        buyItNow[l] = document.itemEdit.buyItNow.value;
-        shipping[l] = document.itemEdit.shipping.value;
-        shipLength[l] = document.itemEdit.length.value;
-        e = document.itemEdit.lengthUnits;
-        shipLengthUnits[l] = e.options[e.selectedIndex].value;
-        shipLengthUnitsIndex[l] = document.itemEdit.lengthUnits.selectedIndex;
-        shipWidth[l] = document.itemEdit.width.value;
-        e = document.itemEdit.widthUnits;
-        shipWidthUnits[l] = e.options[e.selectedIndex].value;
-        shipWidthUnitsIndex[l] = document.itemEdit.widthUnits.selectedIndex;
-        shipHeight[l] = document.itemEdit.height.value;
-        e = document.itemEdit.heightUnits;
-        shipHeightUnits[l] = e.options[e.selectedIndex].value;
-        shipHeightUnitsIndex[l] = document.itemEdit.heightUnits.selectedIndex;
-        shipWeight[l] = document.itemEdit.weight.value;
-        e = document.itemEdit.weightUnits;
-        shipWeightUnits[l] = e.options[e.selectedIndex].value;
-        shipWeightUnitsIndex[l] = document.itemEdit.weightUnits.selectedIndex;
-
-        calendarString = "<select name=calendarItem onchange=setCalendar()>";
-
-        if (itemNumbers == -1) {
-            newXML(l);
+            window.location.href = "#loading";
+            xmlhttp.open("GET", "index.php?action=ebay&inu=" + itemNumber[l], true);
+            xmlhttp.send();
         }
         else {
-            editXML(l);
-        }
-        for (i = 0; i < descriptions.length; i++) {
-            if (colorIndex == 0) {
-                color = "#E8E8E8";
-                colorIndex = 1;
-            }
-            else {
-                color = "#66CCFF";
-                colorIndex = 0;
-            }
-            calendarString += "<option>" + names[i] + "</option>";
-            htmlString += "<tr>";
-            htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>X</button></td>";
-            htmlString += "<td bgcolor=" + color + "><img src="+images[i]+" width=70></td>";
-            htmlString += "<td bgcolor=" + color + ">" + names[i] + "</td>";
-            htmlString += "<td bgcolor=" + color + ">" + descriptions[i] + "</td>";
-            htmlString += "<td bgcolor=" + color + ">$" + toMoney(priceBuy[i]) + "</td>";
-            htmlString += "<td bgcolor=" + color + ">" + monthBuy[i] + " " + dayBuy[i] + ", " + yearBuy[i] + "</td>";
-            htmlString += "<td bgcolor=" + color + ">$" + toMoney(priceSold[i]) + "</td>";
-            htmlString += "<td bgcolor=" + color + ">" + monthSell[i] + " " + daySell[i] + ", " + yearSell[i] + "</td>";
-            htmlString += "<td bgcolor=" + color + ">";
-            if (profits[i] >= 0) {
-                htmlString += "$" + toMoney(profits[i]) + "</td>";
-            }
-            else {
-                tempProfit = profits[i] * (-1);
-                htmlString += "-$" + tempProfit + "</td>";
-            }
-            htmlString += "<td bgcolor=" + color + ">" + percentReturn[i] + "%</td>";
-            htmlString += "<td bgcolor=" + color + ">" + daysToSell[i] + "</td>";
-            htmlString += "<td bgcolor=" + color + "><button onclick=setWizard(" + i + ")>Edit</button></td>";
-            htmlString += "</tr>";
-        }
+            if(q==-1){
+                endDateSplit = endTimes[l].split("T");
+                endDate = endDateSplit[0].split("-");
+                yearEnd[l] = endDate[0];
+                monthEnd[l] = endDate[1];
+                if (monthEnd[l] == 1)
+                    monthEnd[l] = "January";
+                if (monthEnd[l] == 2)
+                    monthEnd[l] = "February";
+                if (monthEnd[l] == 3)
+                    monthEnd[l] = "March";
+                if (monthEnd[l] == 4)
+                    monthEnd[l] = "April";
+                if (monthEnd[l] == 5)
+                    monthEnd[l] = "May";
+                if (monthEnd[l] == 6)
+                    monthEnd[l] = "June";
+                if (monthEnd[l] == 7)
+                    monthEnd[l] = "July";
+                if (monthEnd[l] == 8)
+                    monthEnd[l] = "August";
+                if (monthEnd[l] == 9)
+                    monthEnd[l] = "September";
+                if (monthEnd[l] == 10)
+                    monthEnd[l] = "October";
+                if (monthEnd[l] == 11)
+                    monthEnd[l] = "November";
+                if (monthEnd[l] == 12)
+                    monthEnd[l] = "December";
 
-        calendarString += "</select>";
-        //calendarList.innerHTML = calendarString;
-        htmlString += "</tbody></table>";
-        items.innerHTML = htmlString;
-        //document.getCalendarItem.calendarItem.selectedIndex = 0;
-        //setCalendar();
-        //calculateStats();
+                dayEnd[l] = endDate[2];
+
+                endTimesSplit = endDateSplit[1].split(".");
+                endTime = endTimesSplit[0].split(":");
+                hourEnd[l] = endTime[0];
+                if (hourEnd[l] < 12) {
+                    morningEnd[l] = "AM";
+                }
+                else {
+                    morningEnd[l] = "PM";
+                    if (hourEnd[l] != 0 || hourEnd[l] != 12) {
+                        hourEnd[l] = hourEnd[l] - 12;
+                    }
+                    else {
+                        if (hourEnd[l] == 0) {
+                            hourEnd[l] = 12;
+                        }
+                    }
+                }
+                minuteEnd[l] = endTime[0];
+            }
+            profits[l] = Number(priceSold[l]) - Number(priceBuy[l]) + "";
+            percentReturn[l] = 10000 * profits[l] / priceBuy[l];
+            percentReturn[l] += "";
+            temp = percentReturn[l].split(".");
+            percentReturn[l] = temp[0] / 100;
+
+            reserve[l] = document.itemEdit.reserve.value;
+            buyItNow[l] = document.itemEdit.buyItNow.value;
+            shipping[l] = document.itemEdit.shipping.value;
+            shipLength[l] = document.itemEdit.length.value;
+            e = document.itemEdit.lengthUnits;
+            shipLengthUnits[l] = e.options[e.selectedIndex].value;
+            shipLengthUnitsIndex[l] = document.itemEdit.lengthUnits.selectedIndex;
+            shipWidth[l] = document.itemEdit.width.value;
+            e = document.itemEdit.widthUnits;
+            shipWidthUnits[l] = e.options[e.selectedIndex].value;
+            shipWidthUnitsIndex[l] = document.itemEdit.widthUnits.selectedIndex;
+            shipHeight[l] = document.itemEdit.height.value;
+            e = document.itemEdit.heightUnits;
+            shipHeightUnits[l] = e.options[e.selectedIndex].value;
+            shipHeightUnitsIndex[l] = document.itemEdit.heightUnits.selectedIndex;
+            shipWeight[l] = document.itemEdit.weight.value;
+            e = document.itemEdit.weightUnits;
+            shipWeightUnits[l] = e.options[e.selectedIndex].value;
+            shipWeightUnitsIndex[l] = document.itemEdit.weightUnits.selectedIndex;
+            calendarString = "<select name=calendarItem onchange=setCalendar()>";
+
+            if (q != -1) {
+                if (newItem == "true") {
+                    newXML(l);
+                }
+                else {
+                    editXML(l);
+                }
+            }
+            for (i = 0; i < descriptions.length; i++) {
+                if (colorIndex == 0) {
+                    color = "#E8E8E8";
+                    colorIndex = 1;
+                }
+                else {
+                    color = "#66CCFF";
+                    colorIndex = 0;
+                }
+                calendarString += "<option>" + names[i] + "</option>";
+                htmlString += "<tr>";
+                htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>X</button></td>";
+                htmlString += "<td bgcolor=" + color + "><img src=" + images[i] + " width=70></td>";
+                htmlString += "<td bgcolor=" + color + ">" + names[i] + "</td>";
+                htmlString += "<td bgcolor=" + color + ">$" + toMoney(priceSold[i]) + "</td>";
+                htmlString += "<td bgcolor=" + color + ">";
+                if (profits[i] >= 0) {
+                    htmlString += "$" + toMoney(profits[i]) + "</td>";
+                }
+                else {
+                    tempProfit = profits[i] * (-1);
+                    htmlString += "-$" + tempProfit + "</td>";
+                }
+                htmlString += "<td bgcolor=" + color + ">" + percentReturn[i] + "%</td>";
+                htmlString += "<td bgcolor=" + color + "><button onclick=setWizard(" + i + ")>Edit</button></td>";
+                htmlString += "</tr>";
+            }
+
+            htmlString += "</tbody></table>";
+            items.innerHTML = htmlString;
+            if (q != -1) {
+                window.location.href = "#page2";
+            }
+        }
     }
 
     function removeItem(j) {
@@ -356,7 +489,6 @@
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4) {
-                alert(xmlhttp.responseText);
             }
         }
         xmlhttp.open("GET", "index.php?action=remove&un=" + username + "&in=" + name);
@@ -401,12 +533,14 @@
         shipWeight.splice(j, 1);
         shipWeightUnits.splice(j, 1);
         shipWeightUnitsIndex.splice(j, 1);
+        endTimes.splice(j, 1);
+        images.splice(j, 1);
         index--;
 
         htmlString = "<table width=100% border=1 cellpadding=10>" +
                             "<thead>" +
                             "<tr>" +
-                                "<th></th>" +
+                                "<th colspan=2></th>" +
                                 "<th>Item Name</th>" +
                                 "<th>Item Description</th>" +
                                 "<th>Purchase Price</th>" +
@@ -419,8 +553,7 @@
                                 "</tr>" +
                                 "</thead>" +
                                 "<tbody>";
-        calendarItemString = "<select id='calendarItem'>";
-        for (i = 0; i < index; i++) {
+        for (i = 0; i < descriptions.length; i++) {
             if (colorIndex == 0) {
                 color = "#E8E8E8";
                 colorIndex = 1;
@@ -429,9 +562,9 @@
                 color = "#66CCFF";
                 colorIndex = 0;
             }
-            calendarItemString += "<option>" + names[i] + "</option>";
             htmlString += "<tr>";
             htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>X</button></td>";
+            htmlString += "<td bgcolor=" + color + "><img src="+images[i]+" width=70></td>";
             htmlString += "<td bgcolor=" + color + ">" + names[i] + "</td>";
             htmlString += "<td bgcolor=" + color + ">" + descriptions[i] + "</td>";
             htmlString += "<td bgcolor=" + color + ">$" + toMoney(priceBuy[i]) + "</td>";
@@ -455,6 +588,7 @@
             htmlString = "<table width=100% border=1 cellpadding=10>" +
                 "<thead>" +
                 "<tr>" +
+                    "<th colspan=2></th>" +
                     "<th>Item Name</th>" +
                     "<th>Item Description</th>" +
                     "<th>Purchase Price</th>" +
@@ -477,19 +611,8 @@
                 "</thead>" +
             "</table>";
         }
-        calendarItemString += "</select>";
-        calendarList.innerHTML = calendarItemString;
         htmlString += "</table>";
-        itemView.innerHTML = htmlString;
-        calculateStats();
-        document.getCalendarItem.calendarItem.selectedIndex = 0;
-        setCalendar();
-        window.location.href = '#items';
-    }
-
-    function cancelItem() {
-        index--;
-        window.location.href = "#items";
+        items.innerHTML = htmlString;
     }
 
     function calculateItem() {
@@ -574,113 +697,116 @@
                     "Projected Sell Price");
             }
         }
-        window.location.reload();
     }
 
-    function investmentCalculator() {
-        if (document.investment.amountInvested.value != "") {
-            investedAmountCalc = document.investment.amountInvested.value;
-            totalReturn = 0;
-            for (i = 0; i < index; i++) {
-                totalReturn += percentReturn[i];
-            }
-            averageReturn = totalReturn / index;
-            profitCalc = averageReturn * investedAmountCalc + "";
-            profitTemp = profitCalc.split(".");
-            profitCalc = profitTemp[0] / 100;
-            document.investment.amountReturn.value = profitCalc;
-        }
-        else {
-            if (document.investment.amountReturn.value != "") {
-                returnAmountCalc = Number(document.investment.amountReturn.value);
-                totalReturn = 0;
-                for (i = 0; i < index; i++) {
-                    totalReturn += percentReturn[i];
-                }
-                averageReturn = totalReturn / index;
-                investedAmountCalc = 10000 * returnAmountCalc / averageReturn + "";
-                investTemp = investedAmountCalc.split(".");
-                investedAmountCalc = investTemp[0] / 100;
-                document.investment.amountInvested.value = investedAmountCalc;
-            }
-            else {
-                alert("Enter a value for either:\n\n" +
-                    "Amount Invested\n\n" +
-                    "Profit")
-            }
-        }
-        window.location.reload();
-
+    function resetCalculateItem(){
+        document.individualItem.itemCost.value = "";
+        document.individualItem.itemSell.value = "";
+        document.individualItem.itemProfit.value = "";
+        document.individualItem.itemPercentReturn.value = "";
     }
 
     function calculateStats() {
+
+        monthRevenue = document.revenues.revenueMonth.selectedIndex;
+        yearRevenue = document.revenues.revenueYear.selectedIndex;
+        
         totalProfit = 0;
-        minProfit = Number(profits[0]);
-        maxProfit = Number(profits[0]);
-        averageProfit = 0;
         totalPercentReturn = 0;
-        minPercentReturn = Number(percentReturn[0]);
-        maxPercentReturn = Number(percentReturn[0]);
-        averagePercentReturn = 0;
         totalBuy = 0;
-        minBuy = Number(priceBuy[0]);
-        maxBuy = Number(priceBuy[0]);
-        averageBuy = 0;
         totalSell = 0;
-        minSell = Number(priceSold[0]);
-        maxSell = Number(priceSold[0]);
+
+        averageProfit = 0;
+        averagePercentReturn = 0;
+        averageBuy = 0;
         averageSell = 0;
-        totalDaysToSell = 0;
-        minDaysToSell = Number(daysToSell[0]);
-        maxDaysToSell = Number(daysToSell[0]);
-        averageDaysToSell = 0;
-        for (i = 0; i < index; i++) {
-            totalProfit += Number(profits[i]);
-            totalPercentReturn += Number(percentReturn[i]);
-            totalBuy += Number(priceBuy[i]);
-            totalSell += Number(priceSold[i]);
-            totalDaysToSell += Number(daysToSell[i]);
-            if (profits[i] < minProfit) {
-                minProfit = profits[i];
+
+        minBuy = 0;
+        maxBuy = 0;
+
+        minProfit = 0;
+        maxProfit = 0;
+
+        minPercentReturn = 0;
+        maxPercentReturn = 0;
+
+        minSell = 0;
+        maxSell = 0;
+
+        averageNumberBuy = 0;
+        averageNumberSell = 0;
+
+        for (j = 0; j < descriptions.length; j++) {
+            if (yearSellIndex[j] == yearRevenue && monthSellIndex[j] == monthRevenue) {
+                minProfit = Number(profits[j]);
+                maxProfit = Number(profits[j]);
+
+                minPercentReturn = Number(percentReturn[j]);
+                maxPercentReturn = Number(percentReturn[j]);
+
+                minSell = Number(priceSold[j]);
+                maxSell = Number(priceSold[j]);
+
+                averageNumberSell++;
             }
-            if (profits[i] > maxProfit) {
-                maxProfit = profits[i];
-            }
-            if (percentReturn[i] < minPercentReturn) {
-                minPercentReturn = percentReturn[i];
-            }
-            if (percentReturn[i] > maxPercentReturn) {
-                maxPercentReturn = percentReturn[i];
-            }
-            if (priceBuy[i] < minBuy) {
-                minBuy = priceBuy[i];
-            }
-            if (priceBuy[i] > maxBuy) {
-                maxBuy = priceBuy[i];
-            }
-            if (priceSold[i] < minSell) {
-                minSell = priceSold[i];
-            }
-            if (priceSold[i] > maxSell) {
-                maxSell = priceSold[i];
-            }
-            if (daysToSell[i] < minDaysToSell) {
-                minDaysToSell = daysToSell[i];
-            }
-            if (daysToSell[i] > minDaysToSell) {
-                maxDaysToSell = daysToSell[i];
+            if (yearBuyIndex[j] == yearRevenue && monthBuyIndex[j] == monthRevenue) {
+                minBuy = Number(priceBuy[j]);
+                maxBuy = Number(priceBuy[j]);
+
+                averageNumberBuy++;
             }
         }
-        averageProfit = totalProfit / index + "";
-        averagePercentReturn = totalPercentReturn / index;
-        averageBuy = totalBuy / index;
-        averageSell = totalSell / index;
-        averageDaysToSell = (totalDaysToSell / index) + "";
-        daysToSellTemp = averageDaysToSell.split(".");
-        averageDaysToSell = daysToSellTemp[0] + "";
+        
+        if (averageNumberSell <= 0)
+            averageNumberSell = 1;
+        if (averageNumberBuy <= 0)
+            averageNumberBuy = 1;
 
+        for (i = 0; i < descriptions.length; i++) {            
+            if (monthBuyIndex[i] == monthRevenue && yearBuyIndex[i] == yearRevenue) {
+                totalBuy += Number(priceBuy[i]);
+                if (priceBuy[i] < minBuy) {
+                    minBuy = priceBuy[i];
+                }
+                if (priceBuy[i] > maxBuy) {
+                    maxBuy = priceBuy[i];
+                }
+            }
+            if (monthSellIndex[i] == monthRevenue && yearSellIndex[i] == yearRevenue) {
+                totalProfit += Number(profits[i]);
+                totalPercentReturn += Number(percentReturn[i]);
+                totalSell += Number(priceSold[i]);
 
-        statsTable.innerHTML = "<table>" +
+                if (profits[i] < minProfit) {
+                    minProfit = profits[i];
+                }
+                if (profits[i] > maxProfit) {
+                    maxProfit = profits[i];
+                }
+
+                if (percentReturn[i] < minPercentReturn) {
+                    minPercentReturn = percentReturn[i];
+                }
+                if (percentReturn[i] > maxPercentReturn) {
+                    maxPercentReturn = percentReturn[i];
+                }
+
+                if (priceSold[i] < minSell) {
+                    minSell = priceSold[i];
+                }
+                if (priceSold[i] > maxSell) {
+                    maxSell = priceSold[i];
+                }
+            }
+        }
+
+        averageBuy = totalBuy / averageNumberBuy;
+
+        averageProfit = totalProfit / averageNumberSell + "";
+        averagePercentReturn = totalPercentReturn / averageNumberSell;
+        averageSell = totalSell / averageNumberSell;
+
+        statistics.innerHTML = "<table>" +
                                 "<tr><th>Profits</th></tr>" +
                                 "<tr><td>Total Profit:</td><td>$" + toMoney(totalProfit + "") + "</td></tr>" +
                                 "<tr><td>Average Profit:</td><td>$" + toMoney(averageProfit + "") + "</td></tr>" +
@@ -703,11 +829,7 @@
                                 "<tr><td>Average Revenue/Sale:</td><td>$" + toMoney(averageSell + "") + "</td></tr>" +
                                 "<tr><td>Max Revenue:</td><td>$" + toMoney(maxSell + "") + "</td></tr>" +
                                 "<tr><td>Min Revenue:</td><td>$" + toMoney(minSell + "") + "</td></tr>" +
-                                "<tr height=20></tr>" +
-                                "<tr><th>Days to Sell</th></tr>" +
-                                "<tr><td>Average Days to Sell:</td><td>" + averageDaysToSell + "</td></tr>" +
-                                "<tr><td>Max Days To Sell:</td><td>" + maxDaysToSell + "</td></tr>" +
-                                "<tr><td>Min Days to Sell:</td><td>" + minDaysToSell + "</td></tr>" +
+                                "<tr></tr>" +
                              "</table>";
     }
 
@@ -1044,9 +1166,27 @@
     }
 
     function contact() {
-        window.location.href = "#items";
-    }
+        subject = document.email.emailSubject.value;
+        message = document.email.emailMessage.value;
 
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4) {
+                if (xmlhttp.responseText == "true") {
+                    alert("Your email has been successfully sent");
+                    document.email.emailSubject.value = "";
+                    document.email.emailMessage.value = "";
+                    window.location.href = "#page2";
+                }
+                else {
+                    alert(xmlhttp.responseText);
+                }
+            }
+        };
+        xmlhttp.open("GET", "index.php?action=email&un=" + username + "&su=" + subject + "&m=" + message, true);
+        xmlhttp.send();
+    }
+    
     function newAccount() {
         username = document.account.newUserName.value;
         password = document.account.newPassword.value;
@@ -1058,11 +1198,38 @@
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4) {
                 if (xmlhttp.responseText == "true") {
-                    window.location.href = "#home";
+                    htmlString = "<table width=100% border=1 cellpadding=10>" +
+                                    "<thead>" +
+                                        "<tr>" +
+                                            "<th colspan=2></th>" +
+                                            "<th>Item Name</th>" +
+                                            "<th>Item Description</th>" +
+                                            "<th>Purchase Price</th>" +
+                                            "<th>Date Purchased</th>" +
+                                            "<th>Price Sold</th>" +
+                                            "<th>Date Sold</th>" +
+                                            "<th>Profit</th>" +
+                                            "<th>Percent Return</th>" +
+                                        "</tr>" +
+                                        "<tr height=50>" +
+                                            "<td colspan=2></td>" +
+                                            "<td></td>" +
+                                            "<td></td>" +
+                                            "<td></td>" +
+                                            "<td></td>" +
+                                            "<td></td>" +
+                                            "<td></td>" +
+                                            "<td></td>" +
+                                            "<td></td>" +
+                                        "</tr>" +
+                                    "</thead>" +
+                                "</table>";
+                    items.innerHTML = htmlString;
+                    window.location.href = "#page2";
                 }
                 else {
                     alert(xmlhttp.responseText);
-                    window.location.href = "#createAccount";
+                    window.location.href = "#page18";
                 }
             }
         };
@@ -1083,6 +1250,7 @@
                     window.location.href = "#page2"
                 }
                 else {
+                    alert(xmlhttp.responseText);
                     window.location.href = "#page13";
                 }
             }
@@ -1188,12 +1356,8 @@
 
         for (x = 0; x < k; x++) {
             setWizard(x);
-            editItem(x);
+            editItem(x, -1);
         }
-        //calendarList.innerHTML = calendarItemString;
-        //document.getCalendarItem.calendarItem.selectedIndex = 0;
-        //setCalendar();
-        //calculateStats();
     }
 
     function newXML(l) {

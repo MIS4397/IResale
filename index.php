@@ -52,9 +52,14 @@
     //auxillary variable for delete item
     $on=$_GET["on"];
 
+    //ebay variables
     $s_endpoint = "http://open.api.ebay.com/shopping?";
     $appid = 'Princess-3830-4887-9530-d802342a42a9';
     $responseEncoding = 'XML';
+
+    //email variables
+    $su=$_GET["su"];
+    $m=$_GET["m"];
     
     $doc=new DOMDocument();
 
@@ -379,6 +384,13 @@
                 $node->appendChild($username);
                 $doc->save("ireselldata.xml");
 
+                $to=$ue;
+                $subject="New User Account";
+                $message="You have succesfully set up an account with iResell. Your username is ".$un." and your password is ".$pw;
+                $headers="From:"."csvteam@iresellapp.com";
+
+                mail($to, $subject, $message, $headers);
+
                 echo "true";
             }
         }
@@ -453,5 +465,53 @@
             }
         }
         $doc->save("ireselldata.xml");
+    }
+
+    if($action=="ebay"){
+        $selectedItemID=$inu;
+        $apicallb  = "$s_endpoint";
+        $apicallb .= "callname=GetSingleItem";
+        $apicallb .= "&version=563";
+        $apicallb .= "&appid=$appid";
+        $apicallb .= "&itemid=$selectedItemID";
+        $apicallb .= "&responseencoding=$responseEncoding";
+        $ebayDoc=simplexml_load_file($apicallb);
+        $currentPrice=$ebayDoc->Item->ConvertedCurrentPrice;
+        $imgSrc=$ebayDoc->Item->GalleryURL;
+        $endTime=$ebayDoc->Item->EndTime;
+        $outputString=$outputString.$currentPrice."~";
+        $outputString=$outputString.$imgSrc."~";
+        $outputString=$outputString.$endTime."~";
+        echo $outputString;
+    }
+
+    if($action=="email"){
+        $doc->load("ireselldata.xml");
+        $node=$doc->getElementsByTagName("ireselldata")->item(0);
+
+        if($node->getElementsByTagName($un)->item(0)==null){
+                echo "***Error in sending email***";
+        }
+        else{
+            $node=$node->getElementsByTagName($un)->item(0);
+            $userEmailAddress=$node->getElementsByTagName("userEmail")->item(0)->nodeValue;
+            $subjectContact=$su;
+            $messageContact=$m;
+            $messageUser="Your email has successfully been sent to iResell. We will respond to you very shortly.";
+            $headerUser="From:".$userEmailAddress;
+            $headerUs="From:"."csvteam@iresellapp.com";
+            
+            if(mail("eshe042@gmail.com", $subjectContact, $messageContact, $headerUser)){
+                if(mail($userEmailAddress, "Thank you for contacting us!", $messageUser, $headerUs)){
+                    echo "true";
+                }
+                else{
+                    echo "***Error in sending email***";
+                }
+            }
+            else{
+                echo "***Error in sending email***";
+            }
+        }
     }
 ?>

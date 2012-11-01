@@ -1,423 +1,992 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>iResell</title>
-</head>
-<body>
-
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.css" />
-<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
-<script src="index.js"></script>
-
-//login
-<div data-role="page" id="loginPage" data-theme="b">
-    <div data-role="header">
-        <h1>iResell</h1>
-    </div>
-    <div data-role="content">
-        <div style="text-align: center">
+    
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+        </title>
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.css"
+        />
+        <link rel="stylesheet" href="my.css" />
+        <style>
+            /* App custom styles */
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.js">
+        </script>
+        <script src="my.js">
+        </script>
+        <script src="index.js">
+        </script>
+    </head>
+    
+    <body>
+        <!-- Login -->
+        <div data-role="page" data-theme="f" id="page13">
+            <div data-theme="b" data-role="header">
+                <h3>
+                    iRESELL
+                </h3>
+                <a data-role="button" data-theme="c" href="#page17" data-icon="info" data-iconpos="notext"
+                class="ui-btn-right">
+                </a>
+            </div>
+            <div data-role="content">
+                <div style=" text-align:center">
+                    <img style="width: 275px; height: 200px" src="http://assets.codiqa.com/ps/34188/11dcc44410eb786eiconcut.jpg">
+                </div>
+                <form name="loginScreen">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput20">
+                        </label>
+                        <input name="username" id="textinput20" placeholder="Username" value="" type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput21">
+                        </label>
+                        <input name="password" id="textinput21" placeholder="Password" value="" type="password">
+                    </fieldset>
+                </div>
+                </form>
+                <a data-role="button" data-theme="b" onclick="loginWindow()">
+                    Login
+                </a>
+                <a data-role="button" data-theme="b" href="#page18">
+                    Create Account
+                </a>
+            </div>
         </div>
+        <!-- Loading -->
+        <div data-role="page" data-theme="f" id="loading">
+            <div data-theme="b" data-role="header">
+                <h3>
+                    Loading...
+                </h3>
+            </div>
+            <div data-role="content">
+                <div style=" text-align:center">
+                    <img style="width: 275px; height: 200px" src="http://assets.codiqa.com/ps/34188/85b9190a2949d78aiconcut.jpg">
+                </div>
+            </div>
+        </div>
+        <!-- Create Account -->
+        <div data-role="page" data-theme="f" id="page18">
+            <div data-theme="b" data-role="header">
+                <h3>
+                    Create Account
+                </h3>
+                <a data-role="button" data-theme="c" href="#page17" data-icon="info" data-iconpos="notext"
+                class="ui-btn-right">
+                </a>
+            </div>
+            <div data-role="content">
+                <form name="account">
+                <div style=" text-align:center">
+                    <img style="width: 275px; height: 200px" src="http://assets.codiqa.com/ps/34188/85b9190a2949d78aiconcut.jpg">
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput24">
+                        </label>
+                        <input id="textinput24" placeholder="Email" value="" type="text" name="userEmail">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput22">
+                        </label>
+                        <input id="textinput22" placeholder="Username" value="" type="text" name="newUserName">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput23">
+                        </label>
+                        <input id="textinput23" placeholder="Password" value="" type="password" name="newPassword">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput25">
+                        </label>
+                        <input id="textinput25" placeholder="Confirm Password" value="" type="password" name="repeatPassword">
+                    </fieldset>
+                </div>
+                </form>
+                <a data-role="button" data-theme="b" onclick="newAccount()">
+                    Register
+                </a>
+            </div>
+        </div>
+        <!-- Contact us -->
+        <div data-role="page" data-theme="f" id="page17">
+            <div data-theme="b" data-role="header">
+                <h3>
+                    Contact Us
+                </h3>
+            </div>
+            <div data-role="content">
+                <div style=" text-align:center">
+                    <img style="width: 275px; height: 200px" src="http://assets.codiqa.com/ps/34188/a54885b92be794aficoncut.jpg">
+                </div>
+                <a data-role="button" data-theme="b" href="http://iresellapp.com">
+                    iResellapp.com
+                </a>
+                <a data-role="button" data-theme="b" href="#emailUs">
+                    Email us
+                </a>
+                <a data-role="button" data-theme="b" href="http://twitter.com/iresell">
+                    Tweet us
+                </a>
+            </div>
+            <div data-role="tabbar" data-iconpos="top" data-theme="b">
+                <ul>
+                    <li>
+                        <a href="#page2" data-theme="" data-icon="home">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page7" data-theme="" data-icon="check">
+                            Revenue
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page10" data-theme="" data-icon="search">
+                            Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                            Export
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Email us -->
+        <div data-role="page" data-theme="f" id="emailUs">
+            <div data-theme="b" data-role="header">
+                <h3>
+                    Email Us
+                </h3>
+            </div>
+            <form name="email">
+            <div data-role="content" align="center">
+                <table>
+                    <tr>
+                        <td>Subject</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="emailSubject"></td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td>Message</td>
+                    </tr>
+                    <tr height="100">
+                        <td><textarea style="resize: none" name="emailMessage" rows="5"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><input type="button" value="Send" onclick="contact()"></td>
+                    </tr>
+                </table>
+            </div>
+            </form>
+            <div data-role="tabbar" data-iconpos="top" data-theme="b">
+                <ul>
+                    <li>
+                        <a href="#page2" data-theme="" data-icon="home">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page7" data-theme="" data-icon="check">
+                            Revenue
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page10" data-theme="" data-icon="search">
+                            Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                            Export
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Home -->
+        <div data-role="page" data-theme="f" id="page2">
+            <div data-theme="b" data-role="header">
+                <a data-role="button" data-theme="c" href="#page17" data-icon="info" data-iconpos="notext"
+                class="ui-btn-right">
+                    Contact us
+                </a>
+                <h3>
+                    iRESELL
+                </h3>
+                <a data-role="button" data-theme="c" onclick="resetWizard()" data-icon="plus" data-iconpos="notext"
+                class="ui-btn-left">
+                    Add
+                </a>
+            </div>
+            <div data-role="content" id="items" style="width: inherit">
+            </div>
+            <div data-role="tabbar" data-iconpos="top" data-theme="b">
+                <ul>
+                    <li>
+                        <a href="#page2" data-theme="" data-icon="home">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page7" data-theme="" data-icon="check">
+                            Revenue
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page10" data-theme="" data-icon="search">
+                            Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                            Export
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Add item -->
+        <div data-role="page" data-theme="f" id="page8">
+            <div data-theme="b" data-role="header">
+                <h3>
+                    Add Item
+                </h3>
+            </div>
+            <div data-role="content">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <div data-role="content" id="itemEditor">
+                    <form name='itemEdit'>
+                        <table border='0'>
+                            <tr height='20'></tr>
+                            <tr>
+                                <td colspan=3><input type='text' name='name' size='15'></td>
+                                <td align='right'>Quantity:</td>
+                                <td><input type='text' name='quantity' size='1'></td>
+                            </tr>
+                            <tr height='130'>
+                                <td><div data-role="content" id="itemImage"></div></td>
+                                <td colspan='4' height='130'><textarea style='resize:none' rows='5' cols='10' name='description'></textarea></td>
+                            </tr>
+                            <tr>
+                                <td>Purchase Price:</td>
+                                <td><input type='text' name='purchasePrice' size='7'></td>
+                            </tr>
+                            <tr>
+                                <td>Purchase Date:</td>
+                                <td>
+                                    <select name='monthBuy'>
+                                        <option>January</option>
+                                        <option>February</option>
+                                        <option>March</option>
+                                        <option>April</option>
+                                        <option>May</option>
+                                        <option>June</option>
+                                        <option>July</option>
+                                        <option>August</option>
+                                        <option>September</option>
+                                        <option>October</option>
+                                        <option>November</option>
+                                        <option>December</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name='dayBuy'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option>
+                                        <option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option>
+                                        <option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option>
+                                        <option>30</option><option>31</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name='yearBuy'><option>2008</option><option>2009</option><option>2010</option><option>2011</option><option>2012</option><option>2013</option><option>2014</option><option>2015</option>
+                                        <option>2016</option><option>2017</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sell Price:</td>
+                                <td><input type='text' name='sellPrice' size='7'></td>
+                            </tr>
+                            <tr>
+                                <td>Sell Date:</td>
+                                <td>
+                                    <select name='monthSell'><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option>
+                                        <option>August</option><option>September</option><option>October</option><option>November</option><option>December</option>
+                                    </select>
+                                </td>
+                                <td><select name='daySell'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option>
+                                        <option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option>
+                                        <option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name='yearSell'><option>2008</option><option>2009</option><option>2010</option><option>2011</option><option>2012</option><option>2013</option><option>2014</option><option>2015</option>
+                                        <option>2016</option><option>2017</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr height='30'></tr>
+                            <tr height='50'>
+                                <td colspan=5 bgcolor=yellow align=center><font size=8 color=black>Ebay</font></td>
+                            </tr>
+                            <tr height='30'></tr>
+                            <tr>
+                                <td>Item Number:</td>
+                                <td><input type=text size=4 name=itemNumber></td>
+                            </tr>
+                            <tr>
+                                <td>Start Bid:</td>
+                                <td><input type=text size=4 name=startBid></td>
+                            </tr>
+                            <tr>
+                                <td>Highest Bid:</td>
+                                <td><input type=text size=4 name=highestBid></td>
+                            </tr>
+                            <tr>
+                            </tr>
+                            <tr>
+                                <td>Auction End Date:</td>
+                                <td><div data-role="content" id="auctionDate"></div></td>
+                            </tr>
+                            <tr>
+                            </tr>
+                            <tr>
+                                <td>Auction End Time:</td>
+                                <td><div data-role="content" id="auctionTime"></div></td>
+                            </tr>
+                            <tr>
+                            </tr>
+                            <tr>
+                                <td>Reserve:</td>
+                                <td><input type=text size=4 name=reserve></td>
+                            </tr>
+                            <tr>
+                                <td>Buy It Now:</td>
+                                <td><input type=text size=4 name=buyItNow></td>
+                            </tr>
+                            <tr>
+                                <td>Shipping/Handling:</td>
+                                <td><input type=text size=4 name=shipping></td>
+                            </tr>
+                            <tr>
+                                <td>Length:</td>
+                                <td><input type=text size=2 name=length></td>
+                                <td><select name=lengthUnits><option>inches</option><option>cm</option></select></td>
+                            </tr>
+                            <tr>
+                                <td>Width:</td>
+                                <td><input type=text size=2 name=width></td>
+                                <td><select name=widthUnits><option>inches</option><option>cm</option></select></td>
+                            </tr>
+                            <tr>
+                                <td>Height:</td>
+                                <td><input type=text size=2 name=height></td>
+                                <td><select name=heightUnits><option>inches</option><option>cm</option></select></td>
+                            </tr>
+                            <tr>
+                                <td>Weight:</td>
+                                <td><input type=text size=2 name=weight></td>
+                                <td><select name=weightUnits><option>lbs</option><option>kg</option></select></td>
+                            </tr>
+                        </table>
+                    </form>
+                    <table border=0>
+                        <tr>
+                            <td><div id="finishEdit"></div></td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="finishButton">
+                    <input type="button" data-theme="b" value="Finish" data-mini="true" onclick="editItem(-1, 0)">
+                </div>
+            </div>
+            <div data-role="tabbar" data-iconpos="top" data-theme="b">
+                <ul>
+                    <li>
+                        <a href="#page2" data-theme="" data-icon="home">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page7" data-theme="" data-icon="check">
+                            Revenue
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page10" data-theme="" data-icon="search">
+                            Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                            Export
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Revenue -->
+        <div data-role="page" data-theme="f" id="page7">
+            <div data-theme="b" data-role="header">
+                <h3>
+                    Revenue
+                </h3>
+            </div>
+            <div data-role="content" align="center">
+                <form name="revenues">
+                <table>
+                    <tr>
+                        <td>
+                            <select name="revenueMonth">
+                                <option>January</option>
+                                <option>February</option>
+                                <option>March</option>
+                                <option>April</option>
+                                <option>May</option>
+                                <option>June</option>
+                                <option>July</option>
+                                <option>August</option>
+                                <option>September</option>
+                                <option>October</option>
+                                <option>November</option>
+                                <option>December</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="revenueYear">
+                                <option>2008</option>
+                                <option>2009</option>
+                                <option>2010</option>
+                                <option>2011</option>
+                                <option>2012</option>
+                                <option>2013</option>
+                                <option>2014</option>
+                                <option>2015</option>
+                                <option>2016</option>
+                                <option>2017</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="button" value="Go" onclick="calculateStats()">
+                        </td>
+                    </tr>
+                </table>
+                </form>
+            </div>
+            <div data-role="content" id="statistics" align="center"></div>
+            <div data-role="tabbar" data-iconpos="top" data-theme="b">
+                <ul>
+                    <li>
+                        <a href="#page2" data-theme="" data-icon="home">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page7" data-theme="" data-icon="check">
+                            Revenue
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page10" data-theme="" data-icon="search">
+                            Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                            Export
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Item Calculator -->
+        <div data-role="page" data-theme="f" id="page10">
+            <div data-theme="b" data-role="header">
+                <h3>
+                    Item Calculator
+                </h3>
+            </div>
 
-        <div id="login" align="center">
-            <form name="loginScreen">
+            <div data-role="content" align="center">
+            <form name="individualItem">
                 <table border="0">
-                    <tr><td colspan="3"><img src="iresell.JPG" width="250"></td></tr>
-                    <tr><td colspan="3">Username</td></tr>
-                    <tr><td colspan="3"><input type="text" width="9" name="username"></td></tr>
-                    <tr><td colspan="3">Password</td></tr>  
-                    <tr><td colspan="3"><input type="password" width="9" name="password"></td></tr>  
-                    <tr><td><button onclick="loginWindow()">Log in</button></td><td width="30"></td><td><a href="#createAccount">Create account</a></td></tr>
+                    <tr><td colspan="2">Item Cost</td></tr>
+                    <tr><td colspan="2"><input type="text" name="itemCost"></td></tr>
+                    <tr></tr>
+                    <tr><td colspan="2">Price Sold</td></tr>
+                    <tr><td colspan="2"><input type="text" name="itemSell"></td></tr>
+                    <tr></tr>
+                    <tr><td colspan="2">Projected Profit</td></tr>
+                    <tr><td colspan="2"><input type="text" name="itemProfit"></td></tr>
+                    <tr></tr>
+                    <tr><td colspan="2">Project Percent Return</td></tr>
+                    <tr><td colspan="2"><input type="text" name="itemPercentReturn"></td></tr>
+                    <tr></tr>
+                    <tr>
+                        <td><input type="button" value="reset" onclick="resetCalculateItem()"></td>
+                        <td><input type="button" value="calculate" onclick="calculateItem()"></td>
+                    </tr>
                 </table>
             </form>
+            </div>
+
+            <div data-role="tabbar" data-iconpos="top" data-theme="b">
+                <ul>
+                    <li>
+                        <a href="#page2" data-theme="" data-icon="home">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page7" data-theme="" data-icon="check">
+                            Revenue
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page10" data-theme="" data-icon="search">
+                            Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                            Export
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</div>
-
-//home page
-<div data-role="page" id="home" data-theme="b">
-
-    <div data-role="header">
-        <h1>iResell</h1>
-    </div>
-
-    <div data-role="content">
-
-        <div id="loginView" align="center">
+        <!-- Export -->
+        <div data-role="page" data-theme="f" id="page11">
+            <div data-theme="b" data-role="header">
+                <h3>
+                    Export
+                </h3>
+            </div>
+            <div data-role="content">
+            </div>
+            <div data-role="tabbar" data-iconpos="top" data-theme="b">
+                <ul>
+                    <li>
+                        <a href="#page2" data-theme="" data-icon="home">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page7" data-theme="" data-icon="check">
+                            Revenue
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page10" data-theme="" data-icon="search">
+                            Calculator  
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                            Export
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-
-    </div>
-
-    <div data-role='footer' data-position='fixed' data-id='nav'>
-        <div data-role='navbar'>
-            <li><a href='#home'>Home</a></li>
-            <li><a href='#items'>Items Page</a></li>
-            <li><a href='#stats'>Statistics</a></li>
-            <li><a href='#itemcalc'>Prospective Item Calculator</a></li>
-            <li><a href='#profit'>Investment Calculator</a></li>
-            <li><a href='#contact'>Contact Us</a></li>
-            <li><a href='#map'>Google Map Search</a></li>
-            <li><a href='#calendar'>Calendar</a></li>
+        <!-- Export To -->
+        <div data-role="page" data-theme="f" id="page12">
+            <div data-theme="b" data-role="header">
+                <h3>
+                    Export
+                </h3>
+            </div>
+            <div data-role="content">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput6">
+                        </label>
+                        <input name="" id="textinput6" placeholder="Item" value="" type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput7">
+                        </label>
+                        <input name="" id="textinput7" placeholder="Description" value="" type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput8">
+                        </label>
+                        <input name="" id="textinput8" placeholder="Price" value="" type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="slider2">
+                            Inventory
+                        </label>
+                        <input name="slider" value="1" min="0" max="100" data-highlight="true"
+                        data-theme="b" data-track-theme="d" type="range">
+                    </fieldset>
+                </div>
+                <a data-role="button" data-theme="b" href="#page14">
+                    eBay
+                </a>
+                <a data-role="button" data-theme="b" href="#page15">
+                    Craigslist
+                </a>
+            </div>
+            <div data-role="tabbar" data-iconpos="top" data-theme="b">
+                <ul>
+                    <li>
+                        <a href="#page2" data-theme="" data-icon="home">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page7" data-theme="" data-icon="check">
+                            Revenue
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page10" data-theme="" data-icon="search">
+                            Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                            Export
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</div>
-
-//items
-<div data-role="page" id="items">
-
-    <div data-role="header">	
-        <h1 align=center>List of items</h1>
-    </div>
-
-    <div align="center">
-        <table border=0>
-            <tr>
-                <td colspan=2>
-                    <div id="itemView" align="center">
-                        <table width="100%" border="1" cellpadding=10>
-                            <thead> 
-                                <tr> 
-                                    <th>Item Name</th> 
-                                    <th>Item Description</th> 
-                                    <th>Purchase Price</th> 
-                                    <th>Date Purchased</th>
-                                    <th>Price Sold</th> 
-                                    <th>Date Sold</th> 
-                                    <th>Profit</th>
-                                    <th>Percent Return</th>
-                                </tr>
-                                <tr height=50>
-	                                <td></td>
-	                                <td></td>
-	                                <td></td>
-	                                <td></td>
-	                                <td></td>
-	                                <td></td>
-	                                <td></td>
-	                                <td></td>
-                                    </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td width=60>
-                    <div align="left"><button onclick=setWizard(-1)>New Item</button></div>
-                </td>
-                <td></td>
-            </tr>
-        </table>
-    </div>
-
-    <div data-role="footer" data-position="fixed" data-id="nav">
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#items" class="ui-btn-active ui-statepersist">Items Page</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-            </ul>
+        <!-- eBay -->
+        <div data-role="page" data-theme="f" id="page14">
+            <div data-theme="b" data-role="header">
+                <h3>
+                    Export to eBay
+                </h3>
+            </div>
+            <div data-role="content">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <div data-role="fieldcontain">
+                    <label for="selectmenu2">
+                    </label>
+                    <select name="" data-theme="b" data-mini="true">
+                        <option value="option1">
+                            Category
+                        </option>
+                        <option value="value">
+                        </option>
+                        <option value="value">
+                            Antiques
+                        </option>
+                        <option value="value">
+                            Art
+                        </option>
+                        <option value="value">
+                            eBay Motors
+                        </option>
+                        <option value="value">
+                            Cameras
+                        </option>
+                        <option value="value">
+                            Cell Phones
+                        </option>
+                        <option value="value">
+                            Clothing
+                        </option>
+                        <option value="value">
+                            Computers
+                        </option>
+                        <option value="value">
+                            Jewelry
+                        </option>
+                        <option value="value">
+                            Sporting goods
+                        </option>
+                        <option value="value">
+                            Tickets
+                        </option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput10">
+                        </label>
+                        <input name="" id="textinput10" placeholder="Item" value="" type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput11">
+                        </label>
+                        <input name="" id="textinput11" placeholder="Description" value="" type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput12">
+                        </label>
+                        <input name="" id="textinput12" placeholder="Starting Price" value=""
+                        type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput18">
+                        </label>
+                        <input name="" id="textinput18" placeholder="Buy it Now (optional)" value=""
+                        type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput17">
+                        </label>
+                        <input name="" id="textinput17" placeholder="Shipping Cost" value="" type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="selectmenu3">
+                    </label>
+                    <select name="" data-theme="b" data-mini="true">
+                        <option value="option1">
+                            Shipping
+                        </option>
+                        <option value="value">
+                            Media Mail
+                        </option>
+                        <option value="value">
+                            First Class
+                        </option>
+                        <option value="value">
+                            Priority Mail
+                        </option>
+                        <option value="value">
+                            Express Mail
+                        </option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <label for="selectmenu4">
+                    </label>
+                    <select name="" data-theme="b" data-mini="true">
+                        <option value="option1">
+                            Payment
+                        </option>
+                        <option value="value">
+                            Paypal
+                        </option>
+                        <option value="value">
+                            Other
+                        </option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput19">
+                        </label>
+                        <input name="" id="textinput19" placeholder="Return Policy" value="" type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="slider4">
+                            Inventory
+                        </label>
+                        <input name="slider" value="1" min="0" max="100" data-highlight="true"
+                        data-theme="b" data-track-theme="d" type="range">
+                    </fieldset>
+                </div>
+                <a data-role="button" data-theme="b" href="#page12">
+                    Export
+                </a>
+            </div>
+            <div data-role="tabbar" data-iconpos="top" data-theme="b">
+                <ul>
+                    <li>
+                        <a href="#page2" data-theme="" data-icon="home">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page7" data-theme="" data-icon="check">
+                            Revenue
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page10" data-theme="" data-icon="search">
+                            GPS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                            Export
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-
-</div>
-
-
-//Statistics
-<div data-role="page" id="stats">
-
-    <div data-role="header">
-        <h1>Statistics</h1>
-    </div>
-    
-    <div align="center" id="statsTable"></div>
-    
-    <div data-role="footer" data-position="fixed" data-id="nav">
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#items">Items Page</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-            </ul>
+        <!-- Craigslist -->
+        <div data-role="page" data-theme="f" id="page15">
+            <div data-theme="b" data-role="header">
+                <h3>
+                    Export to Craigslist
+                </h3>
+            </div>
+            <div data-role="content">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
+                <div data-role="fieldcontain">
+                    <label for="selectmenu1">
+                    </label>
+                    <select name="" data-theme="b">
+                        <option value="option1">
+                            Category
+                        </option>
+                        <option value="value">
+                            Automobile
+                        </option>
+                        <option value="value">
+                            Books
+                        </option>
+                        <option value="value">
+                            Clothing
+                        </option>
+                        <option value="value">
+                            Electronics
+                        </option>
+                        <option value="value">
+                            Furniture
+                        </option>
+                        <option value="value">
+                            Phone
+                        </option>
+                        <option value="value">
+                            Service
+                        </option>
+                        <option value="value">
+                            Tickets
+                        </option>
+                    </select>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput16">
+                        </label>
+                        <input name="" id="textinput16" placeholder="Email" value="" type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput13">
+                        </label>
+                        <input name="" id="textinput13" placeholder="Item" value="" type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput14">
+                        </label>
+                        <input name="" id="textinput14" placeholder="Description" value="" type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="textinput15">
+                        </label>
+                        <input name="" id="textinput15" placeholder="Price" value="" type="text">
+                    </fieldset>
+                </div>
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <label for="slider5">
+                            Inventory
+                        </label>
+                        <input name="slider" value="1" min="0" max="100" data-highlight="true"
+                        data-theme="b" data-track-theme="d" type="range">
+                    </fieldset>
+                </div>
+                <a data-role="button" data-theme="b" href="#page12">
+                    Export
+                </a>
+            </div>
+            <div data-role="tabbar" data-iconpos="top" data-theme="b">
+                <ul>
+                    <li>
+                        <a href="#page2" data-theme="" data-icon="home">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page7" data-theme="" data-icon="check">
+                            Revenue
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page10" data-theme="" data-icon="search">
+                            GPS
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                            Export
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</div>
+        <script>
+              //App custom javascript
+        </script>
+    </body>
 
-//Items Calculator
-<div data-role="page" id="itemcalc">
-
-    <div data-role="header">
-        <h1>Prospective Item Calculator</h1>
-    </div>
-
-    <div id="calcItems" align="center">
-	    <form name="individualItem">
-		    <table border="0">
-			    <tr height="20"></tr>
-			    <tr>
-				    <th>Item Cost</th>
-			    </tr>
-			    <tr>
-				    <td><input type="text" name="itemCost" size="15"></td>
-			    </tr>
-			    <tr></tr>
-			    <tr>
-				    <th>Projected Sell Price</th>
-			    </tr>
-			    <tr>
-				    <td><input type="text" name="itemSell" size="15"></td>	
-			    </tr>
-			    <tr></tr>
-			    <tr>
-				    <th>Projected Profit</th>
-			    </tr>
-			    <tr>
-				    <td><input type="text" name="itemProfit" size="15"></td>	
-			    </tr>
-			    <tr></tr>
-			    <tr>
-				    <th>Projected Percent Return</th>
-			    </tr>
-			    <tr>
-				    <td><input type="text" name="itemPercentReturn" size="15"></td>	
-			    </tr>
-			    <tr>
-				    <td><button onclick=calculateItem()>Calculate</button></td>
-			    </tr>
-		    </table>
-	    </form>
-    </div>
-
-    <div data-role="footer" data-position="fixed" data-id="nav">
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#items">Items Page</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-            </ul>
-        </div>
-    </div>
-
-</div>
-
-//Investment Calculator
-<div data-role="page" id="profit">
-
-    <div data-role="header">
-        <h1>Investment Calculator</h1>
-    </div>
-
-    <div id="investmentCalc" align="center">
-	    <form name="investment">
-	        <table>
-		        <tr height="20"></tr>
-		        <tr>
-			        <th>Amount Invested</th>
-		        </tr>
-		        <tr></tr>
-		        <tr>
-			        <td><input type="text" name="amountInvested" size="15"></td>
-		        </tr>
-		        <tr></tr>
-		        <tr>
-			        <th>Profit</th>
-		        </tr>
-		        <tr>
-			        <td><input type="text" name="amountReturn" size="15"></td>
-		        </tr>
-		        <tr></tr>
-		        <tr>
-			        <td><button onclick=investmentCalculator()>Calculate</button>
-		        </tr>
-	        </table>
-	    </form>
-    </div>
-
-    <div data-role="footer" data-position="fixed" data-id="nav">
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#items">Items Page</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-            </ul>
-        </div>
-    </div>
-
-</div>
-
-//Edit Items
-<div data-role="page" id="editItems">
-
-    <div data-role="header">
-        <h1>Item View</h1>
-    </div>
-
-    <div id="itemEditor" align="center"></div>
-
-    <div data-role="footer" data-position="fixed" data-id="nav">
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#items">Items Page</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-            </ul>
-        </div>
-    </div>
-
-</div>
-
-//Calendar
-<div data-role="page" id="calendar">
-
-    <div data-role="header">
-        <h1>Calendar</h1>
-    </div>
-
-    <div id="calendarTable" align=center>
-        <table border=0>
-            <tr>
-                <td width=275></td>
-                <td>
-                    <form name="getCalendarItem">
-                        <div id="calendarList" align="center"></div>
-                    </form>
-                </td>
-                <td width=275></td>
-            </tr>
-            <tr>
-                <td colspan=3>
-                    <div id="calendarView" align="center"></div>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <div data-role="footer" data-position="fixed" data-id="nav">
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#items">Items Page</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-            </ul>
-        </div>
-    </div>
-
-</div>
-
-
-//Contact us
-<div data-role="page" id="contact">
-    <div data-role="header">
-        <h1>Contact Us</h1>
-    </div>
-
-    <div id="contactUs" align="center">
-	    <form>
-	        <table>
-		        <tr>
-			        <th>Name</th>
-		        </tr>
-		        <tr>
-			        <td><input type="text" size="30" name="contactName"></td>
-		        </tr>
-		        <tr height="20"></tr>
-		        <tr>
-			        <th>Email</th>
-		        </tr>
-		        <tr>
-			        <td><input type="text" size="30" name="email"></td>
-		        </tr>
-		        <tr height="20"></tr>
-		        <tr>
-			        <th>Message</th>
-		        </tr>
-		        <tr>
-			        <td><textarea rows="3" cols="30" name="message"></textarea></td>
-		        </tr>
-		        <tr>
-			        <td><input type="submit" value="Send"></td>
-		        </tr>
-	        </table>
-	    </form>
-    </div>
-
-    <div data-role="footer" data-position="fixed" data-id="nav">
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#items">Items Page</a></li>
-                <li><a href="#contact"class="ui-btn-active ui-statepersist">Contact Us</a></li>
-            </ul>
-        </div>
-    </div>
-
-</div>
-
-//Maps
-<div data-role="page" id="map">
-    <div data-role="header">
-        <h1>Search for nearby Resale Stores</h1>
-    </div>
-
-    <div data-role="footer" data-position="fixed" data-id="nav">
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#items">Items Page</a></li>
-                <li><a href="#contact">Contact Us</a></li>
-            </ul>
-        </div>
-    </div>
-
-</div>
-
-//Create Account
-<div data-role="page" id="createAccount">
-    <div data-role="header">
-        <h1>Create user account</h1>
-    </div>
-
-    <div id="accountType" align="center">
-        <form name="account">
-            <table border="0">
-                <tr height="10"></tr>
-                <tr>
-                    <td colspan="3">Username</td>
-                </tr>
-                <tr>
-                    <td colspan="3"><input type="text" width="20" name="newUserName"></td>
-                </tr>
-                <tr></tr>
-                <tr>
-                    <td colspan="3">Password</td>
-                </tr>
-                <tr>
-                    <td colspan="3"><input type="password" width="20" name="newPassword"></td>
-                </tr>
-                <tr></tr>
-                <tr>
-                    <td colspan="3">Repeat Password</td>
-                </tr>
-                <tr>
-                    <td colspan="3"><input type="password" width="20" name="repeatPassword"></td>
-                </tr>
-                <tr></tr>
-                <tr>
-                    <td colspan="3">Email:</td>
-                </tr>
-                <tr>
-                    <td colspan="3"><input type="text" width="20" name="userEmail"></td>
-                </tr>
-                <tr height="20"></tr>
-                <tr>
-                    <td><button onclick="newAccount()">Finish</button></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</div>
-
-</body>
 </html>

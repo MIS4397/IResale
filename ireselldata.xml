@@ -2,6 +2,7 @@
 <ireselldata>
   <csv>
     <password>cougars</password>
+    <userEmail>vy.hlam@gmail.com</userEmail>
     <item>
         <itemName>kitchen table</itemName>
         <itemDescription>furniture for use in the kitchen</itemDescription>
@@ -13,17 +14,17 @@
         <yearBuy>2012</yearBuy>
         <yearBuyIndex>4</yearBuyIndex>
         <priceSold>99.0</priceSold>
-        <monthSold>June</monthSold>
-        <monthSoldIndex>5</monthSoldIndex>
-        <daySold>31</daySold>
-        <daySoldIndex>31</daySoldIndex>
+        <monthSold>October</monthSold>
+        <monthSoldIndex>9</monthSoldIndex>
+        <daySold>29</daySold>
+        <daySoldIndex>29</daySoldIndex>
         <yearSold>2012</yearSold>
         <yearSoldIndex>4</yearSoldIndex>
         <numberBoughtDays>1529</numberBoughtDays>
-        <numberSoldDays>1614</numberSoldDays>
+        <numberSoldDays>1767</numberSoldDays>
         <profits>89</profits>
         <percentReturns>890</percentReturns>
-        <daysToSold>85</daysToSold>
+        <daysToSold>238</daysToSold>
         <itemNumbers>160906948574</itemNumbers>
         <startBids>10</startBids>
         <highestBids>99.0</highestBids>
@@ -36,7 +37,7 @@
         <shipWidths>50</shipWidths>
         <shipWidthUnit>cm</shipWidthUnit>
         <shipWidthUnitIndex>1</shipWidthUnitIndex>
-        <shipHeights>,,ss,,,ss,,,ss</shipHeights>
+        <shipHeights>,,,,</shipHeights>
         <shipHeightUnit>cm</shipHeightUnit>
         <shipHeightUnitIndex>1</shipHeightUnitIndex>
         <shipWeights>50</shipWeights>
@@ -54,33 +55,33 @@
         <yearBuy>2010</yearBuy>
         <yearBuyIndex>2</yearBuyIndex>
         <priceSold>14.96</priceSold>
-        <monthSold>July</monthSold>
-        <monthSoldIndex>6</monthSoldIndex>
-        <daySold>27</daySold>
-        <daySoldIndex>27</daySoldIndex>
+        <monthSold>November</monthSold>
+        <monthSoldIndex>10</monthSoldIndex>
+        <daySold>24</daySold>
+        <daySoldIndex>24</daySoldIndex>
         <yearSold>2012</yearSold>
         <yearSoldIndex>4</yearSoldIndex>
         <numberBoughtDays>859</numberBoughtDays>
-        <numberSoldDays>1672</numberSoldDays>
+        <numberSoldDays>1792</numberSoldDays>
         <profits>9.96</profits>
         <percentReturns>199.2</percentReturns>
-        <daysToSold>813</daysToSold>
+        <daysToSold>933</daysToSold>
         <itemNumbers>320971072736</itemNumbers>
-        <startBids></startBids>
+        <startBids/>
         <highestBids>14.96</highestBids>
-        <reserves></reserves>
-        <buyItNows></buyItNows>
-        <shippings></shippings>
-        <shipLengths></shipLengths>
+        <reserves/>
+        <buyItNows/>
+        <shippings/>
+        <shipLengths/>
         <shipLengthUnit>inches</shipLengthUnit>
         <shipLengthUnitIndex>0</shipLengthUnitIndex>
-        <shipWidths></shipWidths>
+        <shipWidths/>
         <shipWidthUnit>inches</shipWidthUnit>
         <shipWidthUnitIndex>0</shipWidthUnitIndex>
-        <shipHeights>,,ss,,,ss,,,ss</shipHeights>
+        <shipHeights/>
         <shipHeightUnit>inches</shipHeightUnit>
         <shipHeightUnitIndex>0</shipHeightUnitIndex>
-        <shipWeights></shipWeights>
+        <shipWeights/>
         <shipWeightUnit>lbs</shipWeightUnit>
         <shipWeightUnitIndex>0</shipWeightUnitIndex>
     </item>
@@ -95,17 +96,17 @@
         <yearBuy>2012</yearBuy>
         <yearBuyIndex>4</yearBuyIndex>
         <priceSold>1575.0</priceSold>
-        <monthSold>January</monthSold>
-        <monthSoldIndex>0</monthSoldIndex>
-        <daySold>8</daySold>
-        <daySoldIndex>8</daySoldIndex>
+        <monthSold>October</monthSold>
+        <monthSoldIndex>9</monthSoldIndex>
+        <daySold>22</daySold>
+        <daySoldIndex>22</daySoldIndex>
         <yearSold>2012</yearSold>
         <yearSoldIndex>4</yearSoldIndex>
         <numberBoughtDays>1462</numberBoughtDays>
-        <numberSoldDays>1471</numberSoldDays>
+        <numberSoldDays>1759</numberSoldDays>
         <profits>575</profits>
         <percentReturns>57.5</percentReturns>
-        <daysToSold>9</daysToSold>
+        <daysToSold>297</daysToSold>
         <itemNumbers>150926600955</itemNumbers>
         <startBids/>
         <highestBids>1575.0</highestBids>
@@ -118,7 +119,7 @@
         <shipWidths/>
         <shipWidthUnit>inches</shipWidthUnit>
         <shipWidthUnitIndex>0</shipWidthUnitIndex>
-        <shipHeights>,,ss,,,ss,,,ss</shipHeights>
+        <shipHeights/>
         <shipHeightUnit>inches</shipHeightUnit>
         <shipHeightUnitIndex>0</shipHeightUnitIndex>
         <shipWeights/>
@@ -126,49 +127,4 @@
         <shipWeightUnitIndex>0</shipWeightUnitIndex>
     </item>
   </csv>
-  <cliff>
-      <password>cliff</password>
-      <accountType/>
-      <item>
-          <itemName>nikes</itemName>
-          <itemDescription>shoes</itemDescription>
-          <priceBuy>20</priceBuy>
-          <monthBuy>April</monthBuy>
-          <monthBuyIndex>3</monthBuyIndex>
-          <dayBuy>5</dayBuy>
-          <dayBuyIndex>4</dayBuyIndex>
-          <yearBuy>2012</yearBuy>
-          <yearBuyIndex>4</yearBuyIndex>
-          <priceSold>500</priceSold>
-          <monthSold>August</monthSold>
-          <monthSoldIndex>7</monthSoldIndex>
-          <daySold>15</daySold>
-          <daySoldIndex>14</daySoldIndex>
-          <yearSold>2012</yearSold>
-          <yearSoldIndex>4</yearSoldIndex>
-          <numberBoughtDays>1556</numberBoughtDays>
-          <numberSoldDays>1689</numberSoldDays>
-          <profits>480</profits>
-          <percentReturns>2400</percentReturns>
-          <daysToSold>133</daysToSold>
-          <itemNumbers/>
-          <startBids/>
-          <highestBids/>
-          <reserves/>
-          <buyItNows/>
-          <shippings/>
-          <shipLengths/>
-          <shipLengthUnit>inches</shipLengthUnit>
-          <shipLengthUnitIndex>0</shipLengthUnitIndex>
-          <shipWidths/>
-          <shipWidthUnit>inches</shipWidthUnit>
-          <shipWidthUnitIndex>0</shipWidthUnitIndex>
-          <shipHeights/>
-          <shipHeightUnit>inches</shipHeightUnit>
-          <shipHeightUnitIndex>0</shipHeightUnitIndex>
-          <shipWeights/>
-          <shipWeightUnit>lbs</shipWeightUnit>
-          <shipWeightUnitIndex>0</shipWeightUnitIndex>
-      </item>
-    </cliff>
 </ireselldata>
