@@ -57,9 +57,7 @@
 
     originalName = "";
 
-    //resets values in item form to default values
     function resetWizard() {
-        alert("test");
         window.location.href = "#page8";
         document.itemEdit.name.value = "";
         document.itemEdit.quantity.value = "";
@@ -81,7 +79,6 @@
         newItem = "true";
     }
 
-    //sets values in item form to values based on an item number
     function setWizard(k) {
         window.location.href = "#page8";
         document.itemEdit.name.value = names[k];
@@ -838,13 +835,6 @@
         repeatPassword = document.account.repeatPassword.value;
         userEmail = document.account.userEmail.value;
 
-        document.account.newUserName.value = "";
-        document.account.newPassword.value = "";
-        document.account.repeatPassword.value = "";
-        document.account.userEmail.value = "";
-        document.loginScreen.username.value = "";
-        document.loginScreen.password.value = "";
-
         accountValidation = "false";
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
@@ -908,10 +898,6 @@
             }
         }
         window.location.href = "#loading";
-
-        document.loginScreen.username.value = "";
-        document.loginScreen.password.value = "";
-
         xmlhttp.open("GET", "index.php?action=login&un=" + username + "&pw=" + password, true);
         xmlhttp.send();
     }

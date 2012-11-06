@@ -466,22 +466,24 @@
         $apicall .= "&paginationInput.entriesPerPage=3";
         $apicall .= "$urlfilter";
 
+        // Load the call and capture the document returned by eBay API
         $resp = simplexml_load_file($apicall);
 
         // Check to see if the request was successful, else print an error
         if ($resp->ack == "Success") {
-            $results = ''; 
+            $results = '';
+            // If the response was loaded, parse it and build links  
             foreach($resp->searchResult->item as $item) {
                 $pic   = $item->galleryURL;
                 $price = $item->sellingStatus->currentPrice;
                 $title = $item->title;
   
+                // For each SearchResultItem node, build a link and append it to $results
                 $results=$results.$title."^&";
                 $results=$results.$pic."^&";
                 $results=$results.$price."~&";
             }
         }
-
         // If the response does not indicate 'Success,' print an error
         else {
             $results  = "<h3>Oops! The request was not successful. Make sure you are using a valid ";
