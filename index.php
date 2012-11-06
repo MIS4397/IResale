@@ -4,6 +4,7 @@
 
     //item variables retrieved from html/javascript
     $i=$_GET["in"];
+    $qu=$_GET["qu"];
     $id=$_GET["id"];
     $pb=$_GET["pb"];
     $mb=$_GET["mb"];
@@ -25,23 +26,7 @@
     $pr=$_GET["pr"];
     $dts=$_GET["dts"];
     $inu=$_GET["inu"];
-    $sb=$_GET["sb"];
     $hb=$_GET["hb"];
-    $r=$_GET["r"];
-    $bin=$_GET["bin"];
-    $s=$_GET["s"];
-    $sl=$_GET["sl"];
-    $slu=$_GET["slu"];
-    $slui=$_GET["slui"];
-    $sw=$_GET["sw"];
-    $swu=$_GET["swu"];
-    $swui=$_GET["swui"];
-    $sh=$_GET["sh"];
-    $shu=$_GET["shu"];
-    $shui=$_GET["shui"];
-    $swe=$_GET["swe"];
-    $sweu=$_GET["sweu"];
-    $sweui=$_GET["sweui"];
 
     //variables for new account
     $un=$_GET["un"];
@@ -86,6 +71,7 @@
                 //loop to create string with all the item info with ~ as delimiter to be used by javascript
                 foreach($items as $xmlItem){
                     $outputString=$outputString.$xmlItem->getElementsByTagName("itemName")->item(0)->nodeValue."~";
+                    $outputString=$outputString.$xmlItem->getElementsByTagName("quantity")->item(0)->nodeValue."~";
                     $outputString=$outputString.$xmlItem->getElementsByTagName("itemDescription")->item(0)->nodeValue."~";
                     $outputString=$outputString.$xmlItem->getElementsByTagName("priceBuy")->item(0)->nodeValue."~";
                     $outputString=$outputString.$xmlItem->getElementsByTagName("monthBuy")->item(0)->nodeValue."~";
@@ -121,7 +107,6 @@
                     $outputString=$outputString.$xmlItem->getElementsByTagName("percentReturns")->item(0)->nodeValue."~";
                     $outputString=$outputString.$xmlItem->getElementsByTagName("daysToSold")->item(0)->nodeValue."~";
                     $outputString=$outputString.$xmlItem->getElementsByTagName("itemNumbers")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("startBids")->item(0)->nodeValue."~";
                     if($xmlItem->getElementsByTagName("itemNumbers")->item(0)->nodeValue!=""){
                         $selectedItemID=$xmlItem->getElementsByTagName("itemNumbers")->item(0)->nodeValue;
                         $apicallb  = "$s_endpoint";
@@ -140,24 +125,9 @@
                     }
                     else{
                         $outputString=$outputString.$xmlItem->getElementsByTagName("highestBids")->item(0)->nodeValue."~";  
-                        $outputString=$outputString.""."~"; 
+                        $outputString=$outputString."iresell.JPG"."~"; 
                         $outputString=$outputString.""."~"; 
                     }
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("reserves")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("buyItNows")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("shippings")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipLengths")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipLengthUnit")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipLengthUnitIndex")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipWidths")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipWidthUnit")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipWidthUnitIndex")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipHeights")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipHeightUnit")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipHeightUnitIndex")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipWeights")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipWeightUnit")->item(0)->nodeValue."~";
-                    $outputString=$outputString.$xmlItem->getElementsByTagName("shipWeightUnitIndex")->item(0)->nodeValue."~";
                 }
 
                 //sends string to html/javascript
@@ -192,6 +162,10 @@
         $itemName->appendChild($item);
 
         //repeat for each piece of information about the item
+        $quantity=$doc->createElement("quantity");
+        $quantity->appendChild($doc->createTextNode($qu));
+        $itemName->appendChild($quantity);
+
         $itemDescription=$doc->createElement("itemDescription");
         $itemDescription->appendChild($doc->createTextNode($id));
         $itemName->appendChild($itemDescription);
@@ -276,78 +250,13 @@
         $itemNumbers->appendChild($doc->createTextNode($inu));
         $itemName->appendChild($itemNumbers);
 
-        $startBids=$doc->createElement("startBids");
-        $startBids->appendChild($doc->createTextNode($sb));
-        $itemName->appendChild($startBids);
-
         $highestBids=$doc->createElement("highestBids");
         $highestBids->appendChild($doc->createTextNode($hb));
         $itemName->appendChild($highestBids);
-
-        $reserves=$doc->createElement("reserves");
-        $reserves->appendChild($doc->createTextNode($r));
-        $itemName->appendChild($reserves);
-
-        $buyItNows=$doc->createElement("buyItNows");
-        $buyItNows->appendChild($doc->createTextNode($bin));
-        $itemName->appendChild($buyItNows);
-
-        $shippings=$doc->createElement("shippings");
-        $shippings->appendChild($doc->createTextNode($s));
-        $itemName->appendChild($shippings);
-
-        $shipLengths=$doc->createElement("shipLengths");
-        $shipLengths->appendChild($doc->createTextNode($sl));
-        $itemName->appendChild($shipLengths);
-
-        $shipLengthUnit=$doc->createElement("shipLengthUnit");
-        $shipLengthUnit->appendChild($doc->createTextNode($slu));
-        $itemName->appendChild($shipLengthUnit);
-
-        $shipLengthUnitIndex=$doc->createElement("shipLengthUnitIndex");
-        $shipLengthUnitIndex->appendChild($doc->createTextNode($slui));
-        $itemName->appendChild($shipLengthUnitIndex);
-
-        $shipWidths=$doc->createElement("shipWidths");
-        $shipWidths->appendChild($doc->createTextNode($sw));
-        $itemName->appendChild($shipWidths);
-
-        $shipWidthUnit=$doc->createElement("shipWidthUnit");
-        $shipWidthUnit->appendChild($doc->createTextNode($swu));
-        $itemName->appendChild($shipWidthUnit);
-
-        $shipWidthUnitIndex=$doc->createElement("shipWidthUnitIndex");
-        $shipWidthUnitIndex->appendChild($doc->createTextNode($swui));
-        $itemName->appendChild($shipWidthUnitIndex);
-
-        $shipHeights=$doc->createElement("shipHeights");
-        $shipHeights->appendChild($doc->createTextNode($sh));
-        $itemName->appendChild($shipHeights);
-
-        $shipHeightUnit=$doc->createElement("shipHeightUnit");
-        $shipHeightUnit->appendChild($doc->createTextNode($shu));
-        $itemName->appendChild($shipHeightUnit);
-
-        $shipHeightUnitIndex=$doc->createElement("shipHeightUnitIndex");
-        $shipHeightUnitIndex->appendChild($doc->createTextNode($shui));
-        $itemName->appendChild($shipHeightUnitIndex);
-
-        $shipWeights=$doc->createElement("shipWeights");
-        $shipWeights->appendChild($doc->createTextNode($swe));
-        $itemName->appendChild($shipWeights);
-
-        $shipWeightUnit=$doc->createElement("shipWeightUnit");
-        $shipWeightUnit->appendChild($doc->createTextNode($sweu));
-        $itemName->appendChild($shipWeightUnit);
-
-        $shipWeightUnitIndex=$doc->createElement("shipWeightUnitIndex");
-        $shipWeightUnitIndex->appendChild($doc->createTextNode($sweui));
-        $itemName->appendChild($shipWeightUnitIndex);
         
         //add outer item tag to xml file and save
         $node->appendChild($itemName);
         $doc->save("ireselldata.xml");
-        echo "test";
     }
 
     if($action=="newAccount"){
@@ -424,6 +333,7 @@
             $itemNodesEdit=$itemNodes->getElementsByTagName("itemName")->item(0)->nodeValue;
             if($itemNodesEdit==$on){
                 $itemNodes->getElementsByTagName("itemName")->item(0)->nodeValue=$i;
+                $itemNodes->getElementsByTagName("quantity")->item(0)->nodeValue=$qu;
                 $itemNodes->getElementsByTagName("itemDescription")->item(0)->nodeValue=$id;
                 $itemNodes->getElementsByTagName("priceBuy")->item(0)->nodeValue=$pb;
                 $itemNodes->getElementsByTagName("monthBuy")->item(0)->nodeValue=$mb;
@@ -445,23 +355,7 @@
                 $itemNodes->getElementsByTagName("percentReturns")->item(0)->nodeValue=$pr;
                 $itemNodes->getElementsByTagName("daysToSold")->item(0)->nodeValue=$dts;
                 $itemNodes->getElementsByTagName("itemNumbers")->item(0)->nodeValue=$inu;
-                $itemNodes->getElementsByTagName("startBids")->item(0)->nodeValue=$sb;
                 $itemNodes->getElementsByTagName("highestBids")->item(0)->nodeValue=$hb;
-                $itemNodes->getElementsByTagName("reserves")->item(0)->nodeValue=$r;
-                $itemNodes->getElementsByTagName("buyItNows")->item(0)->nodeValue=$bin;
-                $itemNodes->getElementsByTagName("shippings")->item(0)->nodeValue=$s;
-                $itemNodes->getElementsByTagName("shipLengths")->item(0)->nodeValue=$sl;
-                $itemNodes->getElementsByTagName("shipLengthUnit")->item(0)->nodeValue=$slu;
-                $itemNodes->getElementsByTagName("shipLengthUnitIndex")->item(0)->nodeValue=$slui;
-                $itemNodes->getElementsByTagName("shipWidths")->item(0)->nodeValue=$sw;
-                $itemNodes->getElementsByTagName("shipWidthUnit")->item(0)->nodeValue=$swu;
-                $itemNodes->getElementsByTagName("shipWidthUnitIndex")->item(0)->nodeValue=$swui;
-                $itemNodes->getElementsByTagName("shipHeights")->item(0)->nodeValue=$sh;
-                $itemNodes->getElementsByTagName("shipHeightUnit")->item(0)->nodeValue=$shu;
-                $itemNodes->getElementsByTagName("shipHeightUnitIndex")->item(0)->nodeValue=$shui;
-                $itemNodes->getElementsByTagName("shipWeights")->item(0)->nodeValue=$swe;
-                $itemNodes->getElementsByTagName("shipWeightUnit")->item(0)->nodeValue=$sweu;
-                $itemNodes->getElementsByTagName("shipWeightUnitIndex")->item(0)->nodeValue=$sweui;
             }
         }
         $doc->save("ireselldata.xml");
@@ -513,5 +407,86 @@
                 echo "***Error in sending email***";
             }
         }
+    }
+
+    if($action=="ebayPrice"){
+        $search=$_GET["search"];
+        error_reporting(E_ALL);  // Turn on all errors, warnings and notices for easier debugging
+
+        // API request variables
+        $endpoint = 'http://svcs.ebay.com/services/search/FindingService/v1';  // URL to call
+        $version = '1.0.0';  // API version supported by your application
+        $globalid = 'EBAY-US';  // Global ID of the eBay site you want to search (e.g., EBAY-DE)
+        $query = $search;  // You may want to supply your own query
+        $safequery = urlencode($query);  // Make the query URL-friendly
+        $i = '0';  // Initialize the item filter index to 0
+
+        // Create a PHP array of the item filters you want to use in your request
+        $filterarray =
+        array(
+            array(
+                'paramName' => 'Currency',
+                'paramValue' => 'USD')
+        );
+
+        // Generates an indexed URL snippet from the array of item filters
+        function buildURLArray ($filterarray) {
+            global $urlfilter;
+            global $i;
+            // Iterate through each filter in the array
+            foreach($filterarray as $itemfilter) {
+                // Iterate through each key in the filter
+                foreach ($itemfilter as $key =>$value) {
+                    if(is_array($value)) {
+                        foreach($value as $j => $content) { // Index the key for each value
+                            $urlfilter .= "&itemFilter($i).$key($j)=$content";
+                        }
+                    }
+                    else {
+                        if($value != "") {
+                            $urlfilter .= "&itemFilter($i).$key=$value";
+                        }
+                    }
+                }
+                $i++;
+            }
+            return "$urlfilter";
+        } // End of buildURLArray function
+
+        // Build the indexed item filter URL snippet
+        buildURLArray($filterarray);
+
+        // Construct the findItemsByKeywords HTTP GET call 
+        $apicall = "$endpoint?";
+        $apicall .= "OPERATION-NAME=findItemsByKeywords";
+        $apicall .= "&SERVICE-VERSION=$version";
+        $apicall .= "&SECURITY-APPNAME=$appid";
+        $apicall .= "&GLOBAL-ID=$globalid";
+        $apicall .= "&keywords=$safequery";
+        $apicall .= "&paginationInput.entriesPerPage=3";
+        $apicall .= "$urlfilter";
+
+        $resp = simplexml_load_file($apicall);
+
+        // Check to see if the request was successful, else print an error
+        if ($resp->ack == "Success") {
+            $results = ''; 
+            foreach($resp->searchResult->item as $item) {
+                $pic   = $item->galleryURL;
+                $price = $item->sellingStatus->currentPrice;
+                $title = $item->title;
+  
+                $results=$results.$title."^&";
+                $results=$results.$pic."^&";
+                $results=$results.$price."~&";
+            }
+        }
+
+        // If the response does not indicate 'Success,' print an error
+        else {
+            $results  = "<h3>Oops! The request was not successful. Make sure you are using a valid ";
+            $results .= "AppID for the Production environment.</h3>";
+        }
+        echo $results;
     }
 ?>

@@ -20,6 +20,7 @@
         </script>
         <script src="index.js">
         </script>
+        <script type="text/javascript" src="http://launchrock-ignition.s3.amazonaws.com/ignition.1.1.js"></script>
     </head>
     
     <body>
@@ -29,35 +30,31 @@
                 <h3>
                     iRESELL
                 </h3>
-                <a data-role="button" data-theme="c" href="#page17" data-icon="info" data-iconpos="notext"
-                class="ui-btn-right">
-                </a>
             </div>
-            <div data-role="content">
-                <div style=" text-align:center">
+            <div data-role="content" align="center">
+                <div align="center">
                     <img style="width: 275px; height: 200px" src="http://assets.codiqa.com/ps/34188/11dcc44410eb786eiconcut.jpg">
+                    <form name="loginScreen">
+                        <fieldset data-role="controlgroup" data-mini="true">
+                            <label for="textinput20">
+                            </label>
+                            <input name="username" id="textinput20" placeholder="Username" value="" type="text" style="width: 275px">
+                        </fieldset>
+                        <fieldset data-role="controlgroup" data-mini="true">
+                            <label for="textinput21">
+                            </label>
+                            <input name="password" id="textinput21" placeholder="Password" value="" type="password" style="width: 275px">
+                        </fieldset>
+                    </form>
                 </div>
-                <form name="loginScreen">
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput20">
-                        </label>
-                        <input name="username" id="textinput20" placeholder="Username" value="" type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput21">
-                        </label>
-                        <input name="password" id="textinput21" placeholder="Password" value="" type="password">
-                    </fieldset>
-                </div>
-                </form>
                 <a data-role="button" data-theme="b" onclick="loginWindow()">
                     Login
                 </a>
                 <a data-role="button" data-theme="b" href="#page18">
                     Create Account
+                </a>
+                <a data-role="button" data-theme="b" href="#landing">
+                    View our landing page
                 </a>
             </div>
         </div>
@@ -163,7 +160,7 @@
                     </li>
                     <li>
                         <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Export
+                            Appraise
                         </a>
                     </li>
                 </ul>
@@ -239,7 +236,7 @@
                     Add
                 </a>
             </div>
-            <div data-role="content" id="items" style="width: inherit">
+            <div data-role="content" id="items" style="overflow:scroll">
             </div>
             <div data-role="tabbar" data-iconpos="top" data-theme="b">
                 <ul>
@@ -260,7 +257,7 @@
                     </li>
                     <li>
                         <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Export
+                            Appraise
                         </a>
                     </li>
                 </ul>
@@ -282,18 +279,18 @@
                 <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
                 <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
                 <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <div data-role="content" id="itemEditor">
+                <div data-role="content" id="itemEditor" style="overflow: scroll">
                     <form name='itemEdit'>
                         <table border='0'>
                             <tr height='20'></tr>
                             <tr>
-                                <td colspan=3><input type='text' name='name' size='15'></td>
+                                <td colspan=3><input type='text' name='name' size='15' placeholder="Item Name"></td>
                                 <td align='right'>Quantity:</td>
                                 <td><input type='text' name='quantity' size='1'></td>
                             </tr>
                             <tr height='130'>
                                 <td><div data-role="content" id="itemImage"></div></td>
-                                <td colspan='4' height='130'><textarea style='resize:none' rows='5' cols='10' name='description'></textarea></td>
+                                <td colspan='4' height='130'><textarea style='resize:none' rows='5' cols='10' name='description' placeholder="Item description"></textarea></td>
                             </tr>
                             <tr>
                                 <td>Purchase Price:</td>
@@ -362,10 +359,6 @@
                                 <td><input type=text size=4 name=itemNumber></td>
                             </tr>
                             <tr>
-                                <td>Start Bid:</td>
-                                <td><input type=text size=4 name=startBid></td>
-                            </tr>
-                            <tr>
                                 <td>Highest Bid:</td>
                                 <td><input type=text size=4 name=highestBid></td>
                             </tr>
@@ -382,38 +375,6 @@
                                 <td><div data-role="content" id="auctionTime"></div></td>
                             </tr>
                             <tr>
-                            </tr>
-                            <tr>
-                                <td>Reserve:</td>
-                                <td><input type=text size=4 name=reserve></td>
-                            </tr>
-                            <tr>
-                                <td>Buy It Now:</td>
-                                <td><input type=text size=4 name=buyItNow></td>
-                            </tr>
-                            <tr>
-                                <td>Shipping/Handling:</td>
-                                <td><input type=text size=4 name=shipping></td>
-                            </tr>
-                            <tr>
-                                <td>Length:</td>
-                                <td><input type=text size=2 name=length></td>
-                                <td><select name=lengthUnits><option>inches</option><option>cm</option></select></td>
-                            </tr>
-                            <tr>
-                                <td>Width:</td>
-                                <td><input type=text size=2 name=width></td>
-                                <td><select name=widthUnits><option>inches</option><option>cm</option></select></td>
-                            </tr>
-                            <tr>
-                                <td>Height:</td>
-                                <td><input type=text size=2 name=height></td>
-                                <td><select name=heightUnits><option>inches</option><option>cm</option></select></td>
-                            </tr>
-                            <tr>
-                                <td>Weight:</td>
-                                <td><input type=text size=2 name=weight></td>
-                                <td><select name=weightUnits><option>lbs</option><option>kg</option></select></td>
                             </tr>
                         </table>
                     </form>
@@ -446,7 +407,7 @@
                     </li>
                     <li>
                         <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Export
+                            Appraise
                         </a>
                     </li>
                 </ul>
@@ -520,7 +481,7 @@
                     </li>
                     <li>
                         <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Export
+                            Appraise
                         </a>
                     </li>
                 </ul>
@@ -576,20 +537,41 @@
                     </li>
                     <li>
                         <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Export
+                            Appraise
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
-        <!-- Export -->
+        <!-- Pricing -->
         <div data-role="page" data-theme="f" id="page11">
             <div data-theme="b" data-role="header">
                 <h3>
-                    Export
+                    Market Price
                 </h3>
             </div>
-            <div data-role="content">
+
+            <form name="appraise">
+            <div data-role="content" align="center">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="text" placeholder="Enter search term" name="searchTerm">
+                        </td>
+                        <td>
+                            <input type="button" onclick="exportEbay()" value="Go">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </form>
+            <div data-role="content" align="center" style="overflow: scroll">
+            <div data-role="content" align="center" id="overallAverage">
+            </div>
+            <div data-role="content" align="center" id="ebayPrice">
+            </div>
+            <div data-role="content" align="center" id="googleShopping">
+            </div>
             </div>
             <div data-role="tabbar" data-iconpos="top" data-theme="b">
                 <ul>
@@ -610,383 +592,17 @@
                     </li>
                     <li>
                         <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Export
+                            Appraise
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
-        <!-- Export To -->
-        <div data-role="page" data-theme="f" id="page12">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    Export
-                </h3>
-            </div>
-            <div data-role="content">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput6">
-                        </label>
-                        <input name="" id="textinput6" placeholder="Item" value="" type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput7">
-                        </label>
-                        <input name="" id="textinput7" placeholder="Description" value="" type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput8">
-                        </label>
-                        <input name="" id="textinput8" placeholder="Price" value="" type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="slider2">
-                            Inventory
-                        </label>
-                        <input name="slider" value="1" min="0" max="100" data-highlight="true"
-                        data-theme="b" data-track-theme="d" type="range">
-                    </fieldset>
-                </div>
-                <a data-role="button" data-theme="b" href="#page14">
-                    eBay
-                </a>
-                <a data-role="button" data-theme="b" href="#page15">
-                    Craigslist
-                </a>
-            </div>
-            <div data-role="tabbar" data-iconpos="top" data-theme="b">
-                <ul>
-                    <li>
-                        <a href="#page2" data-theme="" data-icon="home">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page7" data-theme="" data-icon="check">
-                            Revenue
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page10" data-theme="" data-icon="search">
-                            Calculator
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Export
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- eBay -->
-        <div data-role="page" data-theme="f" id="page14">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    Export to eBay
-                </h3>
-            </div>
-            <div data-role="content">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <div data-role="fieldcontain">
-                    <label for="selectmenu2">
-                    </label>
-                    <select name="" data-theme="b" data-mini="true">
-                        <option value="option1">
-                            Category
-                        </option>
-                        <option value="value">
-                        </option>
-                        <option value="value">
-                            Antiques
-                        </option>
-                        <option value="value">
-                            Art
-                        </option>
-                        <option value="value">
-                            eBay Motors
-                        </option>
-                        <option value="value">
-                            Cameras
-                        </option>
-                        <option value="value">
-                            Cell Phones
-                        </option>
-                        <option value="value">
-                            Clothing
-                        </option>
-                        <option value="value">
-                            Computers
-                        </option>
-                        <option value="value">
-                            Jewelry
-                        </option>
-                        <option value="value">
-                            Sporting goods
-                        </option>
-                        <option value="value">
-                            Tickets
-                        </option>
-                    </select>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput10">
-                        </label>
-                        <input name="" id="textinput10" placeholder="Item" value="" type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput11">
-                        </label>
-                        <input name="" id="textinput11" placeholder="Description" value="" type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput12">
-                        </label>
-                        <input name="" id="textinput12" placeholder="Starting Price" value=""
-                        type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput18">
-                        </label>
-                        <input name="" id="textinput18" placeholder="Buy it Now (optional)" value=""
-                        type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput17">
-                        </label>
-                        <input name="" id="textinput17" placeholder="Shipping Cost" value="" type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <label for="selectmenu3">
-                    </label>
-                    <select name="" data-theme="b" data-mini="true">
-                        <option value="option1">
-                            Shipping
-                        </option>
-                        <option value="value">
-                            Media Mail
-                        </option>
-                        <option value="value">
-                            First Class
-                        </option>
-                        <option value="value">
-                            Priority Mail
-                        </option>
-                        <option value="value">
-                            Express Mail
-                        </option>
-                    </select>
-                </div>
-                <div data-role="fieldcontain">
-                    <label for="selectmenu4">
-                    </label>
-                    <select name="" data-theme="b" data-mini="true">
-                        <option value="option1">
-                            Payment
-                        </option>
-                        <option value="value">
-                            Paypal
-                        </option>
-                        <option value="value">
-                            Other
-                        </option>
-                    </select>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput19">
-                        </label>
-                        <input name="" id="textinput19" placeholder="Return Policy" value="" type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="slider4">
-                            Inventory
-                        </label>
-                        <input name="slider" value="1" min="0" max="100" data-highlight="true"
-                        data-theme="b" data-track-theme="d" type="range">
-                    </fieldset>
-                </div>
-                <a data-role="button" data-theme="b" href="#page12">
-                    Export
-                </a>
-            </div>
-            <div data-role="tabbar" data-iconpos="top" data-theme="b">
-                <ul>
-                    <li>
-                        <a href="#page2" data-theme="" data-icon="home">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page7" data-theme="" data-icon="check">
-                            Revenue
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page10" data-theme="" data-icon="search">
-                            GPS
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Export
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- Craigslist -->
-        <div data-role="page" data-theme="f" id="page15">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    Export to Craigslist
-                </h3>
-            </div>
-            <div data-role="content">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <div data-role="fieldcontain">
-                    <label for="selectmenu1">
-                    </label>
-                    <select name="" data-theme="b">
-                        <option value="option1">
-                            Category
-                        </option>
-                        <option value="value">
-                            Automobile
-                        </option>
-                        <option value="value">
-                            Books
-                        </option>
-                        <option value="value">
-                            Clothing
-                        </option>
-                        <option value="value">
-                            Electronics
-                        </option>
-                        <option value="value">
-                            Furniture
-                        </option>
-                        <option value="value">
-                            Phone
-                        </option>
-                        <option value="value">
-                            Service
-                        </option>
-                        <option value="value">
-                            Tickets
-                        </option>
-                    </select>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput16">
-                        </label>
-                        <input name="" id="textinput16" placeholder="Email" value="" type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput13">
-                        </label>
-                        <input name="" id="textinput13" placeholder="Item" value="" type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput14">
-                        </label>
-                        <input name="" id="textinput14" placeholder="Description" value="" type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput15">
-                        </label>
-                        <input name="" id="textinput15" placeholder="Price" value="" type="text">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="slider5">
-                            Inventory
-                        </label>
-                        <input name="slider" value="1" min="0" max="100" data-highlight="true"
-                        data-theme="b" data-track-theme="d" type="range">
-                    </fieldset>
-                </div>
-                <a data-role="button" data-theme="b" href="#page12">
-                    Export
-                </a>
-            </div>
-            <div data-role="tabbar" data-iconpos="top" data-theme="b">
-                <ul>
-                    <li>
-                        <a href="#page2" data-theme="" data-icon="home">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page7" data-theme="" data-icon="check">
-                            Revenue
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page10" data-theme="" data-icon="search">
-                            GPS
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Export
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <script>
-              //App custom javascript
-        </script>
-    </body>
 
+        <!-- Landing Page -->
+        <div data-role="page" data-theme="f" id="landing">
+            <div rel="M4VHUKOY" class="lrdiscoverwidget" data-logo="on" data-background="on" data-share-url="signuppy.iresellapp.com" data-css=""></div>
+        </div>
+
+    </body>
 </html>

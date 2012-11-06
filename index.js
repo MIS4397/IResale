@@ -20,6 +20,7 @@
     profits = new Array();
     percentReturn = new Array();
     itemNumber = new Array();
+    quantity = new Array();
     startBid = new Array();
     highestBid = new Array();
     endTimes = new Array();
@@ -56,9 +57,12 @@
 
     originalName = "";
 
+    //resets values in item form to default values
     function resetWizard() {
+        alert("test");
         window.location.href = "#page8";
         document.itemEdit.name.value = "";
+        document.itemEdit.quantity.value = "";
         document.itemEdit.description.value = "";
         document.itemEdit.purchasePrice.value = "";
         document.itemEdit.monthBuy.selectedIndex = 0;
@@ -69,19 +73,7 @@
         document.itemEdit.yearSell.selectedIndex = 4;
         document.itemEdit.sellPrice.value = "";
         document.itemEdit.itemNumber.value = "";
-        document.itemEdit.startBid.value = "";
         document.itemEdit.highestBid.value = "";
-        document.itemEdit.reserve.value = "";
-        document.itemEdit.buyItNow.value = "";
-        document.itemEdit.shipping.value = "";
-        document.itemEdit.length.value = "";
-        document.itemEdit.lengthUnits.selectedIndex = 0;
-        document.itemEdit.width.value = "";
-        document.itemEdit.widthUnits.selectedIndex = 0;
-        document.itemEdit.height.value = "";
-        document.itemEdit.heightUnits.selectedIndex = 0;
-        document.itemEdit.weight.value = "";
-        document.itemEdit.weightUnits.selectedIndex = 0;
         itemImage.innerHTML = "<img src=iresell.JPG width=125>";
         auctionDate.innerHTML = "";
         auctionTime.innerHTML = "";
@@ -89,9 +81,12 @@
         newItem = "true";
     }
 
+    //sets values in item form to values based on an item number
     function setWizard(k) {
         window.location.href = "#page8";
         document.itemEdit.name.value = names[k];
+        originalName = names[k];
+        document.itemEdit.quantity.value = quantity[k];
         document.itemEdit.description.value = descriptions[k];
         document.itemEdit.purchasePrice.value = priceBuy[k];
         document.itemEdit.monthBuy.selectedIndex = monthBuyIndex[k];
@@ -102,19 +97,7 @@
         document.itemEdit.yearSell.selectedIndex = yearSellIndex[k];
         document.itemEdit.sellPrice.value = priceSold[k];
         document.itemEdit.itemNumber.value = itemNumber[k];
-        document.itemEdit.startBid.value = startBid[k];
         document.itemEdit.highestBid.value = highestBid[k];
-        document.itemEdit.reserve.value = reserve[k];
-        document.itemEdit.buyItNow.value = buyItNow[k];
-        document.itemEdit.shipping.value = shipping[k];
-        document.itemEdit.length.value = shipLength[k];
-        document.itemEdit.lengthUnits.selectedIndex = shipLengthUnitsIndex[k];
-        document.itemEdit.width.value = shipWidth[k];
-        document.itemEdit.widthUnits.selectedIndex = shipWidthUnitsIndex[k];
-        document.itemEdit.height.value = shipHeight[k];
-        document.itemEdit.heightUnits.selectedIndex = shipHeightUnitsIndex[k];
-        document.itemEdit.weight.value = shipWeight[k];
-        document.itemEdit.weightUnits.selectedIndex = shipWeightUnitsIndex[k];
         itemImage.innerHTML = "<img src=" + images[k] + " width=125>";
         auctionDate.innerHTML = monthEnd[k] + " " + dayEnd[k] + ", " + yearEnd[k];
         auctionTime.innerHTML = hourEnd[k] + ":" + minuteEnd[k] + " " + morningEnd[k];
@@ -137,14 +120,17 @@
                             "<tr>" +
                                 "<th colspan=2></th>" +
                                 "<th>Item Name</th>" +
-                                "<th>Sell Price</th>" +
+                                "<th>Buy/Sell Price</th>" +
                                 "<th>Profit</th>" +
                                 "<th>Percent Return</th>" +
                                 "</tr>" +
                                 "</thead>" +
                                 "<tbody>";
-        originalName = names[l];
+        if(l==descriptions.length){
+            originalName = names[l];
+        }
         names[l] = document.itemEdit.name.value;
+        quantity[l] = document.itemEdit.quantity.value;
         descriptions[l] = document.itemEdit.description.value;
         priceBuy[l] = document.itemEdit.purchasePrice.value;
         e = document.itemEdit.monthBuy;
@@ -221,12 +207,62 @@
         }
         daysToSell[l] = numberSellDays[l] - numberBuyDays[l];
         itemNumber[l] = document.itemEdit.itemNumber.value;
-        startBid[l] = document.itemEdit.startBid.value;
         highestBid[l] = document.itemEdit.highestBid.value;
-        if (q != -1) {
+        if(q!=-1)
             images[l] = "iresell.JPG";
+        if (itemNumber[l] != "" && q == -1) {
+            endDateSplit = endTimes[l].split("T");
+            endDate = endDateSplit[0].split("-");
+            yearEnd[l] = endDate[0];
+            monthEnd[l] = endDate[1];
+            if (monthEnd[l] == 1)
+                monthEnd[l] = "January";
+            if (monthEnd[l] == 2)
+                monthEnd[l] = "February";
+            if (monthEnd[l] == 3)
+                monthEnd[l] = "March";
+            if (monthEnd[l] == 4)
+                monthEnd[l] = "April";
+            if (monthEnd[l] == 5)
+                monthEnd[l] = "May";
+            if (monthEnd[l] == 6)
+                monthEnd[l] = "June";
+            if (monthEnd[l] == 7)
+                monthEnd[l] = "July";
+            if (monthEnd[l] == 8)
+                monthEnd[l] = "August";
+            if (monthEnd[l] == 9)
+                monthEnd[l] = "September";
+            if (monthEnd[l] == 10)
+                monthEnd[l] = "October";
+            if (monthEnd[l] == 11)
+                monthEnd[l] = "November";
+            if (monthEnd[l] == 12)
+                monthEnd[l] = "December";
+
+            dayEnd[l] = endDate[2];
+
+            endTimesSplit = endDateSplit[1].split(".");
+            endTime = endTimesSplit[0].split(":");
+            hourEnd[l] = endTime[0];
+            if (hourEnd[l] < 12) {
+                morningEnd[l] = "AM";
+            }
+            else {
+                morningEnd[l] = "PM";
+                if (hourEnd[l] != 0 || hourEnd[l] != 12) {
+                    hourEnd[l] = hourEnd[l] - 12;
+                }
+                else {
+                    if (hourEnd[l] == 0) {
+                        hourEnd[l] = 12;
+                    }
+                }
+            }
+            minuteEnd[l] = endTime[0];
         }
-        if (itemNumber[l] != "" && q!=-1) {
+
+        if (itemNumber[l] != ""&&q!=-1) {
             xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
                 if (xmlhttp.readyState == 4) {
@@ -285,32 +321,12 @@
                     }
                     minuteEnd[l] = endTime[0];
 
-                    profits[l] = Number(priceSold[l]) - Number(priceBuy[l]) + "";
+                    profits[l] = (Number(priceSold[l]) - Number(priceBuy[l])) + "";
                     percentReturn[l] = 10000 * profits[l] / priceBuy[l];
                     percentReturn[l] += "";
+                    profits[l] = Number(profits[l]) * Number(quantity[l]) + "";
                     temp = percentReturn[l].split(".");
                     percentReturn[l] = temp[0] / 100;
-
-                    reserve[l] = document.itemEdit.reserve.value;
-                    buyItNow[l] = document.itemEdit.buyItNow.value;
-                    shipping[l] = document.itemEdit.shipping.value;
-                    shipLength[l] = document.itemEdit.length.value;
-                    e = document.itemEdit.lengthUnits;
-                    shipLengthUnits[l] = e.options[e.selectedIndex].value;
-                    shipLengthUnitsIndex[l] = document.itemEdit.lengthUnits.selectedIndex;
-                    shipWidth[l] = document.itemEdit.width.value;
-                    e = document.itemEdit.widthUnits;
-                    shipWidthUnits[l] = e.options[e.selectedIndex].value;
-                    shipWidthUnitsIndex[l] = document.itemEdit.widthUnits.selectedIndex;
-                    shipHeight[l] = document.itemEdit.height.value;
-                    e = document.itemEdit.heightUnits;
-                    shipHeightUnits[l] = e.options[e.selectedIndex].value;
-                    shipHeightUnitsIndex[l] = document.itemEdit.heightUnits.selectedIndex;
-                    shipWeight[l] = document.itemEdit.weight.value;
-                    e = document.itemEdit.weightUnits;
-                    shipWeightUnits[l] = e.options[e.selectedIndex].value;
-                    shipWeightUnitsIndex[l] = document.itemEdit.weightUnits.selectedIndex;
-                    calendarString = "<select name=calendarItem onchange=setCalendar()>";
 
                     if (q != -1) {
                         if (newItem == "true") {
@@ -329,12 +345,12 @@
                             color = "#66CCFF";
                             colorIndex = 0;
                         }
-                        calendarString += "<option>" + names[i] + "</option>";
+
                         htmlString += "<tr>";
                         htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>X</button></td>";
                         htmlString += "<td bgcolor=" + color + "><img src=" + images[i] + " width=70></td>";
                         htmlString += "<td bgcolor=" + color + ">" + names[i] + "</td>";
-                        htmlString += "<td bgcolor=" + color + ">$" + toMoney(priceSold[i]) + "</td>";
+                        htmlString += "<td bgcolor=" + color + ">$"+toMoney(priceBuy[i])+"/$" + toMoney(priceSold[i]) + "</td>";
                         htmlString += "<td bgcolor=" + color + ">";
                         if (profits[i] >= 0) {
                             htmlString += "$" + toMoney(profits[i]) + "</td>";
@@ -348,8 +364,6 @@
                         htmlString += "</tr>";
                     }
 
-                    calendarString += "</select>";
-                    //calendarList.innerHTML = calendarString;
                     htmlString += "</tbody></table>";
                     items.innerHTML = htmlString;
                     if (q != -1) {
@@ -362,83 +376,12 @@
             xmlhttp.send();
         }
         else {
-            if(q==-1){
-                endDateSplit = endTimes[l].split("T");
-                endDate = endDateSplit[0].split("-");
-                yearEnd[l] = endDate[0];
-                monthEnd[l] = endDate[1];
-                if (monthEnd[l] == 1)
-                    monthEnd[l] = "January";
-                if (monthEnd[l] == 2)
-                    monthEnd[l] = "February";
-                if (monthEnd[l] == 3)
-                    monthEnd[l] = "March";
-                if (monthEnd[l] == 4)
-                    monthEnd[l] = "April";
-                if (monthEnd[l] == 5)
-                    monthEnd[l] = "May";
-                if (monthEnd[l] == 6)
-                    monthEnd[l] = "June";
-                if (monthEnd[l] == 7)
-                    monthEnd[l] = "July";
-                if (monthEnd[l] == 8)
-                    monthEnd[l] = "August";
-                if (monthEnd[l] == 9)
-                    monthEnd[l] = "September";
-                if (monthEnd[l] == 10)
-                    monthEnd[l] = "October";
-                if (monthEnd[l] == 11)
-                    monthEnd[l] = "November";
-                if (monthEnd[l] == 12)
-                    monthEnd[l] = "December";
-
-                dayEnd[l] = endDate[2];
-
-                endTimesSplit = endDateSplit[1].split(".");
-                endTime = endTimesSplit[0].split(":");
-                hourEnd[l] = endTime[0];
-                if (hourEnd[l] < 12) {
-                    morningEnd[l] = "AM";
-                }
-                else {
-                    morningEnd[l] = "PM";
-                    if (hourEnd[l] != 0 || hourEnd[l] != 12) {
-                        hourEnd[l] = hourEnd[l] - 12;
-                    }
-                    else {
-                        if (hourEnd[l] == 0) {
-                            hourEnd[l] = 12;
-                        }
-                    }
-                }
-                minuteEnd[l] = endTime[0];
-            }
-            profits[l] = Number(priceSold[l]) - Number(priceBuy[l]) + "";
+            profits[l] = (Number(priceSold[l]) - Number(priceBuy[l])) + "";
             percentReturn[l] = 10000 * profits[l] / priceBuy[l];
+            profits[l]=Number(profits[l])*Number(quantity[l]) + "";
             percentReturn[l] += "";
             temp = percentReturn[l].split(".");
             percentReturn[l] = temp[0] / 100;
-
-            reserve[l] = document.itemEdit.reserve.value;
-            buyItNow[l] = document.itemEdit.buyItNow.value;
-            shipping[l] = document.itemEdit.shipping.value;
-            shipLength[l] = document.itemEdit.length.value;
-            e = document.itemEdit.lengthUnits;
-            shipLengthUnits[l] = e.options[e.selectedIndex].value;
-            shipLengthUnitsIndex[l] = document.itemEdit.lengthUnits.selectedIndex;
-            shipWidth[l] = document.itemEdit.width.value;
-            e = document.itemEdit.widthUnits;
-            shipWidthUnits[l] = e.options[e.selectedIndex].value;
-            shipWidthUnitsIndex[l] = document.itemEdit.widthUnits.selectedIndex;
-            shipHeight[l] = document.itemEdit.height.value;
-            e = document.itemEdit.heightUnits;
-            shipHeightUnits[l] = e.options[e.selectedIndex].value;
-            shipHeightUnitsIndex[l] = document.itemEdit.heightUnits.selectedIndex;
-            shipWeight[l] = document.itemEdit.weight.value;
-            e = document.itemEdit.weightUnits;
-            shipWeightUnits[l] = e.options[e.selectedIndex].value;
-            shipWeightUnitsIndex[l] = document.itemEdit.weightUnits.selectedIndex;
-            calendarString = "<select name=calendarItem onchange=setCalendar()>";
 
             if (q != -1) {
                 if (newItem == "true") {
@@ -457,12 +400,11 @@
                     color = "#66CCFF";
                     colorIndex = 0;
                 }
-                calendarString += "<option>" + names[i] + "</option>";
                 htmlString += "<tr>";
                 htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>X</button></td>";
                 htmlString += "<td bgcolor=" + color + "><img src=" + images[i] + " width=70></td>";
                 htmlString += "<td bgcolor=" + color + ">" + names[i] + "</td>";
-                htmlString += "<td bgcolor=" + color + ">$" + toMoney(priceSold[i]) + "</td>";
+                htmlString += "<td bgcolor=" + color + ">$"+toMoney(priceBuy[i])+"/$" + toMoney(priceSold[i]) + "</td>";
                 htmlString += "<td bgcolor=" + color + ">";
                 if (profits[i] >= 0) {
                     htmlString += "$" + toMoney(profits[i]) + "</td>";
@@ -495,6 +437,7 @@
         xmlhttp.send();
 
         names.splice(j, 1);
+        quantity.splice(j, 1);
         descriptions.splice(j, 1);
         priceBuy.splice(j, 1);
         monthBuy.splice(j, 1);
@@ -516,23 +459,7 @@
         percentReturn.splice(j, 1);
         daysToSell.splice(j, 1);
         itemNumber.splice(j, 1);
-        startBid.splice(j, 1);
         highestBid.splice(j, 1);
-        reserve.splice(j, 1);
-        buyItNow.splice(j, 1);
-        shipping.splice(j, 1);
-        shipLength.splice(j, 1);
-        shipLengthUnits.splice(j, 1);
-        shipLengthUnitsIndex.splice(j, 1);
-        shipWidth.splice(j, 1);
-        shipWidthUnits.splice(j, 1);
-        shipWidthUnitsIndex.splice(j, 1);
-        shipHeight.splice(j, 1);
-        shipHeightUnits.splice(j, 1);
-        shipHeightUnitsIndex.splice(j, 1);
-        shipWeight.splice(j, 1);
-        shipWeightUnits.splice(j, 1);
-        shipWeightUnitsIndex.splice(j, 1);
         endTimes.splice(j, 1);
         images.splice(j, 1);
         index--;
@@ -883,288 +810,6 @@
         return moneyString;
     }
 
-    function setCalendar() {
-        weekDays = new Array();
-        weekDays[0] = "Sunday";
-        weekDays[1] = "Monday";
-        weekDays[2] = "Tuesday";
-        weekDays[3] = "Wednesday";
-        weekDays[4] = "Thursday";
-        weekDays[5] = "Friday";
-        weekDays[6] = "Saturday";
-
-        monthNames = new Array();
-        monthNames[0] = "January";
-        monthNames[1] = "February";
-        monthNames[2] = "March";
-        monthNames[3] = "April";
-        monthNames[4] = "May";
-        monthNames[5] = "June";
-        monthNames[6] = "July";
-        monthNames[7] = "August";
-        monthNames[8] = "September";
-        monthNames[9] = "October";
-        monthNames[10] = "November";
-        monthNames[11] = "December";
-
-        itemIndex = document.getCalendarItem.calendarItem.selectedIndex;
-        weekDayStart = 2;
-        currentMonth = monthBuyIndex[itemIndex];
-        currentYear = yearBuy[itemIndex];
-        startMonth = currentMonth;
-        dayBuyNumber = numberBuyDays[itemIndex];
-        weekDayIndex = (dayBuyNumber % 7) + 2;
-        weekDayMonthStart = weekDayIndex;
-        for (j = 1; j < dayBuy[itemIndex]; j++) {
-            weekDayMonthStart--;
-            if (weekDayMonthStart < 0) {
-                weekDayMonthStart = 6;
-            }
-        }
-        if (currentMonth == 0) {
-            if (currentYear == 2008) {
-                weekDayMonthStart = 2;
-            }
-            if (currentYear == 2009) {
-                weekDayMonthStart = 4;
-            }
-            if (currentYear == 2010) {
-                weekDayMonthStart = 5;
-            }
-            if (currentYear == 2011) {
-                weekDayMonthStart = 6;
-            }
-            if (currentYear == 2012) {
-                weekDayMonthStart = 0;
-            }
-            if (currentYear == 2013) {
-                weekDayMonthStart = 2;
-            }
-            if (currentYear == 2014) {
-                weekDayMonthStart = 3;
-            }
-            if (currentYear == 2015) {
-                weekDayMonthStart = 4;
-            }
-            if (currentYear == 2016) {
-                weekDayMonthStart = 5;
-            }
-            if (currentYear == 2017) {
-                weekDayMonthStart = 0;
-            }
-
-        }
-        if (currentMonth == 1) {
-            weekDayMonthStart -= 1;
-        }
-        monthTableCount = 0;
-        daysMonthCount = 0;
-        currentDay = 0;
-
-        currentWeekDay = 0;
-        maxMonthDay = 0;
-
-        htmlString = "<table border=0 cellpadding=3><tr valign=top><td><table border=1>";
-        htmlString += "<tr>" + monthNames[currentMonth] + " " + currentYear + "</tr>" +
-                "<td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td></tr>";
-
-        for (m = 0; m < dayBuy[itemIndex]; m++) {
-            maxMonthDay = 0;
-            if ((currentMonth <= 6 && currentMonth % 2 == 0) || (currentMonth >= 7 && currentMonth % 2 == 1) || currentMonth == 0) {
-                maxMonthDay = 31;
-            }
-            if (((currentMonth < 6 && currentMonth % 2 == 1) || (currentMonth >= 7 && currentMonth % 2 == 0)) && currentMonth != 1) {
-                maxMonthDay = 30;
-            }
-            if (currentMonth == 1) {
-                if (currentYear % 4 == 0) {
-                    maxMonthDay = 29;
-                }
-                else {
-                    maxMonthDay = 28;
-                }
-            }
-            if (currentWeekDay == 0) {
-                htmlString += "<tr>";
-            }
-
-            if (currentDay == 0) {
-                currentWeekDay = weekDayMonthStart;
-                for (n = 0; n < weekDayMonthStart; n++) {
-                    htmlString += "<td></td>";
-                }
-                currentWeekDay--;
-            }
-            else {
-                htmlString += "<td>" + currentDay + "</td>";
-            }
-
-            if (currentWeekDay >= 6) {
-                htmlString += "</tr>";
-            }
-            if (currentWeekDay < 6) {
-                currentWeekDay++;
-            }
-
-            else {
-                currentWeekDay = 0;
-            }
-
-            if (currentDay < maxMonthDay - 1) {
-                currentDay++;
-            }
-            else {
-                currentDay = 0;
-            }
-        }
-        daysToSellIndex = daysToSell[itemIndex];
-        if (startMonth == 0 || startMonth == 1) {
-            daysToSellIndex++;
-        }
-
-        for (m = 0; m < daysToSellIndex; m++) {
-            maxMonthDay = 0;
-            if ((currentMonth <= 6 && currentMonth % 2 == 0) || (currentMonth >= 7 && currentMonth % 2 == 1) || currentMonth == 0) {
-                maxMonthDay = 31;
-            }
-            if (((currentMonth < 6 && currentMonth % 2 == 1) || (currentMonth >= 7 && currentMonth % 2 == 0)) && currentMonth != 1) {
-                maxMonthDay = 30;
-            }
-            if (currentMonth == 1) {
-                if (currentYear % 4 == 0) {
-                    maxMonthDay = 29;
-                }
-                else {
-                    maxMonthDay = 28;
-                }
-            }
-            if (currentWeekDay == 0) {
-                htmlString += "<tr>";
-            }
-
-            if (currentDay == 0) {
-                weekDayMonthStart = currentWeekDay;
-                for (n = 0; n < weekDayMonthStart; n++) {
-                    htmlString += "<td></td>";
-                }
-                currentDay++;
-                if (m == 0 || m == daysToSellIndex - 1) {
-                    htmlString += "<td bgcolor=yellow>" + currentDay + "</td>";
-                }
-                else {
-                    htmlString += "<td>" + currentDay + "</td>";
-                }
-            }
-            else {
-                if (m == 0 || (m == daysToSellIndex - 1)) {
-                    htmlString += "<td bgcolor=yellow>" + currentDay + "</td>";
-                }
-                else {
-                    htmlString += "<td>" + currentDay + "</td>";
-                }
-                if (m == daysToSellIndex - 1 && currentDay == maxMonthDay) {
-                    currentDay--;
-                }
-            }
-
-            if (currentWeekDay >= 6) {
-                htmlString += "</tr>";
-            }
-            if (currentWeekDay < 6) {
-                currentWeekDay++;
-            }
-
-            else {
-                currentWeekDay = 0;
-            }
-
-            if (currentDay < maxMonthDay) {
-                currentDay++;
-            }
-            else {
-                currentDay = 0;
-                if (currentMonth < 11) {
-                    currentMonth++;
-                }
-                else {
-                    currentMonth = 0;
-                    currentYear++;
-                }
-                htmlString += "</table></td>";
-                if (monthTableCount == 0 || monthTableCount == 1) {
-                    monthTableCount++;
-                    htmlString += "<td>";
-                    htmlString += "<table border=1>";
-                    htmlString += "<tr>" + monthNames[currentMonth] + " " + currentYear + "</tr>" +
-                        "<td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td></tr>";
-                }
-                else {
-                    monthTableCount = 0;
-                    htmlString += "</tr><tr valign=top><td>";
-                    htmlString += "<table border=1>";
-                    htmlString += "<tr>" + monthNames[currentMonth] + " " + currentYear + "</tr>" +
-                        "<td>Sun</td><td>Mon</td><td>Tue</td><td>Wed</td><td>Thu</td><td>Fri</td><td>Sat</td></tr>";
-                }
-            }
-        }
-        endOfMonth = maxMonthDay - currentDay + 1;
-        if (currentDay != maxMonthDay) {
-            for (m = 0; m < endOfMonth; m++) {
-                maxMonthDay = 0;
-                if ((currentMonth <= 6 && currentMonth % 2 == 0) || (currentMonth >= 7 && currentMonth % 2 == 1) || currentMonth == 0) {
-                    maxMonthDay = 31;
-                }
-                if (((currentMonth < 6 && currentMonth % 2 == 1) || (currentMonth >= 7 && currentMonth % 2 == 0)) && currentMonth != 1) {
-                    maxMonthDay = 30;
-                }
-                if (currentMonth == 1) {
-                    if (currentYear % 4 == 0) {
-
-                        maxMonthDay = 29;
-                    }
-                    else {
-                        maxMonthDay = 28;
-                    }
-                }
-                if (currentWeekDay == 0) {
-                    htmlString += "<tr>";
-                }
-
-                if (currentDay == 0) {
-                    weekDayMonthStart = currentWeekDay;
-                    for (n = 0; n < weekDayMonthStart; n++) {
-                        htmlString += "<td></td>";
-                    }
-                    currentDay++;
-                    htmlString += "<td>" + currentDay + "</td>";
-                }
-                else {
-                    htmlString += "<td>" + currentDay + "</td>";
-                }
-
-                if (currentWeekDay >= 6) {
-                    htmlString += "</tr>";
-                }
-                if (currentWeekDay < 6) {
-                    currentWeekDay++;
-                }
-
-                else {
-                    currentWeekDay = 0;
-                }
-
-                if (currentDay < maxMonthDay) {
-                    currentDay++;
-                }
-                else {
-                    currentDay = 0;
-                }
-            }
-        }
-        htmlString += "</table></td></tr></table>";
-        calendarView.innerHTML = htmlString;
-    }
-
     function contact() {
         subject = document.email.emailSubject.value;
         message = document.email.emailMessage.value;
@@ -1192,6 +837,13 @@
         password = document.account.newPassword.value;
         repeatPassword = document.account.repeatPassword.value;
         userEmail = document.account.userEmail.value;
+
+        document.account.newUserName.value = "";
+        document.account.newPassword.value = "";
+        document.account.repeatPassword.value = "";
+        document.account.userEmail.value = "";
+        document.loginScreen.username.value = "";
+        document.loginScreen.password.value = "";
 
         accountValidation = "false";
         xmlhttp = new XMLHttpRequest();
@@ -1245,7 +897,7 @@
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4) {
                 xmlResponse = xmlhttp.responseText.split("~");
-                if (xmlResponse.length > 1) {
+                if (xmlResponse.length > 1 || xmlhttp.responseText=="") {
                     readXML(xmlhttp.responseText);
                     window.location.href = "#page2"
                 }
@@ -1256,6 +908,10 @@
             }
         }
         window.location.href = "#loading";
+
+        document.loginScreen.username.value = "";
+        document.loginScreen.password.value = "";
+
         xmlhttp.open("GET", "index.php?action=login&un=" + username + "&pw=" + password, true);
         xmlhttp.send();
     }
@@ -1268,87 +924,57 @@
             if (j == 0)
                 names[k] = xmlString[i];
             if (j == 1)
-                descriptions[k] = xmlString[i];
+                quantity[k] = xmlString[i];
             if (j == 2)
-                priceBuy[k] = xmlString[i];
+                descriptions[k] = xmlString[i];
             if (j == 3)
-                monthBuy[k] = xmlString[i];
+                priceBuy[k] = xmlString[i];
             if (j == 4)
-                monthBuyIndex[k] = xmlString[i];
+                monthBuy[k] = xmlString[i];
             if (j == 5)
-                dayBuy[k] = xmlString[i];
+                monthBuyIndex[k] = xmlString[i];
             if (j == 6)
-                dayBuyIndex[k] = xmlString[i];
+                dayBuy[k] = xmlString[i];
             if (j == 7)
-                yearBuy[k] = xmlString[i];
+                dayBuyIndex[k] = xmlString[i];
             if (j == 8)
-                yearBuyIndex[k] = xmlString[i];
+                yearBuy[k] = xmlString[i];
             if (j == 9)
-                priceSold[k] = xmlString[i];
+                yearBuyIndex[k] = xmlString[i];
             if (j == 10)
-                monthSell[k] = xmlString[i];
+                priceSold[k] = xmlString[i];
             if (j == 11)
-                monthSellIndex[k] = xmlString[i];
+                monthSell[k] = xmlString[i];
             if (j == 12)
-                daySell[k] = xmlString[i];
+                monthSellIndex[k] = xmlString[i];
             if (j == 13)
-                daySellIndex[k] = xmlString[i];
+                daySell[k] = xmlString[i];
             if (j == 14)
-                yearSell[k] = xmlString[i];
+                daySellIndex[k] = xmlString[i];
             if (j == 15)
-                yearSellIndex[k] = xmlString[i];
+                yearSell[k] = xmlString[i];
             if (j == 16)
-                numberBuyDays[k] = xmlString[i];
+                yearSellIndex[k] = xmlString[i];
             if (j == 17)
-                numberSellDays[k] = xmlString[i];
+                numberBuyDays[k] = xmlString[i];
             if (j == 18)
-                profits[k] = xmlString[i];
+                numberSellDays[k] = xmlString[i];
             if (j == 19)
-                percentReturn[k] = xmlString[i];
+                profits[k] = xmlString[i];
             if (j == 20)
-                daysToSell[k] = xmlString[i];
+                percentReturn[k] = xmlString[i];
             if (j == 21)
-                itemNumber[k] = xmlString[i];
+                daysToSell[k] = xmlString[i];
             if (j == 22)
-                startBid[k] = xmlString[i];
+                itemNumber[k] = xmlString[i];
             if (j == 23)
                 highestBid[k] = xmlString[i];
             if (j == 24)
                 images[k] = xmlString[i];
             if (j == 25)
                 endTimes[k] = xmlString[i];
-            if (j == 26)
-                reserve[k] = xmlString[i];
-            if (j == 27)
-                buyItNow[k] = xmlString[i];
-            if (j == 28)
-                shipping[k] = xmlString[i];
-            if (j == 29)
-                shipLength[k] = xmlString[i];
-            if (j == 30)
-                shipLengthUnits[k] = xmlString[i];
-            if (j == 31)
-                shipLengthUnitsIndex[k] = xmlString[i];
-            if (j == 32)
-                shipWidth[k] = xmlString[i];
-            if (j == 33)
-                shipWidthUnits[k] = xmlString[i];
-            if (j == 34)
-                shipWidthUnitsIndex[k] = xmlString[i];
-            if (j == 35)
-                shipHeight[k] = xmlString[i];
-            if (j == 36)
-                shipHeightUnits[k] = xmlString[i];
-            if (j == 37)
-                shipHeightUnitsIndex[k] = xmlString[i];
-            if (j == 38)
-                shipWeight[k] = xmlString[i];
-            if (j == 39)
-                shipWeightUnits[k] = xmlString[i];
-            if (j == 40)
-                shipWeightUnitsIndex[k] = xmlString[i];
             j++;
-            if (j > 40) {
+            if (j > 25) {
                 j = 0;
                 k++;
             }
@@ -1362,6 +988,7 @@
 
     function newXML(l) {
         name = names[l];
+        quantitys=quantity[l];
         description = descriptions[l];
         priceBought = priceBuy[l];
         monthBought = monthBuy[l];
@@ -1383,41 +1010,23 @@
         profit = profits[l];
         percentReturns = percentReturn[l];
         itemNumbers = itemNumber[l];
-        startBids = startBid[l];
         highestBids = highestBid[l];
-        reserves = reserve[l];
-        buyItNows = buyItNow[l];
-        shippings = shipping[l];
-        shipLengths = shipLength[l];
-        shipLengthUnit = shipLengthUnits[l];
-        shipLengthUnitIndex = shipLengthUnitsIndex[l];
-        shipWidths = shipWidth[l];
-        shipWidthUnit = shipWidthUnits[l];
-        shipWidthUnitIndex = shipWidthUnitsIndex[l];
-        shipHeights = shipHeight[l];
-        shipHeightUnit = shipHeightUnits[l];
-        shipHeightUnitIndex = shipHeightUnitsIndex[l];
-        shipWeights = shipWeight[l];
-        shipWeightUnit = shipWeightUnits[l];
-        shipWeightUnitIndex = shipWeightUnitsIndex[l];
 
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4) {
             }
         }
-        xmlhttp.open("GET", "index.php?action=load&un=" + username + "&in=" + name + "&id=" + description + "&pb=" + priceBought + "&mb=" + monthBought + "&mbi=" +
+        xmlhttp.open("GET", "index.php?action=load&un=" + username + "&in=" + name + "&qu="+quantitys+"&id=" + description + "&pb=" + priceBought + "&mb=" + monthBought + "&mbi=" +
                                 monthBoughtIndex + "&db=" + dayBought + "&dbi=" + dayBoughtIndex + "&yb=" + yearBought + "&ybi=" + yearBoughtIndex + "&ps=" + priceSell + "&ms=" + monthSold +
                                 "&msi=" + monthSoldIndex + "&ds=" + daySold + "&dsi=" + daySoldIndex + "&ys=" + yearSold + "&ysi=" + yearSoldIndex + "&nbd=" + numberBoughtDays +
-                                "&nsd=" + numberSoldDays + "&p=" + profit + "&pr=" + percentReturns + "&dts=" + daysToSold + "&inu=" + itemNumbers + "&sb=" + startBids + "&hb=" + highestBids + "&r=" + reserves +
-                                "&bin=" + buyItNows + "&s=" + shippings + "&sl=" + shipLengths + "&slu=" + shipLengthUnit + "&slui=" + shipLengthUnitIndex + "&sw=" + shipWeights + "&swu=" +
-                                shipWidthUnit + "&swui=" + shipWidthUnitIndex + "&sh=" + shipHeight + "&shu=" + shipHeightUnit + "&shui=" + shipHeightUnitIndex + "&swe=" + shipWeights +
-                                "&sweu=" + shipWeightUnit + "&sweui=" + shipWeightUnitIndex, true);
+                                "&nsd=" + numberSoldDays + "&p=" + profit + "&pr=" + percentReturns + "&dts=" + daysToSold + "&inu=" + itemNumbers + "&hb="  + highestBids, true);
         xmlhttp.send();
     }
 
     function editXML(c) {
         name = names[c];
+        quantitys = quantity[c];
         description = descriptions[c];
         priceBought = priceBuy[c];
         monthBought = monthBuy[c];
@@ -1439,35 +1048,121 @@
         profit = profits[c];
         percentReturns = percentReturn[c];
         itemNumbers = itemNumber[c];
-        startBids = startBid[c];
         highestBids = highestBid[c];
-        reserves = reserve[c];
-        buyItNows = buyItNow[c];
-        shippings = shipping[c];
-        shipLengths = shipLength[c];
-        shipLengthUnit = shipLengthUnits[c];
-        shipLengthUnitIndex = shipLengthUnitsIndex[c];
-        shipWidths = shipWidth[c];
-        shipWidthUnit = shipWidthUnits[c];
-        shipWidthUnitIndex = shipWidthUnitsIndex[c];
-        shipHeights = shipHeight[c];
-        shipHeightUnit = shipHeightUnits[c];
-        shipHeightUnitIndex = shipHeightUnitsIndex[c];
-        shipWeights = shipWeight[c];
-        shipWeightUnit = shipWeightUnits[c];
-        shipWeightUnitIndex = shipWeightUnitsIndex[c];
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4) {
-                statsTable.innerHTML = xmlhttp.responseText;
             }
-        }
-        xmlhttp.open("GET", "index.php?action=edit&on=" + originalName + "&un=" + username + "&in=" + name + "&id=" + description + "&pb=" + priceBought + "&mb=" + monthBought + "&mbi=" +
+        };
+        xmlhttp.open("GET", "index.php?action=edit&on=" + originalName + "&un=" + username + "&in=" + name + "&qu="+quantitys+"&id=" + description + "&pb=" + priceBought + "&mb=" + monthBought + "&mbi=" +
                                 monthBoughtIndex + "&db=" + dayBought + "&dbi=" + dayBoughtIndex + "&yb=" + yearBought + "&ybi=" + yearBoughtIndex + "&ps=" + priceSell + "&ms=" + monthSold +
                                 "&msi=" + monthSoldIndex + "&ds=" + daySold + "&dsi=" + daySoldIndex + "&ys=" + yearSold + "&ysi=" + yearSoldIndex + "&nbd=" + numberBoughtDays +
-                                "&nsd=" + numberSoldDays + "&p=" + profit + "&pr=" + percentReturns + "&dts=" + daysToSold + "&inu=" + itemNumbers + "&sb=" + startBids + "&hb=" + highestBids + "&r=" + reserves +
-                                "&bin=" + buyItNows + "&s=" + shippings + "&sl=" + shipLengths + "&slu=" + shipLengthUnit + "&slui=" + shipLengthUnitIndex + "&sw=" + shipWeights + "&swu=" +
-                                shipWidthUnit + "&swui=" + shipWidthUnitIndex + "&sh=" + shipHeight + "&shu=" + shipHeightUnit + "&shui=" + shipHeightUnitIndex + "&swe=" + shipWeights +
-                                "&sweu=" + shipWeightUnit + "&sweui=" + shipWeightUnitIndex, true);
+                                "&nsd=" + numberSoldDays + "&p=" + profit + "&pr=" + percentReturns + "&dts=" + daysToSold + "&inu=" + itemNumbers + "&hb=" + highestBids, true);
         xmlhttp.send();
+    }
+    function exportEbay(){
+        totalPrice = 0;
+        totalItems = 0;
+        totalAverageDisplay = 0;
+        itemSearch = document.appraise.searchTerm.value;
+
+        overallAverage.innerHTML = "loading...";
+        ebayPrice.innerHTML = "loading...";
+        googleShopping.innerHTML = "loading...";
+ 
+        //Ebay
+        xmlhttpEbay = new XMLHttpRequest();
+        xmlhttpEbay.onreadystatechange = function () {
+            if (xmlhttpEbay.readyState == 4) {
+                ebayTotal = 0;
+                ebayItems = xmlhttpEbay.responseText.split("~&");
+
+                for (j = 0; j < 3; j++) {
+                    ebayPriceDetails = ebayItems[j].split("^&");
+                    ebayTotal += Number(ebayPriceDetails[2]);
+                    totalPrice += Number(ebayPriceDetails[2]);
+                    if (totalPrice > 0)
+                        totalItems++;
+                }
+
+                ebayAverage = ebayTotal / 3;
+                ebayAverage += "";
+                ebayAverageString = ebayAverage.split(".");
+                ebayAverageDisplay = "$" + ebayAverageString[0] + ".";
+                ebayAverageCents = ebayAverageString[1].split("");
+                ebayAverageDisplay += ebayAverageCents[0] + ebayAverageCents[1];
+
+                totalAverage = totalPrice / totalItems;
+                totalAverage += "";
+                totalAverageString = totalAverage.split(".");
+                totalAverageDisplay = "$" + totalAverageString[0] + ".";
+                totalAverageCents = totalAverageString[1].split("");
+                totalAverageDisplay += totalAverageCents[0] + totalAverageCents[1];
+
+                ebayTable = "<table cellspacing=20 cellpadding=20><tr><th colspan=3><big><u>Ebay average=" + ebayAverageDisplay + "</u></big></th></tr><tr>";
+                for (i = 0; i < 3; i++) {
+                    ebayDetails = ebayItems[i].split("^&");
+                    ebayTable += "<tr><td>";
+                    ebayTable += "<table><tr><td width=200>" + ebayDetails[0] + "</td></tr>";
+                    ebayTable += "<tr><td><img src=" + ebayDetails[1] + " width=200></td></tr>";
+                    ebayTable += "<tr><td>Price: $" + ebayDetails[2] + "</td></tr></table>";
+                    ebayTable += "</td></tr>";
+                }
+                ebayTable += "</tr></table>";
+                ebayPrice.innerHTML = ebayTable;
+                overallAverage.innerHTML = "<big><b>Market Price: " + totalAverageDisplay+"</b></big>";
+            }
+        };
+        xmlhttpEbay.open("GET", "index.php?action=ebayPrice&search="+itemSearch, true);
+        xmlhttpEbay.send();
+
+        //Google shopping
+        xmlhttpGoogle = new XMLHttpRequest();
+        xmlhttpGoogle.onreadystatechange = function () {
+            if (xmlhttpGoogle.readyState == 4) {
+                googleTotal = 0;
+                obj = eval("(" + xmlhttpGoogle.responseText + ")");
+
+                for (k = 0; k < 3; k++) {
+                    googleTotal += Number(obj.items[k].product.inventories[0].price);
+                    totalPrice += Number(obj.items[k].product.inventories[0].price);
+                    if (totalPrice > 0)
+                        totalItems++;
+                }
+
+                googleAverage = googleTotal / 3;
+                googleAverage += "";
+                googleAverageString = googleAverage.split(".");
+                googleAverageDisplay = "$" + googleAverageString[0] + ".";
+                googleAverageCents = googleAverageString[1].split("");
+                googleAverageDisplay += googleAverageCents[0] + googleAverageCents[1];
+
+                totalAverage = totalPrice / totalItems;
+                totalAverage += "";
+                totalAverageString = totalAverage.split(".");
+                totalAverageDisplay = "$" + totalAverageString[0] + ".";
+                totalAverageCents = totalAverageString[1].split("");
+                totalAverageDisplay += totalAverageCents[0] + totalAverageCents[1];
+
+                googleOutput = "<table cellpadding=20 cellspacing=20><tr><th colspan=3><big><u>Google Shopping average: " + googleAverageDisplay + "</u></big></th></tr><tr>";
+
+                for (l = 0; l < 3; l++) {
+                    itemTitle = obj.items[l].product.title;
+                    itemImage = obj.items[l].product.images[0].link;
+                    itemPrice = obj.items[l].product.inventories[0].price;
+                    googleOutput += "<tr><td><table><tr><td width=200>" + itemTitle + "</td></tr>";
+                    googleOutput += "<tr><td><img src=" + itemImage + " width=200></td></tr>";
+                    googleOutput += "<tr><td width=100>Price: $" + itemPrice + "</td></tr></table></td></tr>";
+                }
+                googleOutput += "</tr></table>";
+                googleShopping.innerHTML = googleOutput;
+                overallAverage.innerHTML = "Market Price: " + totalAverageDisplay;
+            }
+        };
+        qsplit = itemSearch;
+        while(qsplit.indexOf(" ")!=-1){
+            qsplit=qsplit.replace(" ", "+");
+        }
+        xmlhttpGoogle.open("GET", "https://www.googleapis.com/shopping/search/v1/public/products?key=AIzaSyCnG99cUzzeeRewOH286CDIpR5qcHa4LRE&country=US&q="+qsplit+"&alt=json", true);
+        xmlhttpGoogle.send();
     }
