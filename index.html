@@ -1,608 +1,168 @@
-<!DOCTYPE html>
-<html>
-    
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>
-        </title>
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.css"
-        />
-        <link rel="stylesheet" href="my.css" />
-        <style>
-            /* App custom styles */
-        </style>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery.mobile/1.1.1/jquery.mobile-1.1.1.min.js">
-        </script>
-        <script src="my.js">
-        </script>
-        <script src="index.js">
-        </script>
-        <script type="text/javascript" src="http://launchrock-ignition.s3.amazonaws.com/ignition.1.1.js"></script>
-    </head>
-    
-    <body>
-        <!-- Login -->
-        <div data-role="page" data-theme="f" id="page13">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    iRESELL
-                </h3>
-            </div>
-            <div data-role="content" align="center">
-                <div align="center">
-                    <img style="width: 275px; height: 200px" src="http://assets.codiqa.com/ps/34188/11dcc44410eb786eiconcut.jpg">
-                    <form name="loginScreen">
-                        <fieldset data-role="controlgroup" data-mini="true">
-                            <label for="textinput20">
-                            </label>
-                            <input name="username" id="textinput20" placeholder="Username" value="" type="text" style="width: 275px">
-                        </fieldset>
-                        <fieldset data-role="controlgroup" data-mini="true">
-                            <label for="textinput21">
-                            </label>
-                            <input name="password" id="textinput21" placeholder="Password" value="" type="password" style="width: 275px">
-                        </fieldset>
-                    </form>
-                </div>
-                <a data-role="button" data-theme="b" onclick="loginWindow()">
-                    Login
-                </a>
-                <a data-role="button" data-theme="b" href="#page18">
-                    Create Account
-                </a>
-                <a data-role="button" data-theme="b" href="#landing">
-                    View our landing page
-                </a>
-            </div>
-        </div>
-        <!-- Loading -->
-        <div data-role="page" data-theme="f" id="loading">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    Loading...
-                </h3>
-            </div>
-            <div data-role="content">
-                <div style=" text-align:center">
-                    <img style="width: 275px; height: 200px" src="http://assets.codiqa.com/ps/34188/85b9190a2949d78aiconcut.jpg">
-                </div>
-            </div>
-        </div>
-        <!-- Create Account -->
-        <div data-role="page" data-theme="f" id="page18">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    Create Account
-                </h3>
-                <a data-role="button" data-theme="c" href="#page17" data-icon="info" data-iconpos="notext"
-                class="ui-btn-right">
-                </a>
-            </div>
-            <div data-role="content">
-                <form name="account">
-                <div style=" text-align:center">
-                    <img style="width: 275px; height: 200px" src="http://assets.codiqa.com/ps/34188/85b9190a2949d78aiconcut.jpg">
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput24">
-                        </label>
-                        <input id="textinput24" placeholder="Email" value="" type="text" name="userEmail">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput22">
-                        </label>
-                        <input id="textinput22" placeholder="Username" value="" type="text" name="newUserName">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput23">
-                        </label>
-                        <input id="textinput23" placeholder="Password" value="" type="password" name="newPassword">
-                    </fieldset>
-                </div>
-                <div data-role="fieldcontain">
-                    <fieldset data-role="controlgroup" data-mini="true">
-                        <label for="textinput25">
-                        </label>
-                        <input id="textinput25" placeholder="Confirm Password" value="" type="password" name="repeatPassword">
-                    </fieldset>
-                </div>
-                </form>
-                <a data-role="button" data-theme="b" onclick="newAccount()">
-                    Register
-                </a>
-            </div>
-        </div>
-        <!-- Contact us -->
-        <div data-role="page" data-theme="f" id="page17">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    Contact Us
-                </h3>
-            </div>
-            <div data-role="content">
-                <div style=" text-align:center">
-                    <img style="width: 275px; height: 200px" src="http://assets.codiqa.com/ps/34188/a54885b92be794aficoncut.jpg">
-                </div>
-                <a data-role="button" data-theme="b" href="http://iresellapp.com">
-                    iResellapp.com
-                </a>
-                <a data-role="button" data-theme="b" href="#emailUs">
-                    Email us
-                </a>
-                <a data-role="button" data-theme="b" href="http://twitter.com/iresell">
-                    Tweet us
-                </a>
-            </div>
-            <div data-role="tabbar" data-iconpos="top" data-theme="b">
-                <ul>
-                    <li>
-                        <a href="#page2" data-theme="" data-icon="home">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page7" data-theme="" data-icon="check">
-                            Revenue
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page10" data-theme="" data-icon="search">
-                            Calculator
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Appraise
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- Email us -->
-        <div data-role="page" data-theme="f" id="emailUs">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    Email Us
-                </h3>
-            </div>
-            <form name="email">
-            <div data-role="content" align="center">
-                <table>
-                    <tr>
-                        <td>Subject</td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="emailSubject"></td>
-                    </tr>
-                    <tr>
-                    </tr>
-                    <tr>
-                        <td>Message</td>
-                    </tr>
-                    <tr height="100">
-                        <td><textarea style="resize: none" name="emailMessage" rows="5"></textarea></td>
-                    </tr>
-                    <tr>
-                        <td><input type="button" value="Send" onclick="contact()"></td>
-                    </tr>
-                </table>
-            </div>
-            </form>
-            <div data-role="tabbar" data-iconpos="top" data-theme="b">
-                <ul>
-                    <li>
-                        <a href="#page2" data-theme="" data-icon="home">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page7" data-theme="" data-icon="check">
-                            Revenue
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page10" data-theme="" data-icon="search">
-                            Calculator
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Export
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- Home -->
-        <div data-role="page" data-theme="f" id="page2">
-            <div data-theme="b" data-role="header">
-                <a data-role="button" data-theme="c" href="#page17" data-icon="info" data-iconpos="notext"
-                class="ui-btn-right">
-                    Contact us
-                </a>
-                <h3>
-                    iRESELL
-                </h3>
-                <a data-role="button" data-theme="c" onclick="resetWizard()" data-icon="plus" data-iconpos="notext"
-                class="ui-btn-left">
-                    Add
-                </a>
-            </div>
-            <div data-role="content" id="items" style="overflow:scroll">
-            </div>
-            <div data-role="tabbar" data-iconpos="top" data-theme="b">
-                <ul>
-                    <li>
-                        <a href="#page2" data-theme="" data-icon="home">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page7" data-theme="" data-icon="check">
-                            Revenue
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page10" data-theme="" data-icon="search">
-                            Calculator
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Appraise
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- Add item -->
-        <div data-role="page" data-theme="f" id="page8">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    Add Item
-                </h3>
-            </div>
-            <div data-role="content">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <img src="http://codiqa.com/static/images/v2/image.png" alt="image">
-                <div data-role="content" id="itemEditor" style="overflow: scroll">
-                    <form name='itemEdit'>
-                        <table border='0'>
-                            <tr height='20'></tr>
-                            <tr>
-                                <td colspan=3><input type='text' name='name' size='15' placeholder="Item Name"></td>
-                                <td align='right'>Quantity:</td>
-                                <td><input type='text' name='quantity' size='1'></td>
-                            </tr>
-                            <tr height='130'>
-                                <td><div data-role="content" id="itemImage"></div></td>
-                                <td colspan='4' height='130'><textarea style='resize:none' rows='5' cols='10' name='description' placeholder="Item description"></textarea></td>
-                            </tr>
-                            <tr>
-                                <td>Purchase Price:</td>
-                                <td><input type='text' name='purchasePrice' size='7'></td>
-                            </tr>
-                            <tr>
-                                <td>Purchase Date:</td>
-                                <td>
-                                    <select name='monthBuy'>
-                                        <option>January</option>
-                                        <option>February</option>
-                                        <option>March</option>
-                                        <option>April</option>
-                                        <option>May</option>
-                                        <option>June</option>
-                                        <option>July</option>
-                                        <option>August</option>
-                                        <option>September</option>
-                                        <option>October</option>
-                                        <option>November</option>
-                                        <option>December</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select name='dayBuy'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option>
-                                        <option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option>
-                                        <option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option>
-                                        <option>30</option><option>31</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select name='yearBuy'><option>2008</option><option>2009</option><option>2010</option><option>2011</option><option>2012</option><option>2013</option><option>2014</option><option>2015</option>
-                                        <option>2016</option><option>2017</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Sell Price:</td>
-                                <td><input type='text' name='sellPrice' size='7'></td>
-                            </tr>
-                            <tr>
-                                <td>Sell Date:</td>
-                                <td>
-                                    <select name='monthSell'><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option>
-                                        <option>August</option><option>September</option><option>October</option><option>November</option><option>December</option>
-                                    </select>
-                                </td>
-                                <td><select name='daySell'><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option>
-                                        <option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option>
-                                        <option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select name='yearSell'><option>2008</option><option>2009</option><option>2010</option><option>2011</option><option>2012</option><option>2013</option><option>2014</option><option>2015</option>
-                                        <option>2016</option><option>2017</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr height='30'></tr>
-                            <tr height='50'>
-                                <td colspan=5 bgcolor=yellow align=center><font size=8 color=black>Ebay</font></td>
-                            </tr>
-                            <tr height='30'></tr>
-                            <tr>
-                                <td>Item Number:</td>
-                                <td><input type=text size=4 name=itemNumber></td>
-                            </tr>
-                            <tr>
-                                <td>Highest Bid:</td>
-                                <td><input type=text size=4 name=highestBid></td>
-                            </tr>
-                            <tr>
-                            </tr>
-                            <tr>
-                                <td>Auction End Date:</td>
-                                <td><div data-role="content" id="auctionDate"></div></td>
-                            </tr>
-                            <tr>
-                            </tr>
-                            <tr>
-                                <td>Auction End Time:</td>
-                                <td><div data-role="content" id="auctionTime"></div></td>
-                            </tr>
-                            <tr>
-                            </tr>
-                        </table>
-                    </form>
-                    <table border=0>
-                        <tr>
-                            <td><div id="finishEdit"></div></td>
-                        </tr>
-                    </table>
-                </div>
-                <div id="finishButton">
-                    <input type="button" data-theme="b" value="Finish" data-mini="true" onclick="editItem(-1, 0)">
-                </div>
-            </div>
-            <div data-role="tabbar" data-iconpos="top" data-theme="b">
-                <ul>
-                    <li>
-                        <a href="#page2" data-theme="" data-icon="home">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page7" data-theme="" data-icon="check">
-                            Revenue
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page10" data-theme="" data-icon="search">
-                            Calculator
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Appraise
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- Revenue -->
-        <div data-role="page" data-theme="f" id="page7">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    Revenue
-                </h3>
-            </div>
-            <div data-role="content" align="center">
-                <form name="revenues">
-                <table>
-                    <tr>
-                        <td>
-                            <select name="revenueMonth">
-                                <option>January</option>
-                                <option>February</option>
-                                <option>March</option>
-                                <option>April</option>
-                                <option>May</option>
-                                <option>June</option>
-                                <option>July</option>
-                                <option>August</option>
-                                <option>September</option>
-                                <option>October</option>
-                                <option>November</option>
-                                <option>December</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select name="revenueYear">
-                                <option>2008</option>
-                                <option>2009</option>
-                                <option>2010</option>
-                                <option>2011</option>
-                                <option>2012</option>
-                                <option>2013</option>
-                                <option>2014</option>
-                                <option>2015</option>
-                                <option>2016</option>
-                                <option>2017</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input type="button" value="Go" onclick="calculateStats()">
-                        </td>
-                    </tr>
-                </table>
-                </form>
-            </div>
-            <div data-role="content" id="statistics" align="center"></div>
-            <div data-role="tabbar" data-iconpos="top" data-theme="b">
-                <ul>
-                    <li>
-                        <a href="#page2" data-theme="" data-icon="home">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page7" data-theme="" data-icon="check">
-                            Revenue
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page10" data-theme="" data-icon="search">
-                            Calculator
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Appraise
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- Item Calculator -->
-        <div data-role="page" data-theme="f" id="page10">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    Item Calculator
-                </h3>
-            </div>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-            <div data-role="content" align="center">
-            <form name="individualItem">
-                <table border="0">
-                    <tr><td colspan="2">Item Cost</td></tr>
-                    <tr><td colspan="2"><input type="text" name="itemCost"></td></tr>
-                    <tr></tr>
-                    <tr><td colspan="2">Price Sold</td></tr>
-                    <tr><td colspan="2"><input type="text" name="itemSell"></td></tr>
-                    <tr></tr>
-                    <tr><td colspan="2">Projected Profit</td></tr>
-                    <tr><td colspan="2"><input type="text" name="itemProfit"></td></tr>
-                    <tr></tr>
-                    <tr><td colspan="2">Project Percent Return</td></tr>
-                    <tr><td colspan="2"><input type="text" name="itemPercentReturn"></td></tr>
-                    <tr></tr>
-                    <tr>
-                        <td><input type="button" value="reset" onclick="resetCalculateItem()"></td>
-                        <td><input type="button" value="calculate" onclick="calculateItem()"></td>
-                    </tr>
-                </table>
-            </form>
-            </div>
+	<head>
+		<title>iResell</title>
+		<link rel="stylesheet" type="text/css" href="styles.css" />
+		<link rel="stylesheet" href="nivo-slider.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="default.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+        <link rel="apple-touch-icon" href="iresellicon.PNG"/>
+	<script type="text/javascript"></script>
+	<link rel='stylesheet' type='text/css' href='ndhui.css' />
+	</head> 
 
-            <div data-role="tabbar" data-iconpos="top" data-theme="b">
-                <ul>
-                    <li>
-                        <a href="#page2" data-theme="" data-icon="home">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page7" data-theme="" data-icon="check">
-                            Revenue
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page10" data-theme="" data-icon="search">
-                            Calculator
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Appraise
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- Pricing -->
-        <div data-role="page" data-theme="f" id="page11">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    Market Price
-                </h3>
-            </div>
 
-            <form name="appraise">
-            <div data-role="content" align="center">
-                <table>
-                    <tr>
-                        <td>
-                            <input type="text" placeholder="Enter search term" name="searchTerm">
-                        </td>
-                        <td>
-                            <input type="button" onclick="exportEbay()" value="Go">
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            </form>
-            <div data-role="content" align="center" style="overflow: scroll">
-            <div data-role="content" align="center" id="overallAverage">
-            </div>
-            <div data-role="content" align="center" id="ebayPrice">
-            </div>
-            <div data-role="content" align="center" id="googleShopping">
-            </div>
-            </div>
-            <div data-role="tabbar" data-iconpos="top" data-theme="b">
-                <ul>
-                    <li>
-                        <a href="#page2" data-theme="" data-icon="home">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page7" data-theme="" data-icon="check">
-                            Revenue
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page10" data-theme="" data-icon="search">
-                            Calculator  
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Appraise
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+	<body><script type='text/javascript' language='javascript' src='ndhui.js?0=0&amp;0=0&amp;0=0'></script>
+	
+		<div class="container">
+			<div class="header">
+				<div class="get-it-buttons">
+					<a href="index3.html" class="free-trial-button">Free Trial</a>
+					<a href="index3.html" class="buy-it-button">Buy It Now</a>
+				</div>
+			</div>
+			<div class="intro" align="center">
+				<h2>iResell</h2>
+				<table><tr><td height=30>
+				<p>Maximize your performance in the resale market</p>
+				</td></tr></table>
+				<div class="slider-wrapper theme-default">
+				    <div id="slider" class="nivoSlider">
+				        <img src="iresellicon.PNG" width="300px" height="500px" alt="" />
+				        <img src="mainimage2.PNG" width="300px" height="500px" alt="" />
+				        <img src="mainimage3.PNG" width="300px" height="500px" alt="" />
+				        <img src="mainimage1.PNG" width="300px" height="500px" alt="" />
+				    </div>
+				</div>
+			</div>
+			<div class="divider-2"></div>
+			<div class="top-features">
+				<h3>Top Features</h3>
+				<div class="inset-top"></div>
+				<div class="inset">
+					<div class="row"><!--Start of Row-->
+						
+						<div class="col"><!--Start of Feature-->
+							<div class="feature-image">
+									<div class="mask-container-thumbnail">
+										<img src="feature1.PNG" width="100" height="100">
+									</div>
+							</div>
+							<div class="description">
+								<h4>Items Chart</h4>
+								<p>Quickly see your profit margins across all items</p>
+								
+								<p>Retrieves updated bidding activity from ebay</p>
+								
+								<p>Shows Buy/Sell price, profit, and percent return within one quick view</p>
+							</div>
+						</div><!--End of Feature-->
+						
+						<div class="col"><!--Start of Feature-->
+							<div class="feature-image">
+									<div class="mask-container-thumbnail">
+										<img src="feature2.PNG" width="100" height="100" alt="" />
+									</div>
+							</div>
+							<div class="description">
+								<h4>Monthly Statistics</h4>
+								<p>Maintains a monthly record of your buying/selling activity</p>
+								
+								<p> View your performance on a month-to-month basis</p>
+								
+								<p>View statistics for profit, percent return, revenue, and expenses</p>
+							</div>
+						</div><!--End of Feature-->
+						
+						<br class="clear" />
+					</div><!--End of Row-->
+					
+					<div class="row"><!--Start of Row-->
+						
+						<div class="col"><!--Start of Feature-->
+							<div class="feature-image">
+									<div class="mask-container-thumbnail">
+										<img src="feature3.PNG" width="100" height="100" alt="" />
+									</div>
+							</div>
+							<div class="description">
+								<h4>Calculator</h4>
+								<p>Gain purchasing power by being able to determine if an item will generate profit</p>
+								
+								<p>Calculate profit and percent return based on buy/sell price of an item</p>
+								
+								<p>Quickly determine maximum purchase price and/or minimum selling price before making a purchasing/selling decision</p>
+							</div>
+						</div><!--End of Feature-->
+						
+						<div class="col"><!--Start of Feature-->
+							<div class="feature-image">
+									<div class="mask-container-thumbnail">
+										<img src="feature4.PNG" width="100" height="100"alt="" />
+									</div>
+							</div>
+							<div class="description">
+								<h4>Quick Appraiser</h4>
+								<p>Find out how much an item is worth before you buy</p>
+								
+								<p>Retrieves the top 3 results from google shopping and ebay for an across the market comparison.</p>
+								
+								<p>Displays the price comparisons in an easy to view format</p>
+							</div>
+						</div><!--End of Feature-->
+						
+						<br class="clear" />
+					</div><!--End of Row-->
+					
+										
+				</div>
+				<div class="inset-btm"></div>
+			</div>
+			
+			<div class="testimonials">
+				<h3>Testimonials</h3>
+				
+				<div class="quote"><!--Start of Quote-->
+					<img src="quotation-mark.png" alt="quotation mark" class="quotation-mark" />
+					<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Non recuso laborem alios. Pedicabo ego hoc. Non sum semester gradibus ad hoc opus aliis. Bonus fortuna trying facio eos operari. Ad commercia iungere sunt. Secundarium schola est malitia</p>
+					</div><!--End of Quote-->
+				
+				<div class="quote"><!--Start of Quote-->
+					<img src="quotation-mark.png" alt="quotation mark" class="quotation-mark" />
+					<p>LLorem ipsum dolor sit amet, consectetuer adipiscing elit. Non recuso laborem alios. Pedicabo ego hoc. Non sum semester gradibus ad hoc opus aliis. Bonus fortuna trying facio eos operari. Ad commercia iungere sunt. Secundarium schola est malitia</p>
+				</div><!--End of Quote-->
+				
+				<br class="clear" />
+				
+			</div>
+            <br class="clear" />	
+		</div>
+		
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery.nivo.slider.pack.js"></script>
+		<script type="text/javascript" src="jquery.fancybox-1.3.4.pack.js"></script>
+		<script type="text/javascript" src="jquery.easing-1.4.pack.js"></script>
+		<script type="text/javascript" src="jquery.mousewheel-3.0.4.pack.js"></script>
+		
+		<script type="text/javascript">
+		$(window).load(function() {
+		    $('#slider').nivoSlider();
+		});
+		</script>
+		
+		<script type="text/javascript">
+      $(window).load(function () {
+          $("*[rel=fancybox]").fancybox();
+      });
+      function email() {
+          alert("Thank you for signing up for updates");
+          document.enterEmail.address.value = "";
+          window.location.href = "index.html";
+      }
+		</script>
+		
+	
+	</body>
 
-        <!-- Landing Page -->
-        <div data-role="page" data-theme="f" id="landing">
-            <div rel="M4VHUKOY" class="lrdiscoverwidget" data-logo="on" data-background="on" data-share-url="signuppy.iresellapp.com" data-css=""></div>
-        </div>
-
-    </body>
 </html>

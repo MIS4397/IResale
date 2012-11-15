@@ -1,3 +1,4 @@
+    //declares arrays    
     names = new Array();
     descriptions = new Array();
     priceBuy = new Array();
@@ -57,10 +58,12 @@
 
     originalName = "";
 
+    //set add item page to default values
     function resetWizard() {
         window.location.href = "#page8";
         document.itemEdit.name.value = "";
         document.itemEdit.quantity.value = "";
+        document.itemEdit.imageURL.value = "";
         document.itemEdit.description.value = "";
         document.itemEdit.purchasePrice.value = "";
         document.itemEdit.monthBuy.selectedIndex = 0;
@@ -72,18 +75,19 @@
         document.itemEdit.sellPrice.value = "";
         document.itemEdit.itemNumber.value = "";
         document.itemEdit.highestBid.value = "";
-        itemImage.innerHTML = "<img src=iresell.JPG width=125>";
+        itemImage.innerHTML = "<img src=iresell.JPG width=100%>";
         auctionDate.innerHTML = "";
         auctionTime.innerHTML = "";
         index = descriptions.length;
         newItem = "true";
     }
-
+    //sets item edit page to item number k
     function setWizard(k) {
         window.location.href = "#page8";
         document.itemEdit.name.value = names[k];
         originalName = names[k];
         document.itemEdit.quantity.value = quantity[k];
+        document.itemEdit.imageURL.value = images[k];
         document.itemEdit.description.value = descriptions[k];
         document.itemEdit.purchasePrice.value = priceBuy[k];
         document.itemEdit.monthBuy.selectedIndex = monthBuyIndex[k];
@@ -95,13 +99,21 @@
         document.itemEdit.sellPrice.value = priceSold[k];
         document.itemEdit.itemNumber.value = itemNumber[k];
         document.itemEdit.highestBid.value = highestBid[k];
-        itemImage.innerHTML = "<img src=" + images[k] + " width=125>";
-        auctionDate.innerHTML = monthEnd[k] + " " + dayEnd[k] + ", " + yearEnd[k];
-        auctionTime.innerHTML = hourEnd[k] + ":" + minuteEnd[k] + " " + morningEnd[k];
+        itemImage.innerHTML = "<img src=" + images[k] + " width=100%>";
+        if (itemNumber[k] != "") {
+            auctionDate.innerHTML = monthEnd[k] + " " + dayEnd[k] + ", " + yearEnd[k];
+            auctionTime.innerHTML = hourEnd[k] + ":" + minuteEnd[k] + " " + morningEnd[k];
+        }
+        else{
+            auctionDate.innerHTML = "";
+            auctionTime.innerHTML = "";
+        }
         index = k;
         newItem = "false";
     }
 
+    //handles adding/editing items and sends requests to php to handle data
+    //changes in xml
     function editItem(itemNumbers, q) {
         if (itemNumbers == -1) {
             l = descriptions.length;
@@ -112,20 +124,9 @@
         l = index;
         color = "#E8E8E8";
         colorIndex = 0;
-        htmlString = "<table width=100% border=1 cellpadding=10>" +
-                            "<thead>" +
-                            "<tr>" +
-                                "<th colspan=2></th>" +
-                                "<th>Item Name</th>" +
-                                "<th>Buy/Sell Price</th>" +
-                                "<th>Profit</th>" +
-                                "<th>Percent Return</th>" +
-                                "</tr>" +
-                                "</thead>" +
-                                "<tbody>";
-        if(l==descriptions.length){
-            originalName = names[l];
-        }
+        htmlString = "<table width=250 cellpadding=0><tr><td bgcolor=#66CCFF align=center><big><b><a id=top></a>Your Items</b></big></td></tr>";
+        selectionItem = "<form name=selectItems><select id=selectItem onchange=gotoItem() width=250>";
+        originalName = names[l];
         names[l] = document.itemEdit.name.value;
         quantity[l] = document.itemEdit.quantity.value;
         descriptions[l] = document.itemEdit.description.value;
@@ -259,6 +260,9 @@
             minuteEnd[l] = endTime[0];
         }
 
+        if(document.itemEdit.imageURL.value!=""){
+            images[l] = document.itemEdit.imageURL.value;
+        }
         if (itemNumber[l] != ""&&q!=-1) {
             xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
@@ -342,26 +346,24 @@
                             color = "#66CCFF";
                             colorIndex = 0;
                         }
-
-                        htmlString += "<tr>";
-                        htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>X</button></td>";
-                        htmlString += "<td bgcolor=" + color + "><img src=" + images[i] + " width=70></td>";
-                        htmlString += "<td bgcolor=" + color + ">" + names[i] + "</td>";
-                        htmlString += "<td bgcolor=" + color + ">$"+toMoney(priceBuy[i])+"/$" + toMoney(priceSold[i]) + "</td>";
-                        htmlString += "<td bgcolor=" + color + ">";
+                        htmlString += "<a name=" + i + "></a><tr><td><table cellspacing=0 cellpadding=0>";
+                        htmlString += "<tr><td bgcolor=" + color + " colspan=2>" + names[i] + "</td></tr>";
+                        htmlString += "<tr><td bgcolor=" + color + " colspan=2><img src=" + images[i] + " width=100%></td></tr>";
+                        htmlString += "<tr><td bgcolor=" + color + " colspan=2 width=100>Buy/Sell: $" + toMoney(priceBuy[i]) + "/$" + toMoney(priceSold[i]) + "</td></tr>";
+                        htmlString += "<tr><td bgcolor=" + color + " colspan=2>";
                         if (profits[i] >= 0) {
-                            htmlString += "$" + toMoney(profits[i]) + "</td>";
+                            htmlString += "Profit: $" + toMoney(profits[i]) + "</td></tr>";
                         }
                         else {
                             tempProfit = profits[i] * (-1);
-                            htmlString += "-$" + tempProfit + "</td>";
+                            htmlString += "Profit: -$" + tempProfit + "</td></tr>";
                         }
-                        htmlString += "<td bgcolor=" + color + ">" + percentReturn[i] + "%</td>";
-                        htmlString += "<td bgcolor=" + color + "><button onclick=setWizard(" + i + ")>Edit</button></td>";
-                        htmlString += "</tr>";
+                        htmlString += "<tr><td bgcolor=" + color + "><button onclick=setWizard(" + i + ")>Edit</button></td>";
+                        htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>Delete</button></td></tr>";
+                        htmlString += "<tr><td><td><a href=#top>Return to top</a>";
+                        htmlString += "</table></td></tr>";
                     }
-
-                    htmlString += "</tbody></table>";
+                    htmlString += "</table>";
                     items.innerHTML = htmlString;
                     if (q != -1) {
                         window.location.href = "#page2";
@@ -397,32 +399,38 @@
                     color = "#66CCFF";
                     colorIndex = 0;
                 }
-                htmlString += "<tr>";
-                htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>X</button></td>";
-                htmlString += "<td bgcolor=" + color + "><img src=" + images[i] + " width=70></td>";
-                htmlString += "<td bgcolor=" + color + ">" + names[i] + "</td>";
-                htmlString += "<td bgcolor=" + color + ">$"+toMoney(priceBuy[i])+"/$" + toMoney(priceSold[i]) + "</td>";
-                htmlString += "<td bgcolor=" + color + ">";
+
+                //creating table for items
+                htmlString += "<tr><td align=center><table cellspacing=0 cellpadding=5 width=100%>";
+                htmlString += "<tr><td bgcolor=" + color + " colspan=2 align=center><big><a name="+i+"></a>" + names[i] + "</big></td></tr>";
+                htmlString += "<tr><td bgcolor=" + color + " colspan=2><img src=" + images[i] + " width=100%></td></tr>";
+                htmlString += "<tr><td bgcolor=" + color + " colspan=2 width=100>Buy/Sell: $"+toMoney(priceBuy[i])+"/$" + toMoney(priceSold[i]) + "</td></tr>";
+                htmlString += "<tr><td bgcolor=" + color + " colspan=2>";
                 if (profits[i] >= 0) {
-                    htmlString += "$" + toMoney(profits[i]) + "</td>";
+                    htmlString += "Profit: $" + toMoney(profits[i]) + "</td></tr>";
                 }
                 else {
                     tempProfit = profits[i] * (-1);
-                    htmlString += "-$" + tempProfit + "</td>";
+                    htmlString += "Profit: -$" + tempProfit + "</td></tr>";
                 }
-                htmlString += "<td bgcolor=" + color + ">" + percentReturn[i] + "%</td>";
-                htmlString += "<td bgcolor=" + color + "><button onclick=setWizard(" + i + ")>Edit</button></td>";
-                htmlString += "</tr>";
+                htmlString += "<tr><td bgcolor=" + color + "><button onclick=setWizard(" + i + ")>Edit</button></td>";
+                htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>Delete</button></td></tr>";
+                htmlString += "<tr><td></td><td align=right onclick=gotolocation('page2')><u>Return to top</u></td></tr>";
+                htmlString += "<tr></tr>";
+                htmlString += "</table></td></tr>";
+                selectionItem += "<option>" + names[i] + "</option>";
             }
-
-            htmlString += "</tbody></table>";
+            htmlString += "</table>";
+            selectionItem += "</select></form>";
             items.innerHTML = htmlString;
+            itemSelect.innerHTML = "<table><tr><td width=250>"+selectionItem+"</td></tr></table>";
             if (q != -1) {
                 window.location.href = "#page2";
             }
         }
     }
 
+    //removes an item from list and from xml
     function removeItem(j) {
         name = names[j];
         xmlhttp = new XMLHttpRequest();
@@ -461,22 +469,9 @@
         images.splice(j, 1);
         index--;
 
-        htmlString = "<table width=100% border=1 cellpadding=10>" +
-                            "<thead>" +
-                            "<tr>" +
-                                "<th colspan=2></th>" +
-                                "<th>Item Name</th>" +
-                                "<th>Item Description</th>" +
-                                "<th>Purchase Price</th>" +
-                                "<th>Purchase Date</th>" +
-                                "<th>Sell Price</th>" +
-                                "<th>Sell Date</th>" +
-                                "<th>Profit</th>" +
-                                "<th>Percent Return</th>" +
-                                "<th>Days to Sell</th>" +
-                                "</tr>" +
-                                "</thead>" +
-                                "<tbody>";
+        htmlString = "<table width=250 cellpadding=0><tr><td bgcolor=#66CCFF align=center><big><b><a id=top></a>Your Items</b></big></td></tr>";
+        selectionItem = "<form name=selectItems><select id=selectItem onchange=gotoItem() width=250>";
+
         for (i = 0; i < descriptions.length; i++) {
             if (colorIndex == 0) {
                 color = "#E8E8E8";
@@ -486,59 +481,32 @@
                 color = "#66CCFF";
                 colorIndex = 0;
             }
-            htmlString += "<tr>";
-            htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>X</button></td>";
-            htmlString += "<td bgcolor=" + color + "><img src="+images[i]+" width=70></td>";
-            htmlString += "<td bgcolor=" + color + ">" + names[i] + "</td>";
-            htmlString += "<td bgcolor=" + color + ">" + descriptions[i] + "</td>";
-            htmlString += "<td bgcolor=" + color + ">$" + toMoney(priceBuy[i]) + "</td>";
-            htmlString += "<td bgcolor=" + color + ">" + monthBuy[i] + " " + dayBuy[i] + ", " + yearBuy[i] + "</td>";
-            htmlString += "<td bgcolor=" + color + ">$" + toMoney(priceSold[i]) + "</td>";
-            htmlString += "<td bgcolor=" + color + ">" + monthSell[i] + " " + daySell[i] + ", " + yearSell[i] + "</td>";
-            htmlString += "<td bgcolor=" + color + ">";
-            if (profits[i] >= 0) {
-                htmlString += "$" + toMoney(profits[i]) + "</td>";
-            }
-            else {
-                tempProfit = profits[i] * (-1);
-                htmlString += "-$" + tempProfit + "</td>";
-            }
-            htmlString += "<td bgcolor=" + color + ">" + percentReturn[i] + "%</td>";
-            htmlString += "<td bgcolor=" + color + ">" + daysToSell[i] + "</td>";
-            htmlString += "<td bgcolor=" + color + "><button onclick=setWizard(" + i + ")>Edit</button></td>";
-            htmlString += "</tr>";
-        }
-        if (percentReturn.length == 0) {
-            htmlString = "<table width=100% border=1 cellpadding=10>" +
-                "<thead>" +
-                "<tr>" +
-                    "<th colspan=2></th>" +
-                    "<th>Item Name</th>" +
-                    "<th>Item Description</th>" +
-                    "<th>Purchase Price</th>" +
-                    "<th>Date Purchased</th>" +
-                    "<th>Price Sold</th>" +
-                    "<th>Date Sold</th>" +
-                    "<th>Profit</th>" +
-                    "<th>Percent Return</th>" +
-                "</tr>" +
-                "<tr height=50>" +
-                    "<td></td>" +
-                    "<td></td>" +
-                    "<td></td>" +
-                    "<td></td>" +
-                    "<td></td>" +
-                    "<td></td>" +
-                    "<td></td>" +
-                    "<td></td>" +
-                "</tr>" +
-                "</thead>" +
-            "</table>";
+            htmlString += "<tr><td align=center><table cellspacing=0 cellpadding=5 width=100%>";
+                htmlString += "<tr><td bgcolor=" + color + " colspan=2 align=center><big><a name="+i+"></a>" + names[i] + "</big></td></tr>";
+                htmlString += "<tr><td bgcolor=" + color + " colspan=2><img src=" + images[i] + " width=100%></td></tr>";
+                htmlString += "<tr><td bgcolor=" + color + " colspan=2 width=100>Buy/Sell: $"+toMoney(priceBuy[i])+"/$" + toMoney(priceSold[i]) + "</td></tr>";
+                htmlString += "<tr><td bgcolor=" + color + " colspan=2>";
+                if (profits[i] >= 0) {
+                    htmlString += "Profit: $" + toMoney(profits[i]) + "</td></tr>";
+                }
+                else {
+                    tempProfit = profits[i] * (-1);
+                    htmlString += "Profit: -$" + tempProfit + "</td></tr>";
+                }
+                htmlString += "<tr><td bgcolor=" + color + "><button onclick=setWizard(" + i + ")>Edit</button></td>";
+                htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>Delete</button></td></tr>";
+                htmlString += "<tr><td></td><td align=right onclick=gotolocation('page2')><u>Return to top</u></td></tr>";
+                htmlString += "<tr></tr>";
+                htmlString += "</table></td></tr>";
+                selectionItem += "<option>" + names[i] + "</option>";
         }
         htmlString += "</table>";
-        items.innerHTML = htmlString;
+            selectionItem += "</select></form>";
+            items.innerHTML = htmlString;
+            itemSelect.innerHTML = "<table><tr><td width=250>"+selectionItem+"</td></tr></table>";
     }
 
+    //calculator
     function calculateItem() {
         if (document.individualItem.itemCost.value != "") {
             if (document.individualItem.itemSell.value != "") {
@@ -623,6 +591,7 @@
         }
     }
 
+    //reset calculator
     function resetCalculateItem(){
         document.individualItem.itemCost.value = "";
         document.individualItem.itemSell.value = "";
@@ -630,6 +599,7 @@
         document.individualItem.itemPercentReturn.value = "";
     }
 
+    //monthly statistics
     function calculateStats() {
 
         monthRevenue = document.revenues.revenueMonth.selectedIndex;
@@ -757,6 +727,7 @@
                              "</table>";
     }
 
+    //formats numbers to money
     function toMoney(value) {
         moneyString = "";
         if (value != "") {
@@ -807,6 +778,7 @@
         return moneyString;
     }
 
+    //contact us form
     function contact() {
         subject = document.email.emailSubject.value;
         message = document.email.emailMessage.value;
@@ -829,6 +801,7 @@
         xmlhttp.send();
     }
     
+    //set up new account
     function newAccount() {
         username = document.account.newUserName.value;
         password = document.account.newPassword.value;
@@ -879,6 +852,7 @@
         xmlhttp.send();
     }
 
+    //login verification
     function loginWindow() {
         username = document.loginScreen.username.value;
         password = document.loginScreen.password.value;
@@ -902,6 +876,7 @@
         xmlhttp.send();
     }
 
+    //if user logs in, this function handles loading the arrays and tables
     function readXML(stringXML) {
         xmlString = stringXML.split("~");
         j = 0;
@@ -975,6 +950,7 @@
     function newXML(l) {
         name = names[l];
         quantitys=quantity[l];
+        image = images[l];
         description = descriptions[l];
         priceBought = priceBuy[l];
         monthBought = monthBuy[l];
@@ -1003,16 +979,19 @@
             if (xmlhttp.readyState == 4) {
             }
         }
-        xmlhttp.open("GET", "index.php?action=load&un=" + username + "&in=" + name + "&qu="+quantitys+"&id=" + description + "&pb=" + priceBought + "&mb=" + monthBought + "&mbi=" +
+        alert(image);
+        xmlhttp.open("GET", "index.php?action=load&un=" + username + "&in=" + name + "&im=" + image + "&qu="+quantitys+"&id=" + description + "&pb=" + priceBought + "&mb=" + monthBought + "&mbi=" +
                                 monthBoughtIndex + "&db=" + dayBought + "&dbi=" + dayBoughtIndex + "&yb=" + yearBought + "&ybi=" + yearBoughtIndex + "&ps=" + priceSell + "&ms=" + monthSold +
                                 "&msi=" + monthSoldIndex + "&ds=" + daySold + "&dsi=" + daySoldIndex + "&ys=" + yearSold + "&ysi=" + yearSoldIndex + "&nbd=" + numberBoughtDays +
                                 "&nsd=" + numberSoldDays + "&p=" + profit + "&pr=" + percentReturns + "&dts=" + daysToSold + "&inu=" + itemNumbers + "&hb="  + highestBids, true);
         xmlhttp.send();
     }
 
+    //handles xml data changes
     function editXML(c) {
         name = names[c];
         quantitys = quantity[c];
+        image = images[c];
         description = descriptions[c];
         priceBought = priceBuy[c];
         monthBought = monthBuy[c];
@@ -1040,17 +1019,23 @@
             if (xmlhttp.readyState == 4) {
             }
         };
-        xmlhttp.open("GET", "index.php?action=edit&on=" + originalName + "&un=" + username + "&in=" + name + "&qu="+quantitys+"&id=" + description + "&pb=" + priceBought + "&mb=" + monthBought + "&mbi=" +
+        xmlhttp.open("GET", "index.php?action=edit&on=" + originalName + "&un=" + username + "&in=" + name + "&im=" + image + "&qu="+quantitys+"&id=" + description + "&pb=" + priceBought + "&mb=" + monthBought + "&mbi=" +
                                 monthBoughtIndex + "&db=" + dayBought + "&dbi=" + dayBoughtIndex + "&yb=" + yearBought + "&ybi=" + yearBoughtIndex + "&ps=" + priceSell + "&ms=" + monthSold +
                                 "&msi=" + monthSoldIndex + "&ds=" + daySold + "&dsi=" + daySoldIndex + "&ys=" + yearSold + "&ysi=" + yearSoldIndex + "&nbd=" + numberBoughtDays +
                                 "&nsd=" + numberSoldDays + "&p=" + profit + "&pr=" + percentReturns + "&dts=" + daysToSold + "&inu=" + itemNumbers + "&hb=" + highestBids, true);
         xmlhttp.send();
     }
+    
+    //item appraiser feature
     function exportEbay(){
         totalPrice = 0;
         totalItems = 0;
         totalAverageDisplay = 0;
         itemSearch = document.appraise.searchTerm.value;
+        qsplit = itemSearch;
+        while(qsplit.indexOf(" ")!=-1){
+            qsplit=qsplit.replace(" ", "+");
+        }
 
         overallAverage.innerHTML = "loading...";
         ebayPrice.innerHTML = "loading...";
@@ -1063,6 +1048,7 @@
                 ebayTotal = 0;
                 ebayItems = xmlhttpEbay.responseText.split("~&");
 
+                //loop through search terms to get total for average
                 for (j = 0; j < 3; j++) {
                     ebayPriceDetails = ebayItems[j].split("^&");
                     ebayTotal += Number(ebayPriceDetails[2]);
@@ -1070,33 +1056,73 @@
                     if (totalPrice > 0)
                         totalItems++;
                 }
-
+                
+                //compute ebay average
                 ebayAverage = ebayTotal / 3;
                 ebayAverage += "";
                 ebayAverageString = ebayAverage.split(".");
                 ebayAverageDisplay = "$" + ebayAverageString[0] + ".";
-                ebayAverageCents = ebayAverageString[1].split("");
-                ebayAverageDisplay += ebayAverageCents[0] + ebayAverageCents[1];
+                if (ebayAverageString.length > 1) {
+                    ebayAverageCents = ebayAverageString[1].split("");
+                    if (ebayAverageCents.length > 0) {
+                        ebayAverageDisplay += ebayAverageCents[0];
+                        if (ebayAverageCents.length > 1) {
+                            ebayAverageDisplay += ebayAverageCents[1];
+                        }
+                        else {
+                            ebayAverageDisplay += "0";
+                        }
+                    }
+                    else {
+                        ebayAverageDisplay += "00";
+                    }
+                }
+                else {
+                    ebayAverageDisplay += "00";
+                }
 
+                //format total average
                 totalAverage = totalPrice / totalItems;
                 totalAverage += "";
                 totalAverageString = totalAverage.split(".");
                 totalAverageDisplay = "$" + totalAverageString[0] + ".";
-                totalAverageCents = totalAverageString[1].split("");
-                totalAverageDisplay += totalAverageCents[0] + totalAverageCents[1];
 
-                ebayTable = "<table cellspacing=20 cellpadding=20><tr><th colspan=3><big><u>Ebay average=" + ebayAverageDisplay + "</u></big></th></tr><tr>";
+                //format ebay average
+                if (totalAverageString.length > 1) {
+                    totalAverageCents = totalAverageString[1].split("");
+                    if(totalAverageCents.length>0){
+                        totalAverageDisplay += totalAverageCents[0];
+                        if(totalAverageCents.length>1){
+                            totalAverageDisplay += totalAverageCents[1];
+                        }
+                        else{
+                            totalAverageDisplay += "0";
+                        }
+                    }
+                    else{
+                        totalAverageDisplay += "00";
+                    }
+                }
+                else{
+                    totalAverageDisplay += "00";
+                }
+
+                //create link to ebay with search term
+                ebayLink = "http://www.ebay.com/sch/i.html?_trksid=p5197.m570.l1313&_nkw=" + qsplit + "&_sacat=0&_from=R40";
+
+                //create ebay table with ebay search terms
+                ebayTable = "<table border=1 width=200><tr><td><table cellspacing=20 cellpadding=20><tr><td align=center width=100%><a href=" + ebayLink + " target='new'><img src=ebay.PNG width=150></a></td></tr><tr><th colspan=3><big><u>Ebay average: " + ebayAverageDisplay + "</u></big></th></tr><tr>";
                 for (i = 0; i < 3; i++) {
                     ebayDetails = ebayItems[i].split("^&");
                     ebayTable += "<tr><td>";
                     ebayTable += "<table><tr><td width=200>" + ebayDetails[0] + "</td></tr>";
-                    ebayTable += "<tr><td><img src=" + ebayDetails[1] + " width=200></td></tr>";
+                    ebayTable += "<tr><td><img src=" + ebayDetails[1] + " width=100%></td></tr>";
                     ebayTable += "<tr><td>Price: $" + ebayDetails[2] + "</td></tr></table>";
                     ebayTable += "</td></tr>";
                 }
-                ebayTable += "</tr></table>";
+                ebayTable += "</tr></table></td></tr></table>";
                 ebayPrice.innerHTML = ebayTable;
-                overallAverage.innerHTML = "<big><b>Market Price: " + totalAverageDisplay+"</b></big>";
+                overallAverage.innerHTML = "<table cellpadding=10><tr><td align=center bgcolor=#66CCFF width=220><font size=5><b>iResell Price: " + totalAverageDisplay + "</b></font></td></tr></table>";
             }
         };
         xmlhttpEbay.open("GET", "index.php?action=ebayPrice&search="+itemSearch, true);
@@ -1109,6 +1135,7 @@
                 googleTotal = 0;
                 obj = eval("(" + xmlhttpGoogle.responseText + ")");
 
+                //loops through each search term to compute average
                 for (k = 0; k < 3; k++) {
                     googleTotal += Number(obj.items[k].product.inventories[0].price);
                     totalPrice += Number(obj.items[k].product.inventories[0].price);
@@ -1116,39 +1143,89 @@
                         totalItems++;
                 }
 
+                //calculate average from total 
                 googleAverage = googleTotal / 3;
                 googleAverage += "";
                 googleAverageString = googleAverage.split(".");
                 googleAverageDisplay = "$" + googleAverageString[0] + ".";
-                googleAverageCents = googleAverageString[1].split("");
-                googleAverageDisplay += googleAverageCents[0] + googleAverageCents[1];
 
+                //format numbers for display
+                if (googleAverageString.length > 1) {
+                    googleAverageCents = googleAverageString[1].split("");
+                    if(googleAverageCents.length>0){
+                        googleAverageDisplay += googleAverageCents[0]; 
+                        if(googleAverageCents.length>1){
+                            googleAverageDisplay += googleAverageCents[1];
+                        }
+                        else{
+                            googleAverageDisplay += "0";
+                        }   
+                    }
+                    else{
+                        googleAverageDisplay += "00";
+                    }
+                }
+                else{
+                    googleAverageDisplay += "00";
+                }
+                
+                //format total average number
                 totalAverage = totalPrice / totalItems;
                 totalAverage += "";
                 totalAverageString = totalAverage.split(".");
                 totalAverageDisplay = "$" + totalAverageString[0] + ".";
-                totalAverageCents = totalAverageString[1].split("");
-                totalAverageDisplay += totalAverageCents[0] + totalAverageCents[1];
+                if (totalAverageString.length > 1) {
+                    totalAverageCents = totalAverageString[1].split("");
+                    if (totalAverageCents.length > 0) {
+                        totalAverageDisplay += totalAverageCents[0];
+                        if (totalAverageCents.length > 1) {
+                            totalAverageDisplay += totalAverageCents[1];
+                        }
+                        else {
+                            totalAverageDisplay += "0";
+                        }
+                    }
+                    else {
+                        totalAverageDisplay += "00";
+                    }
+                }
+                else {
+                    totalAverageDisplay += "00";
+                }
 
-                googleOutput = "<table cellpadding=20 cellspacing=20><tr><th colspan=3><big><u>Google Shopping average: " + googleAverageDisplay + "</u></big></th></tr><tr>";
+                //create link to google shopping with search term
+                googleLink = "http://www.google.com/search?hl=en&tbm=shop&q=" + qsplit + "&oq=" + qsplit + "&gs_l=products-cc.3..0l10.1688.2562.0.2699.10.5.0.4.4.0.116.440.4j1.5.0...0.0...1ac.1.DuTpGD1gl3Y";
+                
+                //start google output string
+                googleOutput = "<table border=1 width=240><tr><td><table cellpadding=20 cellspacing=20><tr><td colspan=3 align=center><a href=" + googleLink + " target='new'><img src=GoogleShopping.PNG width=100%></a></td></tr><tr><th colspan=3><big><u>Google Shopping average: " + googleAverageDisplay + "</u></big></th></tr><tr>";
 
+                //format table with each search term
                 for (l = 0; l < 3; l++) {
                     itemTitle = obj.items[l].product.title;
                     itemImage = obj.items[l].product.images[0].link;
                     itemPrice = obj.items[l].product.inventories[0].price;
                     googleOutput += "<tr><td><table><tr><td width=200>" + itemTitle + "</td></tr>";
-                    googleOutput += "<tr><td><img src=" + itemImage + " width=200></td></tr>";
+                    googleOutput += "<tr><td><img src=" + itemImage + " width=100%></td></tr>";
                     googleOutput += "<tr><td width=100>Price: $" + itemPrice + "</td></tr></table></td></tr>";
                 }
-                googleOutput += "</tr></table>";
+                googleOutput += "</tr></table></td></tr></table>";
                 googleShopping.innerHTML = googleOutput;
-                overallAverage.innerHTML = "Market Price: " + totalAverageDisplay;
+                overallAverage.innerHTML = "<table cellpadding=10><tr><td align=center bgcolor=#66CCFF width=220><font size=5><b>iResell Price: " + totalAverageDisplay + "</b></font></td></tr></table>";
             }
         };
-        qsplit = itemSearch;
-        while(qsplit.indexOf(" ")!=-1){
-            qsplit=qsplit.replace(" ", "+");
-        }
         xmlhttpGoogle.open("GET", "https://www.googleapis.com/shopping/search/v1/public/products?key=AIzaSyCnG99cUzzeeRewOH286CDIpR5qcHa4LRE&country=US&q="+qsplit+"&alt=json", true);
         xmlhttpGoogle.send();
+    }
+
+    //used throughout app to dynamically add a location to a button
+    function gotolocation(locationgoto){
+        windowlocation = "#" + locationgoto;
+        window.location.href = windowlocation;
+    }
+
+    //used in item table dropdown menu to go to an item
+    function gotoItem(){
+        itemIndex = document.selectItems.selectItem.selectedIndex;
+        document.selectItems.selectItem.selectedIndex=0;
+        gotolocation(itemIndex);
     }
