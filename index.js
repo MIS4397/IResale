@@ -1,4 +1,3 @@
-    //declares arrays    
     names = new Array();
     descriptions = new Array();
     priceBuy = new Array();
@@ -58,11 +57,13 @@
 
     originalName = "";
 
-    //set add item page to default values
+    itemSearch = "";
+    itemCookie = "";
+
     function resetWizard() {
         window.location.href = "#page8";
         document.itemEdit.name.value = "";
-        document.itemEdit.quantity.value = "";
+        document.itemEdit.quantity.value = "1";
         document.itemEdit.imageURL.value = "";
         document.itemEdit.description.value = "";
         document.itemEdit.purchasePrice.value = "";
@@ -75,19 +76,22 @@
         document.itemEdit.sellPrice.value = "";
         document.itemEdit.itemNumber.value = "";
         document.itemEdit.highestBid.value = "";
-        itemImage.innerHTML = "<img src=iresell.JPG width=100%>";
+        itemImage.innerHTML = "<img src=iresell.JPG width=100% alt='itemImage'>";
         auctionDate.innerHTML = "";
         auctionTime.innerHTML = "";
         index = descriptions.length;
         newItem = "true";
     }
-    //sets item edit page to item number k
-    function setWizard(k) {
-        window.location.href = "#page8";
+
+    function setWizard(k, r) {
+        if (r!=undefined && r!=-1) {
+            window.location.href = "#page8";
+        }
         document.itemEdit.name.value = names[k];
         originalName = names[k];
         document.itemEdit.quantity.value = quantity[k];
         document.itemEdit.imageURL.value = images[k];
+        itemImage.innerHTML = "<img src=" + images[k] + " width=100% alt='Item image'>";
         document.itemEdit.description.value = descriptions[k];
         document.itemEdit.purchasePrice.value = priceBuy[k];
         document.itemEdit.monthBuy.selectedIndex = monthBuyIndex[k];
@@ -99,7 +103,6 @@
         document.itemEdit.sellPrice.value = priceSold[k];
         document.itemEdit.itemNumber.value = itemNumber[k];
         document.itemEdit.highestBid.value = highestBid[k];
-        itemImage.innerHTML = "<img src=" + images[k] + " width=100%>";
         if (itemNumber[k] != "") {
             auctionDate.innerHTML = monthEnd[k] + " " + dayEnd[k] + ", " + yearEnd[k];
             auctionTime.innerHTML = hourEnd[k] + ":" + minuteEnd[k] + " " + morningEnd[k];
@@ -110,10 +113,11 @@
         }
         index = k;
         newItem = "false";
+        if (r!=undefined && r!=-1) {
+            setCookie();
+        }
     }
 
-    //handles adding/editing items and sends requests to php to handle data
-    //changes in xml
     function editItem(itemNumbers, q) {
         if (itemNumbers == -1) {
             l = descriptions.length;
@@ -360,7 +364,7 @@
                         }
                         htmlString += "<tr><td bgcolor=" + color + "><button onclick=setWizard(" + i + ")>Edit</button></td>";
                         htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>Delete</button></td></tr>";
-                        htmlString += "<tr><td><td><a href=#top>Return to top</a>";
+                        
                         htmlString += "</table></td></tr>";
                     }
                     htmlString += "</table>";
@@ -399,8 +403,6 @@
                     color = "#66CCFF";
                     colorIndex = 0;
                 }
-
-                //creating table for items
                 htmlString += "<tr><td align=center><table cellspacing=0 cellpadding=5 width=100%>";
                 htmlString += "<tr><td bgcolor=" + color + " colspan=2 align=center><big><a name="+i+"></a>" + names[i] + "</big></td></tr>";
                 htmlString += "<tr><td bgcolor=" + color + " colspan=2><img src=" + images[i] + " width=100%></td></tr>";
@@ -413,9 +415,9 @@
                     tempProfit = profits[i] * (-1);
                     htmlString += "Profit: -$" + tempProfit + "</td></tr>";
                 }
-                htmlString += "<tr><td bgcolor=" + color + "><button onclick=setWizard(" + i + ")>Edit</button></td>";
+                htmlString += "<tr><td bgcolor=" + color + "><button onclick=setWizard(" + i + ",0)>Edit</button></td>";
                 htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>Delete</button></td></tr>";
-                htmlString += "<tr><td></td><td align=right onclick=gotolocation('page2')><u>Return to top</u></td></tr>";
+            
                 htmlString += "<tr></tr>";
                 htmlString += "</table></td></tr>";
                 selectionItem += "<option>" + names[i] + "</option>";
@@ -430,7 +432,6 @@
         }
     }
 
-    //removes an item from list and from xml
     function removeItem(j) {
         name = names[j];
         xmlhttp = new XMLHttpRequest();
@@ -471,20 +472,20 @@
 
         htmlString = "<table width=250 cellpadding=0><tr><td bgcolor=#66CCFF align=center><big><b><a id=top></a>Your Items</b></big></td></tr>";
         selectionItem = "<form name=selectItems><select id=selectItem onchange=gotoItem() width=250>";
-
-        for (i = 0; i < descriptions.length; i++) {
-            if (colorIndex == 0) {
-                color = "#E8E8E8";
-                colorIndex = 1;
-            }
-            else {
-                color = "#66CCFF";
-                colorIndex = 0;
-            }
-            htmlString += "<tr><td align=center><table cellspacing=0 cellpadding=5 width=100%>";
-                htmlString += "<tr><td bgcolor=" + color + " colspan=2 align=center><big><a name="+i+"></a>" + names[i] + "</big></td></tr>";
+        if (descriptions.length > 0) {
+            for (i = 0; i < descriptions.length; i++) {
+                if (colorIndex == 0) {
+                    color = "#E8E8E8";
+                    colorIndex = 1;
+                }
+                else {
+                    color = "#66CCFF";
+                    colorIndex = 0;
+                }
+                htmlString += "<tr><td align=center><table cellspacing=0 cellpadding=5 width=100%>";
+                htmlString += "<tr><td bgcolor=" + color + " colspan=2 align=center><big><a name=" + i + "></a>" + names[i] + "</big></td></tr>";
                 htmlString += "<tr><td bgcolor=" + color + " colspan=2><img src=" + images[i] + " width=100%></td></tr>";
-                htmlString += "<tr><td bgcolor=" + color + " colspan=2 width=100>Buy/Sell: $"+toMoney(priceBuy[i])+"/$" + toMoney(priceSold[i]) + "</td></tr>";
+                htmlString += "<tr><td bgcolor=" + color + " colspan=2 width=100>Buy/Sell: $" + toMoney(priceBuy[i]) + "/$" + toMoney(priceSold[i]) + "</td></tr>";
                 htmlString += "<tr><td bgcolor=" + color + " colspan=2>";
                 if (profits[i] >= 0) {
                     htmlString += "Profit: $" + toMoney(profits[i]) + "</td></tr>";
@@ -493,20 +494,24 @@
                     tempProfit = profits[i] * (-1);
                     htmlString += "Profit: -$" + tempProfit + "</td></tr>";
                 }
-                htmlString += "<tr><td bgcolor=" + color + "><button onclick=setWizard(" + i + ")>Edit</button></td>";
+                htmlString += "<tr><td bgcolor=" + color + "><button onclick=setWizard(" + i + ", 0)>Edit</button></td>";
                 htmlString += "<td bgcolor=" + color + "><button onclick=removeItem(" + i + ")>Delete</button></td></tr>";
-                htmlString += "<tr><td></td><td align=right onclick=gotolocation('page2')><u>Return to top</u></td></tr>";
+   
                 htmlString += "<tr></tr>";
                 htmlString += "</table></td></tr>";
                 selectionItem += "<option>" + names[i] + "</option>";
-        }
-        htmlString += "</table>";
+            }
+            htmlString += "</table>";
             selectionItem += "</select></form>";
             items.innerHTML = htmlString;
-            itemSelect.innerHTML = "<table><tr><td width=250>"+selectionItem+"</td></tr></table>";
+            itemSelect.innerHTML = "<table><tr><td width=250>" + selectionItem + "</td></tr></table>";
+        }
+        else{
+            items.innerHTML = "***You currently have no items***";
+            itemSelect.innerHTML = "";
+        }
     }
 
-    //calculator
     function calculateItem() {
         if (document.individualItem.itemCost.value != "") {
             if (document.individualItem.itemSell.value != "") {
@@ -591,7 +596,6 @@
         }
     }
 
-    //reset calculator
     function resetCalculateItem(){
         document.individualItem.itemCost.value = "";
         document.individualItem.itemSell.value = "";
@@ -599,12 +603,10 @@
         document.individualItem.itemPercentReturn.value = "";
     }
 
-    //monthly statistics
-    function calculateStats() {
-
+    function calculateStats(r) {
         monthRevenue = document.revenues.revenueMonth.selectedIndex;
         yearRevenue = document.revenues.revenueYear.selectedIndex;
-        
+
         totalProfit = 0;
         totalPercentReturn = 0;
         totalBuy = 0;
@@ -727,7 +729,6 @@
                              "</table>";
     }
 
-    //formats numbers to money
     function toMoney(value) {
         moneyString = "";
         if (value != "") {
@@ -778,7 +779,6 @@
         return moneyString;
     }
 
-    //contact us form
     function contact() {
         subject = document.email.emailSubject.value;
         message = document.email.emailMessage.value;
@@ -801,7 +801,6 @@
         xmlhttp.send();
     }
     
-    //set up new account
     function newAccount() {
         username = document.account.newUserName.value;
         password = document.account.newPassword.value;
@@ -813,32 +812,7 @@
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4) {
                 if (xmlhttp.responseText == "true") {
-                    htmlString = "<table width=100% border=1 cellpadding=10>" +
-                                    "<thead>" +
-                                        "<tr>" +
-                                            "<th colspan=2></th>" +
-                                            "<th>Item Name</th>" +
-                                            "<th>Item Description</th>" +
-                                            "<th>Purchase Price</th>" +
-                                            "<th>Date Purchased</th>" +
-                                            "<th>Price Sold</th>" +
-                                            "<th>Date Sold</th>" +
-                                            "<th>Profit</th>" +
-                                            "<th>Percent Return</th>" +
-                                        "</tr>" +
-                                        "<tr height=50>" +
-                                            "<td colspan=2></td>" +
-                                            "<td></td>" +
-                                            "<td></td>" +
-                                            "<td></td>" +
-                                            "<td></td>" +
-                                            "<td></td>" +
-                                            "<td></td>" +
-                                            "<td></td>" +
-                                            "<td></td>" +
-                                        "</tr>" +
-                                    "</thead>" +
-                                "</table>";
+                    htmlString = "***You currently have no items***";
                     items.innerHTML = htmlString;
                     window.location.href = "#page2";
                 }
@@ -848,12 +822,12 @@
                 }
             }
         };
+        window.location.href = "#loading";
         xmlhttp.open("GET", "index.php?action=newAccount&un=" + username + "&pw=" + password + "&rpw=" + repeatPassword + "&ue=" + userEmail, true);
         xmlhttp.send();
     }
 
-    //login verification
-    function loginWindow() {
+    function loginWindow(r) {
         username = document.loginScreen.username.value;
         password = document.loginScreen.password.value;
 
@@ -861,9 +835,12 @@
         xmlhttp.onreadystatechange = function () {
             if (xmlhttp.readyState == 4) {
                 xmlResponse = xmlhttp.responseText.split("~");
-                if (xmlResponse.length > 1 || xmlhttp.responseText=="") {
+                if (xmlResponse.length > 1 || xmlhttp.responseText == "") {
                     readXML(xmlhttp.responseText);
-                    window.location.href = "#page2"
+                    if (r != -1) {
+                        window.location.href = "#page2";
+                        setCookie();
+                    }
                 }
                 else {
                     alert(xmlhttp.responseText);
@@ -871,12 +848,13 @@
                 }
             }
         }
-        window.location.href = "#loading";
+        if (r != -1) {
+            window.location.href = "#loading";
+        }
         xmlhttp.open("GET", "index.php?action=login&un=" + username + "&pw=" + password, true);
         xmlhttp.send();
     }
 
-    //if user logs in, this function handles loading the arrays and tables
     function readXML(stringXML) {
         xmlString = stringXML.split("~");
         j = 0;
@@ -942,7 +920,7 @@
         }
 
         for (x = 0; x < k; x++) {
-            setWizard(x);
+            setWizard(x, -1);
             editItem(x, -1);
         }
     }
@@ -979,7 +957,6 @@
             if (xmlhttp.readyState == 4) {
             }
         }
-        alert(image);
         xmlhttp.open("GET", "index.php?action=load&un=" + username + "&in=" + name + "&im=" + image + "&qu="+quantitys+"&id=" + description + "&pb=" + priceBought + "&mb=" + monthBought + "&mbi=" +
                                 monthBoughtIndex + "&db=" + dayBought + "&dbi=" + dayBoughtIndex + "&yb=" + yearBought + "&ybi=" + yearBoughtIndex + "&ps=" + priceSell + "&ms=" + monthSold +
                                 "&msi=" + monthSoldIndex + "&ds=" + daySold + "&dsi=" + daySoldIndex + "&ys=" + yearSold + "&ysi=" + yearSoldIndex + "&nbd=" + numberBoughtDays +
@@ -987,7 +964,6 @@
         xmlhttp.send();
     }
 
-    //handles xml data changes
     function editXML(c) {
         name = names[c];
         quantitys = quantity[c];
@@ -1025,14 +1001,15 @@
                                 "&nsd=" + numberSoldDays + "&p=" + profit + "&pr=" + percentReturns + "&dts=" + daysToSold + "&inu=" + itemNumbers + "&hb=" + highestBids, true);
         xmlhttp.send();
     }
-    
-    //item appraiser feature
-    function exportEbay(){
+    function exportEbay(r){
         totalPrice = 0;
         totalItems = 0;
         totalAverageDisplay = 0;
         itemSearch = document.appraise.searchTerm.value;
         qsplit = itemSearch;
+        if(r!=-1){
+            setCookie();
+        }
         while(qsplit.indexOf(" ")!=-1){
             qsplit=qsplit.replace(" ", "+");
         }
@@ -1048,7 +1025,6 @@
                 ebayTotal = 0;
                 ebayItems = xmlhttpEbay.responseText.split("~&");
 
-                //loop through search terms to get total for average
                 for (j = 0; j < 3; j++) {
                     ebayPriceDetails = ebayItems[j].split("^&");
                     ebayTotal += Number(ebayPriceDetails[2]);
@@ -1056,8 +1032,7 @@
                     if (totalPrice > 0)
                         totalItems++;
                 }
-                
-                //compute ebay average
+
                 ebayAverage = ebayTotal / 3;
                 ebayAverage += "";
                 ebayAverageString = ebayAverage.split(".");
@@ -1081,13 +1056,10 @@
                     ebayAverageDisplay += "00";
                 }
 
-                //format total average
                 totalAverage = totalPrice / totalItems;
                 totalAverage += "";
                 totalAverageString = totalAverage.split(".");
                 totalAverageDisplay = "$" + totalAverageString[0] + ".";
-
-                //format ebay average
                 if (totalAverageString.length > 1) {
                     totalAverageCents = totalAverageString[1].split("");
                     if(totalAverageCents.length>0){
@@ -1107,10 +1079,7 @@
                     totalAverageDisplay += "00";
                 }
 
-                //create link to ebay with search term
                 ebayLink = "http://www.ebay.com/sch/i.html?_trksid=p5197.m570.l1313&_nkw=" + qsplit + "&_sacat=0&_from=R40";
-
-                //create ebay table with ebay search terms
                 ebayTable = "<table border=1 width=200><tr><td><table cellspacing=20 cellpadding=20><tr><td align=center width=100%><a href=" + ebayLink + " target='new'><img src=ebay.PNG width=150></a></td></tr><tr><th colspan=3><big><u>Ebay average: " + ebayAverageDisplay + "</u></big></th></tr><tr>";
                 for (i = 0; i < 3; i++) {
                     ebayDetails = ebayItems[i].split("^&");
@@ -1135,7 +1104,6 @@
                 googleTotal = 0;
                 obj = eval("(" + xmlhttpGoogle.responseText + ")");
 
-                //loops through each search term to compute average
                 for (k = 0; k < 3; k++) {
                     googleTotal += Number(obj.items[k].product.inventories[0].price);
                     totalPrice += Number(obj.items[k].product.inventories[0].price);
@@ -1143,13 +1111,10 @@
                         totalItems++;
                 }
 
-                //calculate average from total 
                 googleAverage = googleTotal / 3;
                 googleAverage += "";
                 googleAverageString = googleAverage.split(".");
                 googleAverageDisplay = "$" + googleAverageString[0] + ".";
-
-                //format numbers for display
                 if (googleAverageString.length > 1) {
                     googleAverageCents = googleAverageString[1].split("");
                     if(googleAverageCents.length>0){
@@ -1168,8 +1133,7 @@
                 else{
                     googleAverageDisplay += "00";
                 }
-                
-                //format total average number
+
                 totalAverage = totalPrice / totalItems;
                 totalAverage += "";
                 totalAverageString = totalAverage.split(".");
@@ -1193,13 +1157,10 @@
                     totalAverageDisplay += "00";
                 }
 
-                //create link to google shopping with search term
                 googleLink = "http://www.google.com/search?hl=en&tbm=shop&q=" + qsplit + "&oq=" + qsplit + "&gs_l=products-cc.3..0l10.1688.2562.0.2699.10.5.0.4.4.0.116.440.4j1.5.0...0.0...1ac.1.DuTpGD1gl3Y";
-                
-                //start google output string
+
                 googleOutput = "<table border=1 width=240><tr><td><table cellpadding=20 cellspacing=20><tr><td colspan=3 align=center><a href=" + googleLink + " target='new'><img src=GoogleShopping.PNG width=100%></a></td></tr><tr><th colspan=3><big><u>Google Shopping average: " + googleAverageDisplay + "</u></big></th></tr><tr>";
 
-                //format table with each search term
                 for (l = 0; l < 3; l++) {
                     itemTitle = obj.items[l].product.title;
                     itemImage = obj.items[l].product.images[0].link;
@@ -1217,15 +1178,76 @@
         xmlhttpGoogle.send();
     }
 
-    //used throughout app to dynamically add a location to a button
     function gotolocation(locationgoto){
         windowlocation = "#" + locationgoto;
         window.location.href = windowlocation;
+        setCookie();
     }
 
-    //used in item table dropdown menu to go to an item
     function gotoItem(){
         itemIndex = document.selectItems.selectItem.selectedIndex;
         document.selectItems.selectItem.selectedIndex=0;
         gotolocation(itemIndex);
+    }
+
+    function setCookie(){
+        pageLocation = document.location.href;
+        pageLocationSplit = pageLocation.split("#");
+        pageLocation = pageLocationSplit[1];
+        revenueMonth = document.revenues.revenueMonth.selectedIndex;
+        revenueYear = document.revenues.revenueYear.selectedIndex;
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4) {
+            }
+        };
+        xmlhttp.open("GET", "index.php?action=setCookie&un="+username+"&pw="+password+"&plo="+pageLocation+"&ind="+index+"&st="+itemSearch+"&ry="+revenueYear+"&rm="+revenueMonth, true);
+        xmlhttp.send();
+    }
+
+    function getCookie(){
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4) {
+                cookie = xmlhttp.responseText;
+                cookieSplit = cookie.split("~^");
+                if (cookieSplit[0] != "") {
+                    document.loginScreen.username.value = cookieSplit[0];
+                    document.loginScreen.password.value = cookieSplit[1];
+                    windowLocation = "#" + cookieSplit[2];
+                    Cookie = cookieSplit[3];
+                    search = cookieSplit[4];
+                    monthCookie = cookieSplit[5];
+                    yearCookie = cookieSplit[6];
+                    loginWindow(-1);
+                    document.revenues.revenueMonth.selectedIndex = monthCookie;
+                    document.revenues.revenueYear.selectedIndex = yearCookie;
+                    calculateStats(-1);
+                    if (search != "") {
+                        document.appraise.searchTerm.value = search;
+                        exportEbay(-1);
+                    }
+                }
+            }
+        };
+        xmlhttp.open("GET", "index.php?action=getCookie", true);
+        xmlhttp.send();
+    }
+
+    function logout(){
+        username = "";
+        password = "";
+        pageLocation = "";
+        revenueMonth = "";
+        revenueYear = "";
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4) {
+                document.loginScreen.username.value = "";
+                document.loginScreen.password.value = "";
+                window.location.href = "#page13";
+            }
+        };
+        xmlhttp.open("GET", "index.php?action=setCookie&un="+username+"&pw="+password+"&plo="+pageLocation+"&ind="+index+"&st="+itemSearch+"&ry="+revenueYear+"&rm="+revenueMonth, true);
+        xmlhttp.send();
     }

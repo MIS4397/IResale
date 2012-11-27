@@ -1,11 +1,8 @@
-<!--This is a comment. Everything in between -->
-<!-- and --> 
-<!--is a comment-->
-
+<!-- saved from url=(0022)http://internet.e-mail -->
 <!DOCTYPE html>
 <html>
-    
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -25,10 +22,9 @@
         </script>
         <script src="index.js">
         </script>
-        <script type="text/javascript" src="http://launchrock-ignition.s3.amazonaws.com/ignition.1.1.js"></script>
     </head>
     
-    <body>
+    <body onload="getCookie()">
         <!-- Login -->
         <div data-role="page" data-theme="f" id="page13">
             <div data-theme="b" data-role="header">
@@ -52,7 +48,7 @@
                         </fieldset>
                     </form>
                 </div>
-                <a data-role="button" data-theme="b" onclick="loginWindow()">
+                <a data-role="button" data-theme="b" onclick="loginWindow(0)">
                     Login
                 </a>
                 <a data-role="button" data-theme="b" href="#page18">
@@ -122,58 +118,19 @@
                 </a>
             </div>
         </div>
-        <!-- Contact us -->
+        <!-- Email us -->
         <div data-role="page" data-theme="f" id="page17">
             <div data-theme="b" data-role="header">
+                <a data-role="button" data-theme="c" href="#page17" data-icon="info" data-iconpos="notext"
+                class="ui-btn-right">
+                    Contact us
+                </a>
                 <h3>
-                    Contact Us
+                    EMAIL US
                 </h3>
-            </div>
-            <div data-role="content">
-                <div style=" text-align:center">
-                    <img style="width: 275px; height: 200px" src="http://assets.codiqa.com/ps/34188/a54885b92be794aficoncut.jpg">
-                </div>
-                <a data-role="button" data-theme="b" href="http://iresellapp.com">
-                    iResellapp.com
+                <a data-role="button" data-theme="c" onclick="resetWizard()" data-icon="plus" data-iconpos="notext" class="ui-btn-left">
+                        Add
                 </a>
-                <a data-role="button" data-theme="b" href="#emailUs">
-                    Email us
-                </a>
-                <a data-role="button" data-theme="b" href="http://twitter.com/iresell">
-                    Tweet us
-                </a>
-            </div>
-            <div data-role="tabbar" data-iconpos="top" data-theme="b">
-                <ul>
-                    <li>
-                        <a href="#page2" data-theme="" data-icon="home">
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page7" data-theme="" data-icon="check">
-                            Revenue
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page10" data-theme="" data-icon="search">
-                            Calculator
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Appraise
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <!-- Email us -->
-        <div data-role="page" data-theme="f" id="emailUs">
-            <div data-theme="b" data-role="header">
-                <h3>
-                    Email Us
-                </h3>
             </div>
             <form name="email">
             <div data-role="content" align="center">
@@ -211,13 +168,18 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#page10" data-theme="" data-icon="search">
+                        <a href="#page10" data-theme="" data-icon="gear">
                             Calculator
                         </a>
                     </li>
                     <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
-                            Export
+                        <a href="#page11" data-theme="" data-icon="search">
+                            Appraise
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="logout()" data-theme="" data-icon="arrow-r">
+                            Log out
                         </a>
                     </li>
                 </ul>
@@ -233,10 +195,10 @@
                 <h3>
                     iRESELL
                 </h3>
-                <a data-role="button" data-theme="c" onclick="resetWizard()" data-icon="plus" data-iconpos="notext"
-                class="ui-btn-left">
-                    Add
-                </a>
+                    <a data-role="button" data-theme="c" onclick="resetWizard()" data-icon="plus" data-iconpos="notext"
+                    class="ui-btn-left">
+                        Add
+                    </a>
             </div>
             <div id="itemSelect" align="center"></div>
             <div data-role="content" id="items" align="center" style="overflow:scroll">
@@ -254,13 +216,18 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#page10" data-theme="" data-icon="search">
+                        <a href="#page10" data-theme="" data-icon="gear">
                             Calculator
                         </a>
                     </li>
                     <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                        <a href="#page11" data-theme="" data-icon="search">
                             Appraise
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="logout()" data-theme="" data-icon="arrow-r">
+                            Log out
                         </a>
                     </li>
                 </ul>
@@ -269,9 +236,17 @@
         <!-- Add item -->
         <div data-role="page" data-theme="f" id="page8">
             <div data-theme="b" data-role="header">
+                <a data-role="button" data-theme="c" href="#page17" data-icon="info" data-iconpos="notext"
+                class="ui-btn-right">
+                    Contact us
+                </a>
                 <h3>
-                    Add/Edit Item
+                    ADD/EDIT ITEM
                 </h3>
+                    <a data-role="button" data-theme="c" onclick="resetWizard()" data-icon="plus" data-iconpos="notext"
+                    class="ui-btn-left">
+                        Add
+                    </a>
             </div>
             <div data-role="content">
                 <div data-role="content" id="itemEditor" align="center">
@@ -302,7 +277,7 @@
                                 <td colspan="5">
                                     <table border="0" width="250">
                                         <tr>
-                                            <td colspan="5"><input type="text" name="imageURL" placeholder="Image URL"></td>
+                                            <td>Image URL:</td>
                                         </tr>
                                     </table>
                                 </td>
@@ -311,10 +286,23 @@
                                 <td colspan="5">
                                     <table border="0" width="250">
                                         <tr>
-                                            <td colspan='5' height='130'><textarea style='resize:none' rows='5' cols='10' name='description' placeholder="Item description"></textarea></td>
+                                            <td colspan="5"><input type="text" name="imageURL"></td>
                                         </tr>
                                     </table>
                                 </td>
+                            </tr>
+                            <tr>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    <table border="0" width="250">
+                                        <tr>
+                                            <td>Item Description:<textarea style='resize:none' rows='5' cols='10' name='description'></textarea></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
                             </tr>
                             <tr>
                                 <td colspan="5">
@@ -512,9 +500,17 @@
         <!-- Revenue -->
         <div data-role="page" data-theme="f" id="page7">
             <div data-theme="b" data-role="header">
+                <a data-role="button" data-theme="c" href="#page17" data-icon="info" data-iconpos="notext"
+                class="ui-btn-right">
+                    Contact us
+                </a>
                 <h3>
-                    Revenue
+                    REVENUE
                 </h3>
+                    <a data-role="button" data-theme="c" onclick="resetWizard()" data-icon="plus" data-iconpos="notext"
+                    class="ui-btn-left">
+                        Add
+                    </a>
             </div>
             <div data-role="content" align="center">
                 <form name="revenues">
@@ -551,7 +547,7 @@
                             </select>
                         </td>
                         <td>
-                            <input type="button" value="Go" onclick="calculateStats()">
+                            <input type="button" value="Go" onclick="calculateStats(0)">
                         </td>
                     </tr>
                 </table>
@@ -571,13 +567,18 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#page10" data-theme="" data-icon="search">
+                        <a href="#page10" data-theme="" data-icon="gear">
                             Calculator
                         </a>
                     </li>
                     <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                        <a href="#page11" data-theme="" data-icon="search">
                             Appraise
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="logout()" data-theme="" data-icon="arrow-r">
+                            Log out
                         </a>
                     </li>
                 </ul>
@@ -586,13 +587,21 @@
         <!-- Item Calculator -->
         <div data-role="page" data-theme="f" id="page10">
             <div data-theme="b" data-role="header">
+                <a data-role="button" data-theme="c" href="#page17" data-icon="info" data-iconpos="notext"
+                class="ui-btn-right">
+                    Contact us
+                </a>
                 <h3>
-                    Item Calculator
+                    ITEM CALCULATOR
                 </h3>
+                    <a data-role="button" data-theme="c" onclick="resetWizard()" data-icon="plus" data-iconpos="notext"
+                    class="ui-btn-left">
+                        Add
+                    </a>
             </div>
 
             <div data-role="content" align="center">
-            <form name="individualItem">
+            <form name="individualItem" data-ajax="false">
                 <table border="0">
                     <tr><td colspan="2">Item Cost</td></tr>
                     <tr><td colspan="2"><input type="text" name="itemCost"></td></tr>
@@ -627,13 +636,18 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#page10" data-theme="" data-icon="search">
+                        <a href="#page10" data-theme="" data-icon="gear">
                             Calculator
                         </a>
                     </li>
                     <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                        <a href="#page11" data-theme="" data-icon="search">
                             Appraise
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="logout()" data-theme="" data-icon="arrow-r">
+                            Log out
                         </a>
                     </li>
                 </ul>
@@ -642,27 +656,33 @@
         <!-- Pricing -->
         <div data-role="page" data-theme="f" id="page11">
             <div data-theme="b" data-role="header">
+                <a data-role="button" data-theme="c" href="#page17" data-icon="info" data-iconpos="notext"
+                class="ui-btn-right">
+                    Contact us
+                </a>
                 <h3>
-                    iResell Price
+                    iRESELL PRICE
                 </h3>
+                    <a data-role="button" data-theme="c" onclick="resetWizard()" data-icon="plus" data-iconpos="notext"
+                    class="ui-btn-left">
+                        Add
+                    </a>
             </div>
 
-            <form name="appraise">
+            <form name="appraise" onkeypress="exportEbay(0)" data-ajax="false">
             <div data-role="content" align="center">
                 <table>
-                    <!--Form to accept search term-->
                     <tr>
                         <td>
                             <input type="text" placeholder="Enter search term" name="searchTerm">
                         </td>
                         <td>
-                            <input type="button" onclick="exportEbay()" value="Go">
+                            <input type="button" onclick="exportEbay(0)" value="Go">
                         </td>
                     </tr>
                 </table>
             </div>
             </form>
-            <!--Div blocks to handle output from ebay, google shopping, as well as the overall average-->
             <div data-role="content" align="center" style="overflow: scroll">
             <div data-role="content" align="center" id="overallAverage">
             </div>
@@ -684,23 +704,22 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#page10" data-theme="" data-icon="search">
+                        <a href="#page10" data-theme="" data-icon="gear">
                             Calculator  
                         </a>
                     </li>
                     <li>
-                        <a href="#page11" data-theme="" data-icon="arrow-r">
+                        <a href="#page11" data-theme="" data-icon="search">
                             Appraise
+                        </a>
+                    </li>
+                    <li>
+                        <a onclick="logout()" data-theme="" data-icon="arrow-r">
+                            Log out
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
-
-        <!-- Landing Page -->
-        <div data-role="page" data-theme="f" id="landing">
-            <div rel="M4VHUKOY" class="lrdiscoverwidget" data-logo="on" data-background="on" data-share-url="signuppy.iresellapp.com" data-css=""></div>
-        </div>
-
     </body>
 </html>
